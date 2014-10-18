@@ -13,7 +13,7 @@ typedef void(^NNAsyncCompleteBlock)(NSData *responseData, NSError *error);
 
 /** Simple asynchronous request */
 @interface NNAsyncRequest : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
-    NSURLRequest *_request;
+    NSMutableURLRequest *_request;
     NSURLConnection *_connection;
     NSMutableData *_responseData;
     
@@ -23,6 +23,13 @@ typedef void(^NNAsyncCompleteBlock)(NSData *responseData, NSError *error);
 - (instancetype)initWithRequest:(NSURLRequest *)request;
 - (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNAsyncCompleteBlock)block;
 - (instancetype)initWithURL:(NSURL *)url complete:(NNAsyncCompleteBlock)block;
+
+/** Key/Value http headers. Read as is. */
+- (void)setHTTPHeaders:(NSDictionary *)headers;
+/** Accepts only GET and POST for now. */
+- (void)setHTTPMethod:(NSString *)method;
+/** This string needs to be formatted like so: 'param1=value1&param2=value2' other formats will return an error. */
+- (void)setHTTPBody:(NSString *)postString;
 
 - (void)startAsyncConnection;
 

@@ -18,25 +18,48 @@
 }
 
 - (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNAsyncCompleteBlock)block {
+    return [self initWithMutableRequest: [request mutableCopy] complete: block];
+}
+
+- (instancetype)initWithURL:(NSURL *)url complete:(NNAsyncCompleteBlock)block {
+    return [self initWithMutableRequest: [NSMutableURLRequest requestWithURL: url] complete: block];
+}
+
+- (instancetype)initWithMutableRequest:(NSMutableURLRequest *)request complete:(NNAsyncCompleteBlock)block {
     if(self = [super init]) {
-        if(request) {
-            _request = request;
-            _connection = [[NSURLConnection alloc] initWithRequest: _request delegate: self startImmediately: NO];
-            
-            _callback = block;
-        }
+        _request = request;
+        _callback = block;
     }
     return self;
 }
 
-- (instancetype)initWithURL:(NSURL *)url complete:(NNAsyncCompleteBlock)block {
-    NSURLRequest *request = [NSURLRequest requestWithURL: url];
-    return [self initWithRequest: request complete: block];
+#pragma mark - HTTP Setters
+
+- (void)setHTTPHeaders:(NSDictionary *)headers {
+    for(NSString *key in [headers allKeys]) {
+        [_request setValue: headers[key] forHTTPHeaderField: key];
+    }
+}
+
+- (void)setHTTPMethod:(NSString *)method {
+    if(![method compare: @"POST" options: NSCaseInsensitiveSearch] && ![method compare: @"GET" options: NSCaseInsensitiveSearch]) {
+        //If not 'GET' or 'POST', do nothing.
+        return;
+    } else {
+        [_request setHTTPMethod: method];
+    }
+}
+
+- (void)setHTTPBody:(NSString *)postString {
+    if(postString) {
+        [_request setHTTPBody: [[postString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] dataUsingEncoding: NSUTF8StringEncoding]];
+    }
 }
 
 #pragma mark - Instance Methods
 
 - (void)startAsyncConnection {
+    _connection = [[NSURLConnection alloc] initWithRequest: _request delegate: self startImmediately: NO];
     [_connection start];
 }
 
@@ -70,6 +93,14 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection Failed: %@", error]];
     _callback(nil, error);
+}
+
+#pragma mark - dealloc
+
+- (void)dealloc {
+    _request = nil;
+    _connection = nil;
+    _callback = nil;
 }
 
 @end
