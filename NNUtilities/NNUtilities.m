@@ -58,10 +58,21 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
     if(err) {
         //Maybe implement some kind of error handling?
-        [NNLogger logFromInstance: self message: @"Unable to parse JSON!"];
+        [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to parse JSON! %@", err]];
         return [NSDictionary dictionary];
     } else {
         return json;
+    }
+}
+
++ (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: NSJSONReadingAllowFragments error: &err];
+    if(err) {
+        [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
+        return [NSData data];
+    } else {
+        return jsonData;
     }
 }
 

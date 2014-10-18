@@ -10,6 +10,8 @@
 
 typedef void(^NNAsyncCompleteBlock)(NSData *responseData, NSError *error);
 
+static NSString *const httpMethodPOST   = @"POST";
+static NSString *const httpMethodGET    = @"GET";
 
 /** Simple asynchronous request */
 @interface NNAsyncRequest : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
@@ -30,6 +32,8 @@ typedef void(^NNAsyncCompleteBlock)(NSData *responseData, NSError *error);
 - (void)setHTTPMethod:(NSString *)method;
 /** This string needs to be formatted like so: 'param1=value1&param2=value2' other formats will return an error. */
 - (void)setHTTPBody:(NSString *)postString;
+/** Any data you see fit as the HTTP Post data. */
+- (void)setHTTPBodyData:(NSData *)postData;
 
 - (void)startAsyncConnection;
 

@@ -22,6 +22,7 @@
 + (BOOL)validBooleanFromObject:(id)object;
 
 + (NSDictionary *)parseJsonFromData:(NSData *)data;
++ (NSData *)jsonDataFromDictionary:(NSDictionary *)json;
 
 //File Management
 + (NSString *)pathToDocumentsDirectory;

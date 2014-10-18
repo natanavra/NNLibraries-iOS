@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIAlertView (NNAdditions)
-
+/** This method is localized. it passes all displayed string parameters through NSLocalizedString */
++ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate;
 @end

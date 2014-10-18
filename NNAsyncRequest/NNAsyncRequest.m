@@ -33,6 +33,10 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat: @"<%p> NNAsyncRequest URL: %@ \nMethod: %@ \nHeaders: %@ \nHTTPBody: %@", self, _request.URL.absoluteString, _request.HTTPMethod,_request.allHTTPHeaderFields, [[NSString alloc] initWithData: _request.HTTPBody encoding: NSUTF8StringEncoding]];
+}
+
 #pragma mark - HTTP Setters
 
 - (void)setHTTPHeaders:(NSDictionary *)headers {
@@ -42,7 +46,7 @@
 }
 
 - (void)setHTTPMethod:(NSString *)method {
-    if(![method compare: @"POST" options: NSCaseInsensitiveSearch] && ![method compare: @"GET" options: NSCaseInsensitiveSearch]) {
+    if(![method caseInsensitiveCompare: @"POST"] && ![method caseInsensitiveCompare: @"GET"]) {
         //If not 'GET' or 'POST', do nothing.
         return;
     } else {
@@ -53,6 +57,12 @@
 - (void)setHTTPBody:(NSString *)postString {
     if(postString) {
         [_request setHTTPBody: [[postString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] dataUsingEncoding: NSUTF8StringEncoding]];
+    }
+}
+
+- (void)setHTTPBodyData:(NSData *)postData {
+    if(postData) {
+        [_request setHTTPBody: postData];
     }
 }
 
