@@ -88,6 +88,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Received response: %@", response]];
+    if([response isKindOfClass: [NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        _statusCode = httpResponse.statusCode;
+    }
+    
+    _response = [response copy];
     _responseData = [[NSMutableData alloc] init];
 }
 
@@ -97,17 +103,19 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection successful: %@", [self responseString]]];
-    _callback(_responseData, nil);
+    _callback(_response, _responseData, nil);
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection Failed: %@", error]];
-    _callback(nil, error);
+    _callback(_response, nil, error);
 }
 
 #pragma mark - dealloc
 
 - (void)dealloc {
+    _response = nil;
+    _responseData = nil;
     _request = nil;
     _connection = nil;
     _callback = nil;

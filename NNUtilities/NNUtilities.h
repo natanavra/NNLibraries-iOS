@@ -21,6 +21,7 @@
 + (float)validFloatFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object;
 
+//JSON
 + (NSDictionary *)parseJsonFromData:(NSData *)data;
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json;
 

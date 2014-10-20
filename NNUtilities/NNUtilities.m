@@ -67,7 +67,7 @@
 
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
     NSError *err = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: NSJSONReadingAllowFragments error: &err];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: 0 error: &err];
     if(err) {
         [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
         return [NSData data];

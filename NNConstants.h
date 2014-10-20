@@ -7,3 +7,5 @@
 //
 
 #define kStoreKitProductPurchasedNotification @"NNStoreKit_ProductPurchased"
+
+#define kEmptyStatusCode 0

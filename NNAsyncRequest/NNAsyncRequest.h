@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^NNAsyncCompleteBlock)(NSData *responseData, NSError *error);
+typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
 
 static NSString *const httpMethodPOST   = @"POST";
 static NSString *const httpMethodGET    = @"GET";
@@ -16,11 +16,13 @@ static NSString *const httpMethodGET    = @"GET";
 /** Simple asynchronous request */
 @interface NNAsyncRequest : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
     NSMutableURLRequest *_request;
+    NSURLResponse *_response;
     NSURLConnection *_connection;
     NSMutableData *_responseData;
     
     NNAsyncCompleteBlock _callback;
 }
+@property (nonatomic, readonly) NSInteger statusCode;
 
 - (instancetype)initWithRequest:(NSURLRequest *)request;
 - (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNAsyncCompleteBlock)block;
