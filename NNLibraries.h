@@ -14,6 +14,7 @@
 #import "NNAsyncImageView.h"
 
 #import "NNStoreKitHelper.h"
+#import "NNLocationManager.h"
 
 #import "UIButton+NNAdditions.h"
 #import "UIAlertView+NNAdditions.h"

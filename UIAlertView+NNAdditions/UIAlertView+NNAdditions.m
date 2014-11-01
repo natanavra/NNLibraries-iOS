@@ -12,7 +12,7 @@
 
 + (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(title, nil)
-                                                    message: NSLocalizedString(message, nil)\
+                                                    message: NSLocalizedString(message, nil)
                                                    delegate: delegate
                                           cancelButtonTitle: NSLocalizedString(cancelTitle, nil)
                                           otherButtonTitles: nil];

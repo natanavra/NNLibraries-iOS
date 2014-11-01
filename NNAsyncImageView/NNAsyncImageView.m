@@ -18,7 +18,7 @@
     [self addSubview: _indicator];
     [_indicator startAnimating];
     
-    NNAsyncRequest *request = [[NNAsyncRequest alloc] initWithURL: imgUrl complete: ^(NSData *responseData, NSError *error) {
+    NNAsyncRequest *request = [[NNAsyncRequest alloc] initWithURL: imgUrl complete: ^(NSURLResponse *response, NSData *responseData, NSError *error) {
         if(!error && responseData) {
             UIImage *img = [UIImage imageWithData: responseData];
             if(img) {

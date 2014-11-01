@@ -11,11 +11,19 @@
 @implementation NNLogger
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage {
-#ifdef DEBUG
+    [self logFromInstance: sender message: logMessage data: nil];
+}
+
++ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(NSString *)data {
     if(sender && logMessage) {
-        NSLog(@"%@--%@", NSStringFromClass([sender class]), logMessage);
-    }
+        NSMutableString *output = [NSMutableString stringWithFormat: @"%@--%@", NSStringFromClass([sender class]), logMessage];
+        if(data) {
+            [output appendFormat: @"--%@", data];
+        }
+#ifdef DEBUG
+        NSLog(@"%@", output);
 #endif
+    }
 }
 
 @end
