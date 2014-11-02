@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
+typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
 
 static NSString *const httpMethodPOST   = @"POST";
 static NSString *const httpMethodGET    = @"GET";

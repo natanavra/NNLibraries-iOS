@@ -12,5 +12,3 @@
 #define kLocationAuthChanged                    @"LocationAuthChanged"
 
 #define kEmptyStatusCode 0
-
-#define kDefaultAnimationDuration   0.7f
