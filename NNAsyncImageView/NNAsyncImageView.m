@@ -14,7 +14,8 @@
 
 - (void)setImageFromURL:(NSURL *)imgUrl {
     _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-    _indicator.center = [self convertPoint: self.center toView: _indicator];
+    CGPoint center = CGPointMake(self.image.size.width /2, self.image.size.height /2);
+    _indicator.center = center;
     [self addSubview: _indicator];
     [_indicator startAnimating];
     

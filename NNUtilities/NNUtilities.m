@@ -44,6 +44,13 @@
     return 0.0f;
 }
 
++ (double)validDoubleFromObject:(id)object {
+    if([self validObjectFromObject: object]) {
+        return [object doubleValue];
+    }
+    return 0.0;
+}
+
 + (BOOL)validBooleanFromObject:(id)object {
     if([self validObjectFromObject: object]) {
         return [object boolValue];

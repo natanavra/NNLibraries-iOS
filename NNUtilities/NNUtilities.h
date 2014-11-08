@@ -19,6 +19,7 @@
 + (NSString *)validStringFromObject:(id)object;
 + (NSInteger)validIntegerFromObject:(id)object;
 + (float)validFloatFromObject:(id)object;
++ (double)validDoubleFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object;
 
 //JSON
