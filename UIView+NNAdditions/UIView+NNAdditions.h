@@ -11,8 +11,10 @@
 @interface UIView (NNAdditions)
 - (void)removeAllSubviews;
 
-- (void)setFrameOrigin:(CGPoint)origin;
 - (void)setFrameSize:(CGSize)size;
+- (void)setFrameOrigin:(CGPoint)origin;
+- (void)setFrameOriginX:(float)x;
+- (void)setFrameOriginY:(float)y;
 - (void)setCenterX:(float)x;
 - (void)setCenterY:(float)y;
 - (CGPoint)bottomLeft;

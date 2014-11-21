@@ -16,15 +16,26 @@
     }
 }
 
+- (void)setFrameSize:(CGSize)size {
+    CGRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
+}
+
 - (void)setFrameOrigin:(CGPoint)origin {
     CGRect frame = self.frame;
     frame.origin = origin;
     self.frame = frame;
 }
-
-- (void)setFrameSize:(CGSize)size {
+- (void)setFrameOriginX:(float)x {
     CGRect frame = self.frame;
-    frame.size = size;
+    frame.origin.x = x;
+    self.frame = frame;
+}
+
+- (void)setFrameOriginY:(float)y {
+    CGRect frame = self.frame;
+    frame.origin.y = y;
     self.frame = frame;
 }
 

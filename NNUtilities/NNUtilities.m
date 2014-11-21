@@ -9,6 +9,18 @@
 #import "NNUtilities.h"
 #import "NNLogger.h"
 
+static inline NSString *NSStringFromUIInterfaceOrientation(UIInterfaceOrientation orientation) {
+    switch (orientation) {
+        case UIInterfaceOrientationPortrait:           return @"UIInterfaceOrientationPortrait";
+        case UIInterfaceOrientationPortraitUpsideDown: return @"UIInterfaceOrientationPortraitUpsideDown";
+        case UIInterfaceOrientationLandscapeLeft:      return @"UIInterfaceOrientationLandscapeLeft";
+        case UIInterfaceOrientationLandscapeRight:     return @"UIInterfaceOrientationLandscapeRight";
+        case UIInterfaceOrientationUnknown:            return @"UIInterfaceOrientationUnknown";
+    }
+    return @"Unexpected";
+}
+
+
 @implementation NNUtilities
 
 #pragma mark - Object Validations
@@ -56,6 +68,10 @@
         return [object boolValue];
     }
     return NO;
+}
+
++ (NSString *)trimWhiteSpace:(NSString *)string {
+    return [string stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 #pragma mark - JSON
@@ -161,5 +177,25 @@
     
     return [UIColor colorWithPatternImage:image];
 }
+
+#pragma mark - Other
+
++ (NSString *)currentTimestampString {
+    NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate];
+    return [NSString stringWithFormat: @"%d", (int)interval];
+}
+
++ (NSString *)stringFromUIInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    return NSStringFromUIInterfaceOrientation(orientation);
+}
+
++ (BOOL)numberBetween0And1:(float)number {
+    BOOL retVal = NO;
+    if(number >= 0 && number <= 1) {
+        retVal = YES;
+    }
+    return retVal;
+}
+
 
 @end

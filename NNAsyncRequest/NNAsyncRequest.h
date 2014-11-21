@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+/* The completion block is called on the main thread. */
 typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
 typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
 

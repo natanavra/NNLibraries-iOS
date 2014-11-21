@@ -103,12 +103,16 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection successful: %@", [self responseString]]];
-    _callback(_response, _responseData, nil);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _callback(_response, _responseData, nil);
+    });
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection Failed: %@", error]];
-    _callback(_response, nil, error);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _callback(_response, nil, error);
+    });
 }
 
 #pragma mark - dealloc

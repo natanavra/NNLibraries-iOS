@@ -21,6 +21,7 @@
 + (float)validFloatFromObject:(id)object;
 + (double)validDoubleFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object;
++ (NSString *)trimWhiteSpace:(NSString *)string;
 
 //JSON
 + (NSDictionary *)parseJsonFromData:(NSData *)data;
@@ -39,4 +40,10 @@
 //UIColor
 + (UIColor *)colorWithHexString: (NSString *)stringToConvert;
 + (UIColor *)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
+
+//Other
++ (NSString *)currentTimestampString;
++ (NSString *)stringFromUIInterfaceOrientation:(UIInterfaceOrientation)orientation;
+/** Return YES if 0 <= number <= 1. NO otherwise. */
++ (BOOL)numberBetween0And1:(float)number;
 @end
