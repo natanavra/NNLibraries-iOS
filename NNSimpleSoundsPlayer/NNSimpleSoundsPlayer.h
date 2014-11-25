@@ -13,10 +13,12 @@
 }
 @property (nonatomic) BOOL mute;
 
-+ (instancetype)sharedPlayer;
++ (instancetype)soundPlayer;
 
 - (BOOL)addSound:(NSString *)soundFile;
 - (void)playSound:(NSString *)soundFile;
 - (void)toggleSound;
+
+- (void)vibrate;
 
 @end

@@ -15,7 +15,7 @@
 
 @implementation NNSimpleSoundsPlayer
 
-+ (instancetype)sharedPlayer {
++ (instancetype)soundPlayer {
     static NNSimpleSoundsPlayer *_shared = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -69,6 +69,11 @@
     }
     return NO;
 }
+
+- (void)vibrate {
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+}
+
 
 - (void)toggleSound {
     _mute = !_mute;

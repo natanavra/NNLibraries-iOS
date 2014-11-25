@@ -18,7 +18,7 @@
 + (BOOL)locationCanBeUsed;
 
 - (BOOL)currentLocationAvailable;
-- (CLLocation *)getCurrentLocation;
+- (CLLocation *)currentLocation;
 - (BOOL)locationChanged;
 
 - (BOOL)failedGettingLocation;

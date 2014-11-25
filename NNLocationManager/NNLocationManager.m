@@ -128,7 +128,7 @@
     return NO;
 }
 
-- (CLLocation *)getCurrentLocation {
+- (CLLocation *)currentLocation {
     self.lastLocation = currentLoc;
     return self.currentLoc;
 }
