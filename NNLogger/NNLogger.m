@@ -14,9 +14,10 @@
     [self logFromInstance: sender message: logMessage data: nil];
 }
 
-+ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(NSString *)data {
++ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
     if(sender && logMessage) {
         NSMutableString *output = [NSMutableString stringWithFormat: @"%@--%@", NSStringFromClass([sender class]), logMessage];
+        NSString *data = (NSString *)([object isKindOfClass: NSString.class] ? object : [object description]);
         if(data) {
             [output appendFormat: @"--%@", data];
         }

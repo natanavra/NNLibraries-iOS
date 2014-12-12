@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kReachabilityChangedNotification;
+
 @interface NNReachabilityManager : NSObject {
 }
-@property (nonatomic, weak) void (^callback)(BOOL reachable);
 + (NNReachabilityManager *)sharedManager;
 - (BOOL)isReachable;
-- (void)setReachabilityChangedBlock:(void(^)(BOOL reachable))block;
+
 @end

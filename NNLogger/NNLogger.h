@@ -18,5 +18,5 @@
  This method lets you print a message and an object.
  'className' and 'logMessage' must be valid objects, if either is 'nil' nothing will be logged! 
  */
-+ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(NSString *)data;
++ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object;
 @end

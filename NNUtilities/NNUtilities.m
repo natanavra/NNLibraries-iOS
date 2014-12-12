@@ -197,5 +197,10 @@ static inline NSString *NSStringFromUIInterfaceOrientation(UIInterfaceOrientatio
     return retVal;
 }
 
++ (NSArray *)uniqueCopy:(NSArray *)array {
+    NSSet *set = [NSSet setWithArray: array];
+    return [set allObjects];
+}
+
 
 @end

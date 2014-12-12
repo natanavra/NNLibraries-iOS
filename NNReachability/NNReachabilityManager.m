@@ -28,21 +28,11 @@
     if(self = [super init]) {
         self.reach = [Reachability reachabilityWithHostName: @"www.google.com"];
         _reach.reachableOnWWAN = YES;
-        __weak typeof(self) weakSelf = self;
+
         [_reach setReachableBlock: ^(Reachability *r) {
-            //To keep ARC calm
-            __strong typeof(self) strongSelf = weakSelf;
-            if(strongSelf && strongSelf->_callback) {
-                strongSelf->_callback(strongSelf->_reach.isReachable);
-            }
             NSLog(@"Reachable");
         }];
         [_reach setUnreachableBlock: ^(Reachability *r) {
-            //To keep ARC calm
-            __strong typeof(self) strongSelf = weakSelf;
-            if(strongSelf && strongSelf->_callback) {
-                strongSelf->_callback(strongSelf->_reach.isReachable);
-            }
             NSLog(@"NOT Reachable!");
         }];
         [_reach startNotifier];
@@ -52,10 +42,6 @@
 
 - (BOOL)isReachable {
     return [_reach isReachable];
-}
-
-- (void)setReachabilityChangedBlock:(void(^)(BOOL reachable))block {
-    _callback = block;
 }
 
 @end

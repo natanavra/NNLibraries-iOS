@@ -46,4 +46,7 @@
 + (NSString *)stringFromUIInterfaceOrientation:(UIInterfaceOrientation)orientation;
 /** Return YES if 0 <= number <= 1. NO otherwise. */
 + (BOOL)numberBetween0And1:(float)number;
+
++ (NSArray *)uniqueCopy:(NSArray *)array;
+
 @end
