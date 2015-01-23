@@ -10,8 +10,12 @@
 
 @interface UIViewController (NNAdditions)
 
+/** UIImagePicker */
 - (BOOL)presentPictureSelectFromSource:(UIImagePickerControllerSourceType)source allowsEditing:(BOOL)editingAllowed andDelegate:(id<UINavigationControllerDelegate, UIImagePickerControllerDelegate>)delegate;
 - (BOOL)presentCameraPictureCaptureWithDelegate:(id<UINavigationControllerDelegate, UIImagePickerControllerDelegate>)delegate;
 - (BOOL)presentCameraVideoCaptureWithDelegate:(id<UINavigationControllerDelegate, UIImagePickerControllerDelegate>)delegate;
 
+/** MBProgressHUD */
+- (void)showLoadingViewWithText:(NSString *)text withSubtitle:(NSString *)subtitle;
+- (void)hideLoadingView;
 @end

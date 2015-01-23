@@ -7,7 +7,7 @@
 //
 
 #import "NNPickerField.h"
-#import "NNSelectableObject.h"
+#import "NNSelectable.h"
 
 @interface NNPickerField () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, weak) UIBarButtonItem *closeButton;
@@ -109,7 +109,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id object = _items[row];
-    if([object conformsToProtocol: @protocol(NNSelectableObject)]) {
+    if([object conformsToProtocol: @protocol(NNSelectable)]) {
         return [object title];
     } else if([object isKindOfClass: NSString.class]) {
         return object;
@@ -123,7 +123,7 @@
     }
     _selectedObject = _items[row];
     _selectedIndex = row;
-    self.text = [_selectedObject conformsToProtocol: @protocol(NNSelectableObject)] ? [_selectedObject title] : _selectedObject;
+    self.text = [_selectedObject conformsToProtocol: @protocol(NNSelectable)] ? [_selectedObject title] : _selectedObject;
 }
 
 @end

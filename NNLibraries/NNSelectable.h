@@ -1,5 +1,5 @@
 //
-//  NNSelectableObject.h
+//  NNSelectable.h
 //  NNLibraries
 //
 //  Created by Natan Abramov on 1/9/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol NNSelectableObject <NSObject>
+@protocol NNSelectable <NSObject>
 @required
 - (NSString *)title;
 - (NSInteger)objectID;

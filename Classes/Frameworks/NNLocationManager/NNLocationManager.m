@@ -45,20 +45,20 @@
     if(self = [super init]) {
         failed = NO;
         if([CLLocationManager locationServicesEnabled]) {
-            NSLog(@"Location Enabled");
+            [NNLogger logFromInstance: self message: @"Location Enabled"];
             CLAuthorizationStatus gpsStatus = [CLLocationManager authorizationStatus];
-            if(gpsStatus == kCLAuthorizationStatusNotDetermined || gpsStatus == kCLAuthorizationStatusAuthorized) {
+            if(gpsStatus != kCLAuthorizationStatusDenied &&
+               gpsStatus != kCLAuthorizationStatusRestricted) {
                 //Can use location
                 self.locMgr = [[CLLocationManager alloc] init];
-                locMgr.delegate = self;
-                locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-                
-                self.currentLoc = locMgr.location;
-                
-                [locMgr startUpdatingLocation];
                 if([locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
                     [locMgr performSelector: @selector(requestWhenInUseAuthorization)];
                 }
+                
+                locMgr.delegate = self;
+                locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+                self.currentLoc = locMgr.location;
+                [locMgr startUpdatingLocation];
             } else {
                 //Can't use location
                 failed = YES;
@@ -82,7 +82,9 @@
     if([CLLocationManager respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
         return (status == kCLAuthorizationStatusAuthorizedWhenInUse) ? YES : NO;
     } else {
-        return (status == kCLAuthorizationStatusAuthorized) ? YES : NO;
+        return (status != kCLAuthorizationStatusRestricted &&
+                status != kCLAuthorizationStatusDenied &&
+                status != kCLAuthorizationStatusNotDetermined) ? YES : NO;
     }
 }
 
@@ -102,7 +104,8 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if(status == kCLAuthorizationStatusAuthorized) {
+    [NNLogger logFromInstance: self message: @"Authorization changed"];
+    if(status != kCLAuthorizationStatusRestricted && status != kCLAuthorizationStatusDenied) {
         [self.locMgr startUpdatingLocation];
     } else {
         [self.locMgr stopUpdatingLocation];
@@ -111,11 +114,11 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"Location Manager Failed: %@", error.localizedDescription);
+    [NNLogger logFromInstance: self message: @"didFailWithError" data: error];
     failed = YES;
     if(error.code == kCLErrorLocationUnknown) {
         //Keeps updating location
-        NSLog(@"Location is UNKNOWN!");
+        [NNLogger logFromInstance: self message: @"Location is unknown"];
     } else if(error.code == kCLErrorDenied) {
         [self.locMgr stopUpdatingLocation];
     }
@@ -123,8 +126,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject]; //Get last known position;
-    //NSLog(@"Location Changed: %@", location.description);
-    //NSLog(@"We Have location!");
+    //[NNLogger logFromInstance: self message: @"Location changed" data: location];
     failed = NO;
     self.currentLoc = location;
 }
@@ -143,25 +145,21 @@
     return self.currentLoc;
 }
 
+- (double)currentLongitude {
+    return self.currentLoc.coordinate.longitude;
+}
+
+- (double)currentLatitude {
+    return self.currentLoc.coordinate.latitude;
+}
+
 - (CLLocationCoordinate2D)currentLocationCoordinate {
     self.lastLocation = currentLoc;
     return self.currentLoc.coordinate;
 }
 
 - (BOOL)currentLocationAvailable {
-    if(![CLLocationManager locationServicesEnabled]) {
-        //Location not enabled
-        return NO;
-    } else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        //Not authorized to use location
-        return NO;
-    } else if(currentLoc == nil) {
-        //No location set
-        return NO;
-    } else if(failed) {
-        //Location services failed.
-        return NO;
-    } else {
+    if(currentLoc != nil) {
         //BOOL accurate = (currentLoc.horizontalAccuracy <= kAccuracyThreshold && currentLoc.verticalAccuracy <= kAccuracyThreshold);
         BOOL notZero = (currentLoc.coordinate.latitude != 0 && currentLoc.coordinate.longitude != 0);
         if(notZero) {
@@ -171,6 +169,7 @@
             return NO;
         }
     }
+    return NO;
 }
 
 #pragma mark - Error handling

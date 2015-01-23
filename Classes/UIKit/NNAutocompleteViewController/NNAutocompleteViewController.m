@@ -66,7 +66,7 @@ static NSString *const cellID = @"autocompleteCell";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(searchText.length > 0) {
             NSPredicate *predicate = [NSPredicate predicateWithBlock: ^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                if([evaluatedObject conformsToProtocol: @protocol(NNSelectableObject)]) {
+                if([evaluatedObject conformsToProtocol: @protocol(NNSelectable)]) {
                     NSString *title = [evaluatedObject title];
                     if([title rangeOfString: searchText options: NSCaseInsensitiveSearch].location != NSNotFound) {
                         return YES;
@@ -109,7 +109,7 @@ static NSString *const cellID = @"autocompleteCell";
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: cellID];
     }
-    id<NNSelectableObject> object = nil;
+    id<NNSelectable> object = nil;
     if(_filtered) {
         object = _filteredData[indexPath.row];
     } else {
@@ -122,7 +122,7 @@ static NSString *const cellID = @"autocompleteCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(_delegate) {
-        id<NNSelectableObject> object = nil;
+        id<NNSelectable> object = nil;
         if(_filtered) {
             object = _filteredData[indexPath.row];
         } else {

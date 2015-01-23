@@ -7,6 +7,7 @@
 //
 
 #import "NNAsyncRequest.h"
+#import "NNUtilities.h"
 #import "NNLogger.h"
 
 @implementation NNAsyncRequest
@@ -52,13 +53,19 @@
             NSString *requestURL = [url stringByAppendingString: query];
             [_request setURL: [NSURL URLWithString: requestURL]];
         } else if(method == NNHTTPMethodPOST) {
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject: params];
+            NSData *data = [NNUtilities jsonDataFromDictionary: params];
             _request.HTTPBody = data;
         }
         _request.HTTPMethod = [NNAsyncRequest httpMethodName: method];
-        [_request setAllHTTPHeaderFields: headers];
+        [headers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            if([obj isKindOfClass: [NSString class]] && [key isKindOfClass: [NSString class]]) {
+                [_request setValue: obj forHTTPHeaderField: key];
+            }
+        }];
         
         _callback = block;
+        
+        [NNLogger logFromInstance: self message: @"Request created" data: self];
     }
     return self;
 }
@@ -117,12 +124,11 @@
 #pragma mark - NSURLConnectionDataDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Received response: %@", response]];
+    [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Received response: %@", response]];
     if([response isKindOfClass: [NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         _statusCode = httpResponse.statusCode;
     }
-    
     _response = [response copy];
     _responseData = [[NSMutableData alloc] init];
 }
@@ -132,17 +138,51 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection successful: %@", [self responseString]]];
     dispatch_async(dispatch_get_main_queue(), ^{
-        _callback(_response, _responseData, nil);
+        _callback(_response, _responseData, [self requestError]);
     });
+    [NNLogger logFromInstance: self message: @"Connection success"
+                         data: [NSString stringWithFormat: @"Connection: %@, date: %@", connection, [self responseString]]];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    //[NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Connection Failed: %@", error]];
     dispatch_async(dispatch_get_main_queue(), ^{
         _callback(_response, nil, error);
     });
+    [NNLogger logFromInstance: self message: @"Connection failed"
+                         data: [NSString stringWithFormat: @"Connection: %@, Error: %@", connection, error]];
+}
+
+- (BOOL)badRequest {
+    return (_statusCode < 200 || _statusCode >= 300);
+}
+
+- (NSError *)requestError {
+    if([self badRequest]) {
+        NSString *errorDomain = nil;
+        
+        switch(_statusCode) {
+            case NNHTTPErrorNotFound:
+                errorDomain = @"com.NNAsyncRequest.notFound";
+                break;
+            case NNHTTPErrorForbidden:
+                errorDomain = @"com.NNAsyncRequest.forbidden";
+                break;
+            case NNHTTPErrorBadRequest:
+                errorDomain = @"com.NNAsyncRequest.badRequest";
+                break;
+            case NNHTTPErrorNotAuthorized:
+                errorDomain = @"com.NNAsyncRequest.notAuthorized";
+                break;
+            default:
+                errorDomain = @"com.NNAsyncRequest.undefined";
+                break;
+        }
+        if(errorDomain.length > 0) {
+            return [NSError errorWithDomain: errorDomain code: _statusCode userInfo: nil];
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Helper Methods

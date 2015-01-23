@@ -24,7 +24,7 @@
 + (NSString *)trimWhiteSpace:(NSString *)string;
 
 //JSON
-+ (NSDictionary *)parseJsonFromData:(NSData *)data;
++ (id)parseJsonFromData:(NSData *)data;
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json;
 
 //File Management
@@ -32,6 +32,8 @@
 + (NSString *)pathToFileInDocumentsDirectory:(NSString *)fileName;
 + (BOOL)fileExistsInDocumentsDirectory:(NSString *)fileName;
 + (BOOL)fileExistsAtPath:(NSString *)path;
++ (BOOL)archiveObjectToDocumentsDirectory:(id)object withName:(NSString *)fileName;
++ (id)unarchiveObjectFromDocumentsDirectory:(NSString *)fileName;
 
 //Device specific utilities
 + (BOOL)isBigDevice;

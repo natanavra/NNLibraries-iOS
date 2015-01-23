@@ -23,6 +23,10 @@
 - (BOOL)currentLocationAvailable;
 - (CLLocation *)currentLocation;
 - (CLLocationCoordinate2D)currentLocationCoordinate;
+
+- (double)currentLongitude;
+- (double)currentLatitude;
+
 - (BOOL)locationChanged;
 
 - (BOOL)failedGettingLocation;

@@ -64,16 +64,19 @@
 
 #pragma mark - JSON
 
-+ (NSDictionary *)parseJsonFromData:(NSData *)data {
-    NSError *err = nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
-    if(err) {
-        //Maybe implement some kind of error handling?
-        [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to parse JSON! %@", err]];
-        return [NSDictionary dictionary];
-    } else {
-        return json;
++ (id)parseJsonFromData:(NSData *)data {
+    if(data) {
+        NSError *err = nil;
+        id json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
+        if(err) {
+            //Maybe implement some kind of error handling?
+            [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to parse JSON! %@", err]];
+            return nil;
+        } else {
+            return json;
+        }
     }
+    return nil;
 }
 
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
@@ -105,6 +108,18 @@
 
 + (BOOL)fileExistsAtPath:(NSString *)path {
     return [[NSFileManager defaultManager] fileExistsAtPath: path];
+}
+
++ (BOOL)archiveObjectToDocumentsDirectory:(id)object withName:(NSString *)fileName {
+    NSString *path = [self pathToFileInDocumentsDirectory: fileName];
+    return [NSKeyedArchiver archiveRootObject: object toFile: path];
+}
+
++ (id)unarchiveObjectFromDocumentsDirectory:(NSString *)fileName {
+    if([self fileExistsInDocumentsDirectory: fileName]) {
+        return [NSKeyedUnarchiver unarchiveObjectWithFile: [self pathToFileInDocumentsDirectory: fileName]];
+    }
+    return nil;
 }
 
 #pragma mark - Device Utilities

@@ -10,6 +10,8 @@
 #import "NNLogger.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "MBProgressHUD.h"
+
 @implementation UIViewController (NNAdditions)
 
 - (BOOL)presentPictureSelectFromSource:(UIImagePickerControllerSourceType)source allowsEditing:(BOOL)editingAllowed andDelegate:(id<UINavigationControllerDelegate, UIImagePickerControllerDelegate>)delegate {
@@ -60,5 +62,25 @@
     }
     return NO;
 }
+
+- (void)showLoadingViewWithText:(NSString *)text withSubtitle:(NSString *)subtitle {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        [MBProgressHUD hideAllHUDsForView: window animated: YES];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo: window animated: YES];
+        hud.dimBackground = YES;
+        hud.labelText = text;
+        hud.detailsLabelText = subtitle;
+    });
+}
+
+- (void)hideLoadingView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        [MBProgressHUD hideAllHUDsForView: window animated: YES];
+    });
+}
+
 
 @end

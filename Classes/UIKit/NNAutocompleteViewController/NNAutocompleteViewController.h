@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NNSelectableObject.h"
+#import "NNSelectable.h"
 
 @protocol NNAutoCompleteDelegate <NSObject>
 @required
-- (void)selectionDone:(id<NNSelectableObject>)selected;
+- (void)selectionDone:(id<NNSelectable>)selected;
 @optional
 - (void)selectionCancelled;
 @end

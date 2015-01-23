@@ -8,20 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-/* The completion block is called on the main thread. */
-typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
-typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
-
 typedef NS_ENUM(NSInteger, NNHTTPMethod) {
     NNHTTPMethodGET = 0,
     NNHTTPMethodPOST = 1,
 };
 
+typedef NS_ENUM(NSInteger, NNHTTPErrorCode) {
+    NNHTTPErrorBadRequest = 400,
+    NNHTTPErrorNotAuthorized = 401,
+    NNHTTPErrorForbidden = 403,
+    NNHTTPErrorNotFound = 404,
+};
+
+/* The completion block is called on the main thread. */
+typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
+typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
+
 static NSString *const httpMethodPOST   = @"POST";
 static NSString *const httpMethodGET    = @"GET";
 
 /** Simple asynchronous request */
-@interface NNAsyncRequest : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
+@interface NNAsyncRequest : NSObject <NSURLConnectionDataDelegate> {
     NSMutableURLRequest *_request;
     NSURLResponse *_response;
     NSURLConnection *_connection;
