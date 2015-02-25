@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 
 @property (nonatomic, strong) NSString *navBarTitle;
-@property (nonatomic, strong) NSArray *autocompleteData;
 @property (nonatomic, strong) NSArray *filteredData;
 @property (nonatomic, assign) BOOL filtered;
 @end
@@ -37,6 +36,8 @@ static NSString *const cellID = @"autocompleteCell";
         _filteredData = nil;
         _filtered = NO;
         _navBarTitle = title;
+        _delegate = delegate;
+        _textAlignment = NSTextAlignmentLeft;
     }
     return self;
 }
@@ -47,14 +48,20 @@ static NSString *const cellID = @"autocompleteCell";
     _navBarTitle = nil;
 }
 
-#pragma mark - IBActions
-
-- (void)setCloseButtonTitle:(NSString *)title {
-    [_closeButton setTitle: title];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    if(_closeTitle) {
+        [_closeButton setTitle: _closeTitle];
+    } else {
+        [_closeButton setTitle: @"Close"];
+    }
 }
 
+#pragma mark - IBActions
+
+
 - (IBAction)closeAction:(id)sender {
-    if(_delegate) {
+    if([_delegate respondsToSelector: @selector(selectionCancelled)]) {
         [_delegate selectionCancelled];
     }
     [self dismissViewControllerAnimated: YES completion: nil];
@@ -117,6 +124,7 @@ static NSString *const cellID = @"autocompleteCell";
     }
     
     cell.textLabel.text = [object title];
+    cell.textLabel.textAlignment = _textAlignment;
     return cell;
 }
 

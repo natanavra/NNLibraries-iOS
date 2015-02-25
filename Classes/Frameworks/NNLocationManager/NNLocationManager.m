@@ -11,6 +11,8 @@
 #import "NNConstants.h"
 #import "UIAlertView+NNAdditions.h"
 
+#define DEBUG_LOCATION 0
+
 @import CoreLocation;
 
 @interface NNLocationManager () <CLLocationManagerDelegate> {
@@ -22,9 +24,6 @@
 @end
 
 @implementation NNLocationManager
-@synthesize locMgr;
-@synthesize currentLoc;
-@synthesize lastLocation;
 
 #pragma mark - init
 
@@ -51,14 +50,14 @@
                gpsStatus != kCLAuthorizationStatusRestricted) {
                 //Can use location
                 self.locMgr = [[CLLocationManager alloc] init];
-                if([locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
-                    [locMgr performSelector: @selector(requestWhenInUseAuthorization)];
+                if([_locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
+                    [_locMgr performSelector: @selector(requestWhenInUseAuthorization)];
                 }
                 
-                locMgr.delegate = self;
-                locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-                self.currentLoc = locMgr.location;
-                [locMgr startUpdatingLocation];
+                _locMgr.delegate = self;
+                _locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+                _currentLoc = _locMgr.location;
+                [_locMgr startUpdatingLocation];
             } else {
                 //Can't use location
                 failed = YES;
@@ -107,6 +106,7 @@
     [NNLogger logFromInstance: self message: @"Authorization changed"];
     if(status != kCLAuthorizationStatusRestricted && status != kCLAuthorizationStatusDenied) {
         [self.locMgr startUpdatingLocation];
+        self.currentLoc = _locMgr.location;
     } else {
         [self.locMgr stopUpdatingLocation];
     }
@@ -126,22 +126,24 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject]; //Get last known position;
-    //[NNLogger logFromInstance: self message: @"Location changed" data: location];
     failed = NO;
     self.currentLoc = location;
+    if(DEBUG_LOCATION) {
+        [NNLogger logFromInstance: self message: @"Location changed" data: location];
+    }
 }
 
 #pragma mark - Getters
 
 - (BOOL)locationChanged {
-    if([self.lastLocation distanceFromLocation: currentLoc] > 50) {
+    if([self.lastLocation distanceFromLocation: _currentLoc] > 50) {
         return YES;
     }
     return NO;
 }
 
 - (CLLocation *)currentLocation {
-    self.lastLocation = currentLoc;
+    self.lastLocation = _currentLoc;
     return self.currentLoc;
 }
 
@@ -154,14 +156,22 @@
 }
 
 - (CLLocationCoordinate2D)currentLocationCoordinate {
-    self.lastLocation = currentLoc;
+    self.lastLocation = _currentLoc;
     return self.currentLoc.coordinate;
 }
 
+- (double)distanceFromCurrentLocation:(CLLocationCoordinate2D)coordinate {
+    if(_currentLoc != nil) {
+        CLLocation *loc = [[CLLocation alloc] initWithLatitude: coordinate.latitude longitude: coordinate.longitude];
+        return (double)[_currentLoc distanceFromLocation: loc];
+    }
+    return 0;
+}
+
 - (BOOL)currentLocationAvailable {
-    if(currentLoc != nil) {
+    if(_currentLoc != nil) {
         //BOOL accurate = (currentLoc.horizontalAccuracy <= kAccuracyThreshold && currentLoc.verticalAccuracy <= kAccuracyThreshold);
-        BOOL notZero = (currentLoc.coordinate.latitude != 0 && currentLoc.coordinate.longitude != 0);
+        BOOL notZero = (_currentLoc.coordinate.latitude != 0 && _currentLoc.coordinate.longitude != 0);
         if(notZero) {
             return YES;
         } else {
@@ -170,6 +180,22 @@
         }
     }
     return NO;
+}
+
+- (NSString *)parsedDistance:(double)distance {
+    if(distance != 0) {
+        if(distance >= 1000) {
+            double kilometers = distance / 1000.0f;
+            if(kilometers >= 100) {
+                return [NSString stringWithFormat: @"%zd ק״מ", (NSInteger)kilometers];
+            } else {
+                return [NSString stringWithFormat: @"%.1f ק״מ", kilometers];
+            }
+        } else {
+            return [NSString stringWithFormat: @"%zi מטר", (NSInteger)distance];
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Error handling

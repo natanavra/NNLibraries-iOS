@@ -17,3 +17,4 @@
 #import "UIAlertView+NNAdditions.h"
 #import "UINavigationBar+NNAdditions.h"
 #import "UIViewController+NNAdditions.h"
+#import "UINavigationController+NNAdditions.h"

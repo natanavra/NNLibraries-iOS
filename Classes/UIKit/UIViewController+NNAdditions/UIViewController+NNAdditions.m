@@ -14,6 +14,8 @@
 
 @implementation UIViewController (NNAdditions)
 
+#pragma mark - UIImagePicker
+
 - (BOOL)presentPictureSelectFromSource:(UIImagePickerControllerSourceType)source allowsEditing:(BOOL)editingAllowed andDelegate:(id<UINavigationControllerDelegate, UIImagePickerControllerDelegate>)delegate {
     BOOL available = [UIImagePickerController isSourceTypeAvailable: source];
     if(available && delegate) {
@@ -63,6 +65,8 @@
     return NO;
 }
 
+#pragma mark - MBProgressHUD
+
 - (void)showLoadingViewWithText:(NSString *)text withSubtitle:(NSString *)subtitle {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
@@ -82,5 +86,11 @@
     });
 }
 
+#pragma mark - Sharing
+
+- (void)presentSharingMenuWithItems:(NSArray *)items completion:(void(^)())completion {
+    UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities: nil];
+    [self presentViewController: activity animated: YES completion: completion];
+}
 
 @end

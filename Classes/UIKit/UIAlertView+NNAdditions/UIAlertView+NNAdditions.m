@@ -10,15 +10,15 @@
 
 @implementation UIAlertView (NNAdditions)
 
-+ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate {
-    [self showAlertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: btnTitles delegate: delegate tag: 0];
++ (UIAlertView *)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate {
+    return [self showAlertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: btnTitles delegate: delegate tag: 0];
 }
 
-+ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag {
++ (UIAlertView *)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(title, nil)
                                                     message: NSLocalizedString(message, nil)
                                                    delegate: delegate
-                                          cancelButtonTitle: NSLocalizedString(cancelTitle, nil)
+                                          cancelButtonTitle: cancelTitle ? NSLocalizedString(cancelTitle, nil) : nil
                                           otherButtonTitles: nil];
     for(id obj in btnTitles) {
         if([obj isKindOfClass: [NSString class]]) {
@@ -28,6 +28,18 @@
     }
     alert.tag = tag;
     [alert show];
+    return alert;
+}
+
+- (void)showWithDisplayTime:(NSTimeInterval)displayTime {
+    [self show];
+    [self dismissAfterDelay: displayTime];
+}
+
+- (void)dismissAfterDelay:(NSTimeInterval)delay {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self dismissWithClickedButtonIndex: 0 animated: YES];
+    });
 }
 
 @end

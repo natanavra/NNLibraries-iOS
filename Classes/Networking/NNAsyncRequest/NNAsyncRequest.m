@@ -95,6 +95,7 @@
     if(postString) {
         [_request setHTTPBody: [[postString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] dataUsingEncoding: NSUTF8StringEncoding]];
     }
+    
 }
 
 - (void)setHTTPBodyData:(NSData *)postData {
@@ -142,7 +143,7 @@
         _callback(_response, _responseData, [self requestError]);
     });
     [NNLogger logFromInstance: self message: @"Connection success"
-                         data: [NSString stringWithFormat: @"Connection: %@, date: %@", connection, [self responseString]]];
+                         data: [NSString stringWithFormat: @"Connection: %@, Data: %@", connection, [self responseString]]];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

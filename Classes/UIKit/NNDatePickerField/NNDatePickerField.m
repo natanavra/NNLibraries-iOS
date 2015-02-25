@@ -24,6 +24,7 @@
     if(![[self inputView] isKindOfClass: [UIDatePicker class]]) {
         [self setupPicker];
     }
+    [self setCurrentDate: _datePicker.date];
     return [super becomeFirstResponder];
 }
 
@@ -83,6 +84,16 @@
     self.inputAccessoryView = toolbar;
 }
 
+- (void)closePicker {
+    [self resignFirstResponder];
+}
+
+- (void)clearDate {
+    _selectedDate = nil;
+    _datePicker.date = _datePicker.minimumDate ? _datePicker.minimumDate : [NSDate date];
+    self.text = _pickerPlaceholder;
+}
+
 #pragma mark - UIDatePicker Related
 
 - (void)setupPicker {
@@ -99,23 +110,14 @@
 
 - (void)setDatePickerMode:(UIDatePickerMode)newMode {
     if([[self inputView] isKindOfClass: [UIDatePicker class]]) {
-        UIDatePicker *picker = (UIDatePicker *)[self inputView];
-        picker.datePickerMode = newMode;
+        _datePicker.datePickerMode = newMode;
     }
-}
-
-- (void)clearDate {
-    _selectedDate = nil;
-    _datePicker.date = _datePicker.minimumDate ? _datePicker.minimumDate : [NSDate date];
-    self.text = _pickerPlaceholder;
-}
-
-- (void)closePicker {
-    [self resignFirstResponder];
 }
 
 - (void)dateChanged:(UIDatePicker *)datePicker {
     BOOL shouldChange = YES;
+    
+    //Ask delegate wether we can change the date.
     if([_datePickerDelegate respondsToSelector: @selector(datePickerField:shouldChangeToDate:)]) {
         shouldChange = [_datePickerDelegate datePickerField: self shouldChangeToDate: datePicker.date];
     }
@@ -127,21 +129,28 @@
         if([_datePickerDelegate respondsToSelector: @selector(datePickerField:dateChangedToDate:)]) {
             [_datePickerDelegate datePickerField: self dateChangedToDate: _selectedDate];
         }
-        
     } else {
         datePicker.date = _selectedDate ? _selectedDate : [NSDate date];
     }
 }
 
 - (void)setCurrentDate:(NSDate *)date {
-    _selectedDate = date;
-    _datePicker.date = date;
-    self.text = [self dateStringFromDate: date];
+    if([self isValidDate: date]) {
+        _selectedDate = date;
+        _datePicker.date = date;
+        self.text = [self dateStringFromDate: date];
+    }
 }
 
 - (void)setMinimumDate:(NSDate *)date {
-    _datePicker.minimumDate = date;
-    if(_selectedDate && [_selectedDate compare: date] == NSOrderedAscending) {
+    if(!_datePicker.maximumDate) {
+        _datePicker.minimumDate = date;
+    } else if([_datePicker.maximumDate compare: date] == NSOrderedDescending) {
+        _datePicker.minimumDate = date;
+    }
+    
+    //If current date is invalid - change it to the minimum date.
+    if(_selectedDate && ![self isValidDate: _selectedDate]) {
         [self setCurrentDate: date];
     }
 }
@@ -150,12 +159,48 @@
     return _datePicker.minimumDate;
 }
 
+- (void)setMaximumDate:(NSDate *)date {
+    if(!_datePicker.minimumDate) {
+        _datePicker.maximumDate = date;
+    } else if([_datePicker.minimumDate compare: date] == NSOrderedAscending) {
+        _datePicker.maximumDate = date;
+    }
+    
+    //If current selected date is invalid - change it to the maximum date.
+    if(_selectedDate && ![self isValidDate: _selectedDate]) {
+        [self setCurrentDate: date];
+    }
+}
+
+- (NSDate *)maximumDate {
+    return _datePicker.maximumDate;
+}
+
 - (NSString *)selectedDateStringWithFormat:(NSString *)format {
     NSString *previousFormat = _dateDisplayFormat;
     _dateDisplayFormat = format;
     NSString *dateString = [self dateStringFromDate: _selectedDate];
     _dateDisplayFormat = previousFormat;
     return dateString;
+}
+
+- (BOOL)isValidDate:(NSDate *)date {
+    if(!date) {
+        return NO;
+    }
+    
+    if(_datePicker.minimumDate) {
+        if([_datePicker.minimumDate compare: date] == NSOrderedDescending) {
+            return NO;
+        }
+    }
+    if(_datePicker.maximumDate) {
+        if([_datePicker.maximumDate compare: date] == NSOrderedAscending) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - Helpers

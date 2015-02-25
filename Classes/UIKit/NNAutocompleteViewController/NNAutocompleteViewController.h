@@ -23,7 +23,10 @@
  *  @warning To use the Built-in UI, copy the xib file to your application bundle.
  */
 @interface NNAutocompleteViewController : UIViewController
+@property (nonatomic, strong) NSArray *autocompleteData;
 @property (nonatomic, weak) id<NNAutoCompleteDelegate> delegate;
+@property (nonatomic) NSTextAlignment textAlignment;
+@property (nonatomic, copy) NSString *closeTitle;
+
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<NNAutoCompleteDelegate>)delegate data:(NSArray *)data;
-- (void)setCloseButtonTitle:(NSString *)title;
 @end

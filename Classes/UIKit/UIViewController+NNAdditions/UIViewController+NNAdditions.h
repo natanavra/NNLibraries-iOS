@@ -18,4 +18,7 @@
 /** MBProgressHUD */
 - (void)showLoadingViewWithText:(NSString *)text withSubtitle:(NSString *)subtitle;
 - (void)hideLoadingView;
+
+/** Sharing Menu */
+- (void)presentSharingMenuWithItems:(NSArray *)items completion:(void(^)())completion;
 @end

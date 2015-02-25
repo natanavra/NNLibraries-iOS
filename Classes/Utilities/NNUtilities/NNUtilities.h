@@ -53,11 +53,11 @@
 /** Return YES if 0 <= number <= 1. NO otherwise. */
 + (BOOL)numberBetween0And1:(float)number;
 
-+ (NSArray *)uniqueCopy:(NSArray *)array;
++ (NSArray *)uniqueCopyArray:(NSArray *)array;
 
 //URLs
-+ (void)navigateWazeOrMapsWithAddress:(NSString *)address;
-+ (void)navigateWazeOrMapsWithLongitude:(double)longitude latitude:(double)latitude;
-+ (void)callNumber:(NSString *)number;
++ (BOOL)navigateWazeOrMapsWithAddress:(NSString *)address;
++ (BOOL)navigateWazeOrMapsWithLongitude:(double)longitude latitude:(double)latitude;
++ (BOOL)callNumber:(NSString *)number;
 
 @end

@@ -81,13 +81,16 @@
 
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
     NSError *err = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: 0 error: &err];
-    if(err) {
-        [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
-        return [NSData data];
-    } else {
-        return jsonData;
+    NSData *retVal = [NSData data];
+    if([NSJSONSerialization isValidJSONObject: json]) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: kNilOptions error: &err];
+        if(err) {
+            [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
+        } else {
+            retVal = jsonData;
+        }
     }
+    return retVal;
 }
 
 #pragma mark - File Paths
@@ -201,7 +204,7 @@
     return retVal;
 }
 
-+ (NSArray *)uniqueCopy:(NSArray *)array {
++ (NSArray *)uniqueCopyArray:(NSArray *)array {
     NSSet *set = [NSSet setWithArray: array];
     return [set allObjects];
 }
@@ -236,37 +239,41 @@
 }
 
 #pragma mark - URLs
-+ (void)navigateWazeOrMapsWithAddress:(NSString *)address {
++ (BOOL)navigateWazeOrMapsWithAddress:(NSString *)address {
     [NNLogger logFromInstance: self message: @"Navigating to address" data: address];
     NSString *mapsURL = [NSString stringWithFormat: @"waze://?q=%@&navigate=yes", address];
-    if([self applicationURLOpenIfCan: mapsURL]) {
+    BOOL success = [self applicationURLOpenIfCan: mapsURL];
+    if(!success) {
         mapsURL = [NSString stringWithFormat: @"http://maps.apple.com/?q=%@", address];
-        [self applicationURLOpenIfCan: mapsURL];
+        success = [self applicationURLOpenIfCan: mapsURL];
     }
+    return success;
 }
 
-+ (void)navigateWazeOrMapsWithLongitude:(double)longitude latitude:(double)latitude {
++ (BOOL)navigateWazeOrMapsWithLongitude:(double)longitude latitude:(double)latitude {
     NSString *coordinateString = [NSString stringWithFormat: @"%f,%f", latitude, longitude];
     [NNLogger logFromInstance: self message: @"Navigating to coordinates" data: coordinateString];
     NSString *mapsURL = [NSString stringWithFormat: @"waze://?ll=%@&navigate=yes", coordinateString];
-    if(![self applicationURLOpenIfCan: mapsURL]) {
+    BOOL success = [self applicationURLOpenIfCan: mapsURL];
+    if(!success) {
         mapsURL = [NSString stringWithFormat: @"http://maps.apple.com/?ll=%@", coordinateString];
-        [self applicationURLOpenIfCan: mapsURL];
+        success = [self applicationURLOpenIfCan: mapsURL];
     }
+    return success;
 }
 
 + (BOOL)applicationURLOpenIfCan:(NSString *)urlString {
     NSURL *url = [NSURL URLWithString: urlString];
-    return [[UIApplication sharedApplication] openURL: url];
+    BOOL success = [[UIApplication sharedApplication] openURL: url];
+    if(!success) {
+        [NNLogger logFromInstance: self message: @"Failed to open URL" data: urlString];
+    }
+    return success;
 }
 
-+ (void)callNumber:(NSString *)number {
++ (BOOL)callNumber:(NSString *)number {
     NSString *phoneURL = [@"tel://" stringByAppendingString: number];
-    if([self applicationURLOpenIfCan: phoneURL]) {
-        [NNLogger logFromInstance: self message: @"Calling number" data: number];
-    } else {
-        [NNLogger logFromInstance: self message: @"Failed to call number" data: number];
-    }
+    return [self applicationURLOpenIfCan: phoneURL];
 }
 
 @end

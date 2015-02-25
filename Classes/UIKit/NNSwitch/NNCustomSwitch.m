@@ -7,6 +7,7 @@
 //
 
 #import "NNCustomSwitch.h"
+#import "NNLogger.h"
 #import "UIView+NNAdditions.h"
 
 @implementation NNCustomSwitch
@@ -17,14 +18,20 @@
         _offImage = offImage;
         
         UIImageView *imgView = [[UIImageView alloc] initWithImage: offImage];
+        imgView.userInteractionEnabled = NO;
         [imgView sizeToFit];
         [imgView setFrameOrigin: CGPointZero];
         [self setFrameSize: offImage.size];
         [self addSubview: imgView];
         
+        CGRect frame = imgView.bounds;
+        frame.origin = self.frame.origin;
+        self.frame = frame;
+        
         _switchImage = imgView;
         
-        [self addTarget: self action: @selector(toggleState) forControlEvents: UIControlEventTouchUpInside];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(toggleState)];
+        [self addGestureRecognizer: tap];
     }
     return self;
 }

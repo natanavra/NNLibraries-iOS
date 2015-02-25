@@ -6,10 +6,6 @@
 //  Copyright (c) 2014 Natan Abramov. All rights reserved.
 //
 
-#import "NNUtilities.h"
-#import "NNLogger.h"
-#import "NNConstants.h"
-
 #import "NNAsyncRequest.h"
 
 #import "NNStoreKitHelper.h"
@@ -17,3 +13,6 @@
 
 //NN_UIKit
 #import "NNLibrariesUIKit.h"
+
+//NNEssentials (Logger, Utilities)
+#import "NNLibrariesEssentials.h"

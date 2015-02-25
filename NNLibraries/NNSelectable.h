@@ -11,5 +11,7 @@
 @protocol NNSelectable <NSObject>
 @required
 - (NSString *)title;
+@optional
 - (NSInteger)objectID;
+- (NSString *)objectStringID;
 @end

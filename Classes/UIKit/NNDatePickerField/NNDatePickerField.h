@@ -18,12 +18,12 @@
 @interface NNDatePickerField : UITextField
 /** If not set, will use the text field's original <b>text</b> <i>property</i>. */
 @property (nonatomic, strong) NSString *pickerPlaceholder;
-@property (nonatomic, strong) NSDate *selectedDate;
+@property (nonatomic, strong, readonly) NSDate *selectedDate;
 /** The format in which the selected date will be displayed. If not set, default to dd/MM/yyyy */
 @property (nonatomic, strong) NSString *dateDisplayFormat;
 @property (nonatomic, weak) id<NNDatePickerFieldDelegate> datePickerDelegate;
+@property (nonatomic) UIDatePickerMode datePickerMode;
 
-- (void)setDatePickerMode:(UIDatePickerMode)newMode;
 - (void)setCurrentDate:(NSDate *)date;
 - (NSString *)selectedDateStringWithFormat:(NSString *)format;
 /**
@@ -32,6 +32,9 @@
  */
 - (void)setMinimumDate:(NSDate *)date;
 - (NSDate *)minimumDate;
+
+- (void)setMaximumDate:(NSDate *)date;
+- (NSDate *)maximumDate;
 
 /**
  *  Shows an input accessory view, a toolbar above the picker.
