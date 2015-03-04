@@ -8,18 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+#define kUTCTimeZone [NSTimeZone timeZoneWithName: @"UTC"]
+
 extern NSString *const NSDatePOSIXFormat;
 
 @interface NSDate (NNAdditions)
+
+
+- (NSString *)POSIXFormatString;
+- (BOOL)isDateInSameDay:(NSDate *)date;
 
 /**
  *  Returns a string representation of the date with the given format.
  *  @param format Date format (RFC-something standard, Apple way...) must be valid <b><i>non-nil</b></i>
  */
 - (NSString *)dateStringWithFormat:(NSString *)format;
-- (NSString *)POSIXFormatString;
-
-- (BOOL)isDateInSameDay:(NSDate *)date;
 
 /**
  *  @param date   A valid date object.
@@ -36,10 +39,15 @@ extern NSString *const NSDatePOSIXFormat;
  */
 + (NSString *)dateStringFromDate:(NSDate *)date withFormat:(NSString *)format withTimeZone:(NSTimeZone *)timeZone;
 
-+ (NSDate *)dateFromComponents:(NSDateComponents *)components;
 + (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)format;
++ (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)format withTimeZone:(NSTimeZone *)timeZone;
 
++ (NSDate *)dateFromComponents:(NSDateComponents *)components;
 + (NSDateComponents *)dateComponents:(NSCalendarUnit)comps fromDate:(NSDate *)date;
+- (NSDateComponents *)dateComponents:(NSCalendarUnit)comps;
+- (NSDate *)dateFromSpecificComponents:(NSCalendarUnit)comps;
+
+- (NSComparisonResult)timeCompare:(NSDate *)otherDate;
 
 + (NSArray *)monthSymbols;
 + (NSArray *)weekdaySymbols;

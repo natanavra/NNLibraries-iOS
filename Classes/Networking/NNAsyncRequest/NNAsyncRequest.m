@@ -53,7 +53,7 @@
             NSString *requestURL = [url stringByAppendingString: query];
             [_request setURL: [NSURL URLWithString: requestURL]];
         } else if(method == NNHTTPMethodPOST) {
-            NSData *data = [NNUtilities jsonDataFromDictionary: params];
+            NSData *data = [NNUtilities jsonDataFromDictionary: params prettyPrinted: YES];
             _request.HTTPBody = data;
         }
         _request.HTTPMethod = [NNAsyncRequest httpMethodName: method];
@@ -143,7 +143,8 @@
         _callback(_response, _responseData, [self requestError]);
     });
     [NNLogger logFromInstance: self message: @"Connection success"
-                         data: [NSString stringWithFormat: @"Connection: %@, Data: %@", connection, [self responseString]]];
+                         data: [NSString stringWithFormat: @"Connection: %@, Error : %@, Data: %@",
+                                connection, [self requestError], [self responseString]]];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

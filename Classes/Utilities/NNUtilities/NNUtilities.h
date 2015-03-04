@@ -26,6 +26,7 @@
 //JSON
 + (id)parseJsonFromData:(NSData *)data;
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json;
++ (NSData *)jsonDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty;
 
 //File Management
 + (NSString *)pathToDocumentsDirectory;

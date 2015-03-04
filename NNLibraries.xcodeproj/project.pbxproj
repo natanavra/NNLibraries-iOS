@@ -49,6 +49,8 @@
 		5C0157FB1A4BF61600F6ECAF /* NNUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE461C21A445A330027FF22 /* NNUtilities.m */; };
 		5C0CB98A1A5C5E8D007FDD86 /* NNCustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CB9891A5C5E8D007FDD86 /* NNCustomSwitch.m */; };
 		5C3069271A776A1000A2476A /* CALayer+NNRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3069261A776A1000A2476A /* CALayer+NNRuntimeAttributes.m */; };
+		5C3113A51AA1EAA900F36F35 /* NNNumberPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3113A41AA1EAA900F36F35 /* NNNumberPickerField.m */; };
+		5C3113AA1AA1EC0400F36F35 /* NNPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3113A91AA1EC0400F36F35 /* NNPickerField.m */; };
 		5C37F7051A80ADDA00714D5D /* UINavigationController+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37F7041A80ADDA00714D5D /* UINavigationController+NNAdditions.m */; };
 		5C37F7061A80AFCB00714D5D /* UINavigationController+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37F7031A80ADDA00714D5D /* UINavigationController+NNAdditions.h */; };
 		5C47BE3F1A600F7E008DDCEF /* NNAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C47BE3E1A600F7E008DDCEF /* NNAutocompleteViewController.m */; };
@@ -56,10 +58,10 @@
 		5C7863481A79647C00EEB827 /* NSDate+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7863471A79647C00EEB827 /* NSDate+NNAdditions.m */; };
 		5C7863491A79697E00EEB827 /* NSDate+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C7863461A79647C00EEB827 /* NSDate+NNAdditions.h */; };
 		5C78635B1A7AA33600EEB827 /* NNCustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78635A1A7AA33600EEB827 /* NNCustomDatePicker.m */; };
-		5C951A561A602398008860BE /* NNPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C951A551A602398008860BE /* NNPickerField.m */; };
+		5C951A561A602398008860BE /* NNObjectPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C951A551A602398008860BE /* NNObjectPickerField.m */; };
 		5CB8B0401A6E2F5D00838FA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8B03F1A6E2F5D00838FA0 /* MBProgressHUD.m */; };
 		5CCE0A6B1A6A97C1008C68A6 /* NNSelectable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C951A591A604E39008860BE /* NNSelectable.h */; };
-		5CCE0A6C1A6A99B6008C68A6 /* NNPickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C951A541A602398008860BE /* NNPickerField.h */; };
+		5CCE0A6C1A6A99B6008C68A6 /* NNObjectPickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C951A541A602398008860BE /* NNObjectPickerField.h */; };
 		5CCE0A6F1A6AA5E8008C68A6 /* NNDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */; };
 		5CCE0A701A6AAA8D008C68A6 /* NNDatePickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */; };
 /* End PBXBuildFile section */
@@ -74,7 +76,7 @@
 				5C37F7061A80AFCB00714D5D /* UINavigationController+NNAdditions.h in CopyFiles */,
 				5C7863491A79697E00EEB827 /* NSDate+NNAdditions.h in CopyFiles */,
 				5CCE0A701A6AAA8D008C68A6 /* NNDatePickerField.h in CopyFiles */,
-				5CCE0A6C1A6A99B6008C68A6 /* NNPickerField.h in CopyFiles */,
+				5CCE0A6C1A6A99B6008C68A6 /* NNObjectPickerField.h in CopyFiles */,
 				5CCE0A6B1A6A97C1008C68A6 /* NNSelectable.h in CopyFiles */,
 				5C0157D31A4BF4EF00F6ECAF /* NNLocationManager.h in CopyFiles */,
 				5C0157D41A4BF4EF00F6ECAF /* NNReachabilityManager.h in CopyFiles */,
@@ -110,6 +112,10 @@
 		5C0CB9891A5C5E8D007FDD86 /* NNCustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNCustomSwitch.m; path = NNSwitch/NNCustomSwitch.m; sourceTree = "<group>"; };
 		5C3069251A776A1000A2476A /* CALayer+NNRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+NNRuntimeAttributes.h"; path = "CALayer+NNRuntimeAttributes/CALayer+NNRuntimeAttributes.h"; sourceTree = "<group>"; };
 		5C3069261A776A1000A2476A /* CALayer+NNRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+NNRuntimeAttributes.m"; path = "CALayer+NNRuntimeAttributes/CALayer+NNRuntimeAttributes.m"; sourceTree = "<group>"; };
+		5C3113A31AA1EAA900F36F35 /* NNNumberPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNNumberPickerField.h; path = NNNumberPickerField/NNNumberPickerField.h; sourceTree = "<group>"; };
+		5C3113A41AA1EAA900F36F35 /* NNNumberPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNNumberPickerField.m; path = NNNumberPickerField/NNNumberPickerField.m; sourceTree = "<group>"; };
+		5C3113A81AA1EC0400F36F35 /* NNPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNPickerField.h; path = NNPickerField/NNPickerField.h; sourceTree = "<group>"; };
+		5C3113A91AA1EC0400F36F35 /* NNPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNPickerField.m; path = NNPickerField/NNPickerField.m; sourceTree = "<group>"; };
 		5C37F7031A80ADDA00714D5D /* UINavigationController+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+NNAdditions.h"; path = "Class Extensions/UINavigationController/UINavigationController+NNAdditions.h"; sourceTree = "<group>"; };
 		5C37F7041A80ADDA00714D5D /* UINavigationController+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+NNAdditions.m"; path = "Class Extensions/UINavigationController/UINavigationController+NNAdditions.m"; sourceTree = "<group>"; };
 		5C47BE3D1A600F7E008DDCEF /* NNAutocompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNAutocompleteViewController.h; path = NNAutocompleteViewController/NNAutocompleteViewController.h; sourceTree = "<group>"; };
@@ -121,13 +127,13 @@
 		5C7863471A79647C00EEB827 /* NSDate+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+NNAdditions.m"; path = "NSDate+NNAdditions/NSDate+NNAdditions.m"; sourceTree = "<group>"; };
 		5C7863591A7AA33600EEB827 /* NNCustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNCustomDatePicker.h; path = NNCustomDatePicker/NNCustomDatePicker.h; sourceTree = "<group>"; };
 		5C78635A1A7AA33600EEB827 /* NNCustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNCustomDatePicker.m; path = NNCustomDatePicker/NNCustomDatePicker.m; sourceTree = "<group>"; };
-		5C951A541A602398008860BE /* NNPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNPickerField.h; path = NNPickerField/NNPickerField.h; sourceTree = "<group>"; };
-		5C951A551A602398008860BE /* NNPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNPickerField.m; path = NNPickerField/NNPickerField.m; sourceTree = "<group>"; };
+		5C951A541A602398008860BE /* NNObjectPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNObjectPickerField.h; sourceTree = "<group>"; };
+		5C951A551A602398008860BE /* NNObjectPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNObjectPickerField.m; sourceTree = "<group>"; };
 		5C951A591A604E39008860BE /* NNSelectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNSelectable.h; path = ../NNLibraries/NNSelectable.h; sourceTree = "<group>"; };
 		5CB8B03E1A6E2F5D00838FA0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5CB8B03F1A6E2F5D00838FA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDatePickerField.h; path = NNDatePickerField/NNDatePickerField.h; sourceTree = "<group>"; };
-		5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNDatePickerField.m; path = NNDatePickerField/NNDatePickerField.m; sourceTree = "<group>"; };
+		5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDatePickerField.h; path = NNPickerField/NNDatePickerField/NNDatePickerField.h; sourceTree = "<group>"; };
+		5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNDatePickerField.m; path = NNPickerField/NNDatePickerField/NNDatePickerField.m; sourceTree = "<group>"; };
 		5CE4618C1A445A330027FF22 /* NNLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNLocationManager.h; sourceTree = "<group>"; };
 		5CE4618D1A445A330027FF22 /* NNLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNLocationManager.m; sourceTree = "<group>"; };
 		5CE4618F1A445A330027FF22 /* NNReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNReachabilityManager.h; sourceTree = "<group>"; };
@@ -208,6 +214,35 @@
 				5C3069261A776A1000A2476A /* CALayer+NNRuntimeAttributes.m */,
 			);
 			name = "CALayer+NNRuntimeAttributes";
+			sourceTree = "<group>";
+		};
+		5C3113A21AA1E99800F36F35 /* NNNumberPickerField */ = {
+			isa = PBXGroup;
+			children = (
+				5C3113A31AA1EAA900F36F35 /* NNNumberPickerField.h */,
+				5C3113A41AA1EAA900F36F35 /* NNNumberPickerField.m */,
+			);
+			name = NNNumberPickerField;
+			path = NNPickerField;
+			sourceTree = "<group>";
+		};
+		5C3113A61AA1EB6900F36F35 /* NNDatePickerField */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */,
+				5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */,
+			);
+			name = NNDatePickerField;
+			sourceTree = "<group>";
+		};
+		5C3113A71AA1EB7100F36F35 /* NNObjectPickerField */ = {
+			isa = PBXGroup;
+			children = (
+				5C951A541A602398008860BE /* NNObjectPickerField.h */,
+				5C951A551A602398008860BE /* NNObjectPickerField.m */,
+			);
+			name = NNObjectPickerField;
+			path = NNPickerField/NNObjectPickerField;
 			sourceTree = "<group>";
 		};
 		5C37F6FD1A80AD4500714D5D /* Class Extensions */ = {
@@ -296,10 +331,11 @@
 		5C951A531A60236F008860BE /* NNPickerField */ = {
 			isa = PBXGroup;
 			children = (
-				5C951A541A602398008860BE /* NNPickerField.h */,
-				5C951A551A602398008860BE /* NNPickerField.m */,
-				5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */,
-				5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */,
+				5C3113A81AA1EC0400F36F35 /* NNPickerField.h */,
+				5C3113A91AA1EC0400F36F35 /* NNPickerField.m */,
+				5C3113A71AA1EB7100F36F35 /* NNObjectPickerField */,
+				5C3113A21AA1E99800F36F35 /* NNNumberPickerField */,
+				5C3113A61AA1EB6900F36F35 /* NNDatePickerField */,
 			);
 			name = NNPickerField;
 			sourceTree = "<group>";
@@ -603,11 +639,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C3113A51AA1EAA900F36F35 /* NNNumberPickerField.m in Sources */,
 				5C0157EA1A4BF61600F6ECAF /* NNLocationManager.m in Sources */,
 				5C0157EB1A4BF61600F6ECAF /* NNReachabilityManager.m in Sources */,
 				5C37F7051A80ADDA00714D5D /* UINavigationController+NNAdditions.m in Sources */,
 				5CB8B0401A6E2F5D00838FA0 /* MBProgressHUD.m in Sources */,
 				5C3069271A776A1000A2476A /* CALayer+NNRuntimeAttributes.m in Sources */,
+				5C3113AA1AA1EC0400F36F35 /* NNPickerField.m in Sources */,
 				5C47BE3F1A600F7E008DDCEF /* NNAutocompleteViewController.m in Sources */,
 				5C0157EC1A4BF61600F6ECAF /* Reachability.m in Sources */,
 				5C78635B1A7AA33600EEB827 /* NNCustomDatePicker.m in Sources */,
@@ -621,7 +659,7 @@
 				5C0157F31A4BF61600F6ECAF /* NNPickerInputView.m in Sources */,
 				5C0CB98A1A5C5E8D007FDD86 /* NNCustomSwitch.m in Sources */,
 				5C766D291A8529FD00E082B1 /* NNMotionManager.m in Sources */,
-				5C951A561A602398008860BE /* NNPickerField.m in Sources */,
+				5C951A561A602398008860BE /* NNObjectPickerField.m in Sources */,
 				5C0157F41A4BF61600F6ECAF /* UIAlertView+NNAdditions.m in Sources */,
 				5C0157F51A4BF61600F6ECAF /* UIButton+NNAdditions.m in Sources */,
 				5C0157F61A4BF61600F6ECAF /* UIImage+NNAdditions.m in Sources */,

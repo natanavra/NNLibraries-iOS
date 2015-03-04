@@ -2,15 +2,24 @@
 //  NNPickerField.m
 //  NNLibraries
 //
-//  Created by Natan Abramov on 1/9/15.
+//  Created by Natan Abramov on 2/28/15.
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
 #import "NNPickerField.h"
-#import "NNSelectable.h"
 
-@interface NNPickerField () <UIPickerViewDelegate, UIPickerViewDataSource>
-@property (nonatomic, weak) UIPickerView *picker;
+typedef NS_ENUM(NSInteger, toolbarItemIndex) {
+    toolbarClearItemIndex = 0,
+    toolbarTitleItemIndex = 2,
+    toolbarCloseItemIndex = 4,
+};
+
+@interface NNPickerField ()
+@property (nonatomic, readonly) BOOL showsToolbar;
+@property (nonatomic, copy, readonly) UIColor *titleColor;
+@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, copy, readonly) NSString *clearButtonTitle;
+@property (nonatomic, copy, readonly) NSString *closeButtonTitle;
 @end
 
 @implementation NNPickerField
@@ -22,213 +31,151 @@
 }
 
 - (BOOL)becomeFirstResponder {
-    if(![[self inputView] isKindOfClass: [UIPickerView class]]) {
-        [self setupPicker];
-    }
-    if([self showsRange] && _selectedNumber != NSNotFound) {
-        [self setSelectedNumber: _selectedNumber];
-        [self pickerView: _picker didSelectRow: _fromNumber + _selectedNumber inComponent: 0];
-    } else if(![self showsRange]) {
-        [self setCurrentSelectedIndex: 0];
-    }
+    [self PROTECTED(setupPicker)];
     return [super becomeFirstResponder];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if(self = [super initWithCoder: aDecoder]) {
-        [self setupPicker];
+- (BOOL)resignFirstResponder {
+    return [super resignFirstResponder];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    if(self = [super initWithCoder: decoder]) {
+        _pickerPlaceholder = self.text;
     }
     return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame: frame]) {
-        [self setupPicker];
+        _pickerPlaceholder = self.text;
     }
     return self;
 }
 
-#pragma mark - Custom Methods
+#pragma mark - Static Components
 
-- (void)setupPicker {
-    _selectedIndex = -1;
-    _fromNumber = 1;
-    _toNumber = 10;
+- (UIToolbar *)PROTECTED(inputAccessoryToolbar) {
+    static UIToolbar *toolbar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        toolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44.0f)];
+        
+        NSMutableArray *toolbarItems = [NSMutableArray array];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle: nil
+                                                                 style: UIBarButtonItemStylePlain
+                                                                target: self
+                                                                action: @selector(PROTECTED(clearField))];
+        [toolbarItems addObject: item];
+        
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                                                       target: nil
+                                                                                       action: nil];
+        [toolbarItems addObject: flexibleSpace];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, toolbar.frame.size.width * 0.6, toolbar.frame.size.height)];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor blackColor];
+        label.text = nil;
+        label.textAlignment = NSTextAlignmentCenter;
+        UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView: label];
+        [toolbarItems addObject: titleItem];
+        
+        flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                                      target: nil
+                                                                      action: nil];
+        [toolbarItems addObject: flexibleSpace];
+        
+        item = [[UIBarButtonItem alloc] initWithTitle: nil
+                                                style: UIBarButtonItemStyleDone
+                                               target: self
+                                               action: @selector(PROTECTED(closePicker))];
+        [toolbarItems addObject: item];
+        toolbar.items = toolbarItems;
+        
+    });
+    return toolbar;
+}
+
+#pragma mark - UIToolbar
+
+- (void)updateToolBarDisplay {
+    if(_showsToolbar) {
+        UIToolbar *toolbar = [self PROTECTED(inputAccessoryToolbar)];
+        NSMutableArray *items = [toolbar.items mutableCopy];
+        UIBarButtonItem *clearItem = items[toolbarClearItemIndex];
+        UIBarButtonItem *closeItem = items[toolbarCloseItemIndex];
+        UIBarButtonItem *titleItem = items[toolbarTitleItemIndex];
+        
+        clearItem.enabled = _clearButtonTitle.length > 0;
+        [clearItem setTitle: _clearButtonTitle.length > 0 ? _clearButtonTitle : nil];
+        [clearItem setTarget: self];
+        
+        closeItem.enabled = _closeButtonTitle.length > 0;
+        [closeItem setTitle: _closeButtonTitle.length > 0 ? _closeButtonTitle : nil];
+        [closeItem setTarget: self];
+        
+        if(_title) {
+            UILabel *title = (UILabel *)titleItem.customView;
+            title.text = _title;
+            title.textColor = _titleColor ? _titleColor : [UIColor blackColor];
+        }
+        
+        [toolbar setItems: items animated: YES];
+        self.inputAccessoryView = toolbar;
+    } else {
+        self.inputAccessoryView = nil;
+    }
+}
+
+- (void)PROTECTED(closePicker) {
+    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidClose:)]) {
+        [_pickerDelegate pickerFieldDidClose: self];
+    }
+    [self resignFirstResponder];
+}
+
+- (void)PROTECTED(clearField) {
+    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidClearSelection:)]) {
+        [_pickerDelegate pickerFieldDidClearSelection: self];
+    }
+    self.text = _pickerPlaceholder;
+    [self resignFirstResponder];
+}
+
+- (void)setShowsToolBarWithTitle:(NSString *)title withCloseButtonTitle:(NSString *)closeTitle withClearTitle:(NSString *)clearTitle withTitleColor:(UIColor *)color {
+    _showsToolbar = YES;
+    _clearButtonTitle = [clearTitle copy];
+    _title = [title copy];
+    _closeButtonTitle = [closeTitle copy];
+    _titleColor = [color copy];
+}
+
+#pragma mark - Picker Related
+
+- (void)PROTECTED(setupPicker) {
+    [self updateToolBarDisplay];
     
-    UIPickerView *picker = [[UIPickerView alloc] init];
-    picker.delegate = self;
-    picker.dataSource = self;
-    self.inputView = picker;
-    self.picker = picker;
+    //To hide the blinking cursor.
     self.tintColor = [UIColor clearColor];
 }
 
-- (void)setCloseButtonTitle:(NSString *)title {
-    //Deprecated
-}
-
-- (void)setClearButtonTitle:(NSString *)title {
-    //Deprecated
-}
-
-- (void)endEditing {
-    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidFinishSelection:)]) {
-        [_pickerDelegate pickerFieldDidFinishSelection: self];
-    }
-    [self endEditing: YES];
-}
-
-- (void)clear {
-    self.text = @"";
-    _selectedIndex = -1;
-    _selectedNumber = NSNotFound;
-    _selectedObject = nil;
-    [self endEditing: YES];
-    
-    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidCleanSelection:)]) {
-        [_pickerDelegate pickerFieldDidCleanSelection: self];
-    }
-}
-
-- (void)setShowsToolBarWithCleanButtonTitle:(NSString *)cleanTitle
-                       withCloseButtonTitle:(NSString *)closeTitle
-                                  withTitle:(NSString *)title
-                             withTitleColor:(UIColor *)color {
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, _picker.frame.size.width, 44.0f)];
-    
-    NSMutableArray *items = [NSMutableArray array];
-    if(cleanTitle) {
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle: cleanTitle
-                                                                 style: UIBarButtonItemStylePlain
-                                                                target: self action: @selector(clear)];
-        [items addObject: item];
-    }
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                                                   target: nil action: nil];
-    [items addObject: flexibleSpace];
-    
-    if(title) {
-        UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, toolbar.frame.size.width * 0.6, toolbar.frame.size.height)];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = color ? color : [UIColor blackColor];
-        label.text = title;
-        label.textAlignment = NSTextAlignmentCenter;
-        UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView: label];
-        [items addObject: titleItem];
-        
-        flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                                      target: nil action: nil];
-        [items addObject: flexibleSpace];
-    }
-    
-    if(closeTitle) {
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle: closeTitle
-                                                                 style: UIBarButtonItemStyleDone
-                                                                target: self action: @selector(endEditing)];
-        [items addObject: item];
-    }
-    
-    toolbar.items = [items copy];
-    self.inputAccessoryView = toolbar;
-}
-
-#pragma mark - UIPickerView Protocols
-
-- (void)setShowsRange:(BOOL)showsRange {
-    [self showNumberRangeFromNumber: _fromNumber toNumber: _toNumber];
-}
-
-- (void)showNumberRangeFromNumber:(NSInteger)fromNumber toNumber:(NSInteger)toNumber {
-    if(fromNumber > toNumber) {
-        NSInteger holder = fromNumber;
-        fromNumber = toNumber;
-        toNumber = holder;
-    } else if(fromNumber == toNumber) {
-        toNumber ++;
-    }
-    _showsRange = YES;
-    _fromNumber = fromNumber;
-    _toNumber = toNumber;
-    _selectedNumber = NSNotFound;
-    [_picker reloadAllComponents];
-}
+#pragma mark - UIPickerViewDelegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if(_showsRange) {
-        return _toNumber - _fromNumber + 1;
-    } else {
-        return _items.count;
-    }
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if(_showsRange) {
-        return [NSString stringWithFormat: @"%zi", _fromNumber + row];
-    } else {
-        id object = _items[row];
-        if([object conformsToProtocol: @protocol(NNSelectable)]) {
-            return [object title];
-        } else if([object isKindOfClass: NSString.class]) {
-            return object;
-        } else if([object isKindOfClass: [NSDictionary class]]) {
-            return [object allValues][row];
-        }
-        return @"";
-    }
+    return @"";
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if(_showsRange) {
-        _selectedNumber = _fromNumber + row;
-        self.text = [NSString stringWithFormat: @"%zi", _selectedNumber];
-        
-        if([_pickerDelegate respondsToSelector: @selector(pickerField:didSelectNumber:)]) {
-            [_pickerDelegate pickerField: self didSelectNumber: _selectedNumber];
-        }
-    } else {
-        if(_items.count == 0) {
-            return;
-        }
-        
-        BOOL shouldSelect = YES;
-        if([_pickerDelegate respondsToSelector: @selector(pickerField:shouldSelectObjectAtIndex:)]) {
-            shouldSelect = [_pickerDelegate pickerField: self shouldSelectObjectAtIndex: row];
-        }
-        
-        if(shouldSelect) {
-            _selectedObject = _items[row];
-            _selectedIndex = row;
-            self.text = [_selectedObject conformsToProtocol: @protocol(NNSelectable)] ? [_selectedObject title] : _selectedObject;
-            
-            if([_pickerDelegate respondsToSelector: @selector(pickerField:didSelectObject:atIndex:)]) {
-                [_pickerDelegate pickerField: self didSelectObject: _selectedObject atIndex: _selectedIndex];
-            }
-        }
-    }
-}
-
-- (void)setSelectedNumber:(NSInteger)selectedNumber {
-    if(selectedNumber >= _fromNumber && selectedNumber <= _toNumber) {
-        _selectedNumber = selectedNumber;
-        [_picker selectRow: _fromNumber + _selectedNumber inComponent: 0 animated: YES];
-    }
-}
-
-- (void)setCurrentSelectedIndex:(NSInteger)index {
-    if(index >= 0 && index < _items.count) {
-        [_picker selectRow: index inComponent: 0 animated: YES];
-        [self pickerView: _picker didSelectRow: index inComponent: 0];
-    }
-}
-
-- (void)setItems:(NSArray *)items {
-    _items = [items copy];
-    _showsRange = NO;
-    [_picker reloadAllComponents];
+    
 }
 
 @end

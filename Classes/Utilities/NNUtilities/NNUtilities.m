@@ -80,10 +80,14 @@
 }
 
 + (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
+    return [self jsonDataFromDictionary: json prettyPrinted: NO];
+}
+
++ (NSData *)jsonDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty {
     NSError *err = nil;
     NSData *retVal = [NSData data];
     if([NSJSONSerialization isValidJSONObject: json]) {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: kNilOptions error: &err];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: pretty ? NSJSONWritingPrettyPrinted : kNilOptions error: &err];
         if(err) {
             [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
         } else {

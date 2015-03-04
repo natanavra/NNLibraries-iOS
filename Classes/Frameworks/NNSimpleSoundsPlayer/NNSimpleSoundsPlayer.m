@@ -15,6 +15,8 @@
 
 @implementation NNSimpleSoundsPlayer
 
+#pragma mark - Singleton Init
+
 + (instancetype)soundPlayer {
     static NNSimpleSoundsPlayer *_shared = nil;
     static dispatch_once_t onceToken;
@@ -32,23 +34,42 @@
     return self;
 }
 
+#pragma mark - Sound Playing
+
+- (void)toggleSound {
+    _mute = !_mute;
+}
+
 - (void)playSound:(NSString *)soundFile {
     if(_mute) {
+        [NNLogger logFromInstance: self message: @"Not playing, MUTED!"];
         return;
     }
     
-    id soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
-    if(soundObject) {
-        [NNLogger logFromInstance: self message: @"Playing sound"];
-        SystemSoundID sound = [soundObject unsignedIntValue];
-        AudioServicesPlaySystemSound(sound);
-    } else {
-        if([self addSound: soundFile]) {
-            soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
-            AudioServicesPlaySystemSound([soundObject unsignedIntValue]);
+    @synchronized(self) {
+        id soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
+        if(!soundObject) {
+            [NNLogger logFromInstance: self message: @"Sound file not cached" data: soundFile];
+            BOOL success = [self addSound: soundFile];
+            if(success) {
+                soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
+            }
+        }
+        
+        if(soundObject) {
+            [NNLogger logFromInstance: self message: @"Playing sound" data: soundFile];
+            SystemSoundID sound = [soundObject unsignedIntValue];
+            AudioServicesPlaySystemSound(sound);
         }
     }
 }
+
+- (void)vibrate {
+    [NNLogger logFromInstance: self message: @"Vibrate"];
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+}
+
+#pragma mark - Sound Caching
 
 - (BOOL)addSound:(NSString *)soundFile {
     NSArray *components = [soundFile componentsSeparatedByString: @"."];
@@ -60,6 +81,7 @@
             OSStatus success = AudioServicesCreateSystemSoundID((__bridge CFURLRef)pathURL, &soundID);
             if(success == kAudioServicesNoError) {
                 //No errors in creation
+                [NNLogger logFromInstance: self message: @"Cached sound file" data: soundFile];
                 _sounds[soundFile] = [NSNumber numberWithUnsignedInt: soundID];
                 return YES;
             } else {
@@ -70,14 +92,13 @@
     return NO;
 }
 
-- (void)vibrate {
-    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+#pragma mark - Overrides
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"%@\nMuted: %@,\nCached Sounds: %@", [super description], _mute ? @"YES" : @"NO", _sounds];
 }
 
-
-- (void)toggleSound {
-    _mute = !_mute;
-}
+#pragma mark - Dealloc
 
 - (void)dealloc {
     for(NSNumber *soundID in [_sounds allValues]) {
