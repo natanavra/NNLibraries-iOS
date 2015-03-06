@@ -14,5 +14,8 @@
 //NN_UIKit
 #import "NNLibrariesUIKit.h"
 
+//NN_NSFoundation
+#import "NNLibrariesNSFoundation.h"
+
 //NNEssentials (Logger, Utilities)
 #import "NNLibrariesEssentials.h"

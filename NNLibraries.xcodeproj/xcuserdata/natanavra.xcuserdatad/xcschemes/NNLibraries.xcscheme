@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5C0157BB1A4BF3B200F6ECAF"
-               BuildableName = "libNNLibraries.a"
+               BuildableName = "NNLibraries.a"
                BlueprintName = "NNLibraries"
                ReferencedContainer = "container:NNLibraries.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C0157BB1A4BF3B200F6ECAF"
-            BuildableName = "libNNLibraries.a"
+            BuildableName = "NNLibraries.a"
             BlueprintName = "NNLibraries"
             ReferencedContainer = "container:NNLibraries.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C0157BB1A4BF3B200F6ECAF"
-            BuildableName = "libNNLibraries.a"
+            BuildableName = "NNLibraries.a"
             BlueprintName = "NNLibraries"
             ReferencedContainer = "container:NNLibraries.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C0157BB1A4BF3B200F6ECAF"
-            BuildableName = "libNNLibraries.a"
+            BuildableName = "NNLibraries.a"
             BlueprintName = "NNLibraries"
             ReferencedContainer = "container:NNLibraries.xcodeproj">
          </BuildableReference>

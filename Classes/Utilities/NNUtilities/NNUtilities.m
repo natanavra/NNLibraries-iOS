@@ -8,6 +8,7 @@
 
 #import "NNUtilities.h"
 #import "NNLogger.h"
+#import "NSString+NNAdditions.h"
 
 @implementation NNUtilities
 
@@ -56,10 +57,6 @@
         return [object boolValue];
     }
     return NO;
-}
-
-+ (NSString *)trimWhiteSpace:(NSString *)string {
-    return [string stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 #pragma mark - JSON
@@ -276,7 +273,8 @@
 }
 
 + (BOOL)callNumber:(NSString *)number {
-    NSString *phoneURL = [@"tel://" stringByAppendingString: number];
+    NSString *numberWithoutSpaces = [number stringByRemovingAllWhiteSpace];
+    NSString *phoneURL = [@"tel://" stringByAppendingString: numberWithoutSpaces];
     return [self applicationURLOpenIfCan: phoneURL];
 }
 

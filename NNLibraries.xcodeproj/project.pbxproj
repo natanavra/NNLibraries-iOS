@@ -55,12 +55,17 @@
 		5C37F7061A80AFCB00714D5D /* UINavigationController+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37F7031A80ADDA00714D5D /* UINavigationController+NNAdditions.h */; };
 		5C47BE3F1A600F7E008DDCEF /* NNAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C47BE3E1A600F7E008DDCEF /* NNAutocompleteViewController.m */; };
 		5C766D291A8529FD00E082B1 /* NNMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C766D281A8529FD00E082B1 /* NNMotionManager.m */; };
-		5C7863481A79647C00EEB827 /* NSDate+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7863471A79647C00EEB827 /* NSDate+NNAdditions.m */; };
-		5C7863491A79697E00EEB827 /* NSDate+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C7863461A79647C00EEB827 /* NSDate+NNAdditions.h */; };
 		5C78635B1A7AA33600EEB827 /* NNCustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78635A1A7AA33600EEB827 /* NNCustomDatePicker.m */; };
 		5C951A561A602398008860BE /* NNObjectPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C951A551A602398008860BE /* NNObjectPickerField.m */; };
+		5CB117EA1AA8DD420068DE40 /* NNAutolayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB117E91AA8DD420068DE40 /* NNAutolayoutLabel.m */; };
+		5CB117F71AA8E67A0068DE40 /* NSDate+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB117F31AA8E67A0068DE40 /* NSDate+NNAdditions.m */; };
+		5CB117F81AA8E67A0068DE40 /* NSString+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB117F61AA8E67A0068DE40 /* NSString+NNAdditions.m */; };
+		5CB117FC1AA8EAC30068DE40 /* NNSelectable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB117FB1AA8E9DB0068DE40 /* NNSelectable.h */; };
+		5CB117FD1AA8EC730068DE40 /* NNPickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3113A81AA1EC0400F36F35 /* NNPickerField.h */; };
+		5CB117FE1AA8ECAE0068DE40 /* NSString+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB117F51AA8E67A0068DE40 /* NSString+NNAdditions.h */; };
+		5CB117FF1AA8ECB60068DE40 /* NSDate+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB117F21AA8E67A0068DE40 /* NSDate+NNAdditions.h */; };
+		5CB118001AA8ECC50068DE40 /* NNAutolayoutLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB117E81AA8DD420068DE40 /* NNAutolayoutLabel.h */; };
 		5CB8B0401A6E2F5D00838FA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8B03F1A6E2F5D00838FA0 /* MBProgressHUD.m */; };
-		5CCE0A6B1A6A97C1008C68A6 /* NNSelectable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C951A591A604E39008860BE /* NNSelectable.h */; };
 		5CCE0A6C1A6A99B6008C68A6 /* NNObjectPickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C951A541A602398008860BE /* NNObjectPickerField.h */; };
 		5CCE0A6F1A6AA5E8008C68A6 /* NNDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE0A6E1A6AA5E8008C68A6 /* NNDatePickerField.m */; };
 		5CCE0A701A6AAA8D008C68A6 /* NNDatePickerField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */; };
@@ -73,11 +78,14 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				5CB118001AA8ECC50068DE40 /* NNAutolayoutLabel.h in CopyFiles */,
+				5CB117FF1AA8ECB60068DE40 /* NSDate+NNAdditions.h in CopyFiles */,
+				5CB117FE1AA8ECAE0068DE40 /* NSString+NNAdditions.h in CopyFiles */,
+				5CB117FD1AA8EC730068DE40 /* NNPickerField.h in CopyFiles */,
+				5CB117FC1AA8EAC30068DE40 /* NNSelectable.h in CopyFiles */,
 				5C37F7061A80AFCB00714D5D /* UINavigationController+NNAdditions.h in CopyFiles */,
-				5C7863491A79697E00EEB827 /* NSDate+NNAdditions.h in CopyFiles */,
 				5CCE0A701A6AAA8D008C68A6 /* NNDatePickerField.h in CopyFiles */,
 				5CCE0A6C1A6A99B6008C68A6 /* NNObjectPickerField.h in CopyFiles */,
-				5CCE0A6B1A6A97C1008C68A6 /* NNSelectable.h in CopyFiles */,
 				5C0157D31A4BF4EF00F6ECAF /* NNLocationManager.h in CopyFiles */,
 				5C0157D41A4BF4EF00F6ECAF /* NNReachabilityManager.h in CopyFiles */,
 				5C0157D51A4BF4EF00F6ECAF /* Reachability.h in CopyFiles */,
@@ -106,7 +114,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5C0157BC1A4BF3B200F6ECAF /* libNNLibraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNNLibraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C0157BC1A4BF3B200F6ECAF /* NNLibraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = NNLibraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C05FCEC1A509375008612BD /* NNLibraries-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NNLibraries-info.plist"; sourceTree = "<group>"; };
 		5C0CB9881A5C5E8D007FDD86 /* NNCustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNCustomSwitch.h; path = NNSwitch/NNCustomSwitch.h; sourceTree = "<group>"; };
 		5C0CB9891A5C5E8D007FDD86 /* NNCustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNCustomSwitch.m; path = NNSwitch/NNCustomSwitch.m; sourceTree = "<group>"; };
@@ -123,13 +131,18 @@
 		5C47BE401A6010B2008DDCEF /* NNAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NNAutocompleteViewController.xib; path = NNAutocompleteViewController/NNAutocompleteViewController.xib; sourceTree = "<group>"; };
 		5C766D271A8529FD00E082B1 /* NNMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNMotionManager.h; path = NNMotionManager/NNMotionManager.h; sourceTree = "<group>"; };
 		5C766D281A8529FD00E082B1 /* NNMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNMotionManager.m; path = NNMotionManager/NNMotionManager.m; sourceTree = "<group>"; };
-		5C7863461A79647C00EEB827 /* NSDate+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+NNAdditions.h"; path = "NSDate+NNAdditions/NSDate+NNAdditions.h"; sourceTree = "<group>"; };
-		5C7863471A79647C00EEB827 /* NSDate+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+NNAdditions.m"; path = "NSDate+NNAdditions/NSDate+NNAdditions.m"; sourceTree = "<group>"; };
 		5C7863591A7AA33600EEB827 /* NNCustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNCustomDatePicker.h; path = NNCustomDatePicker/NNCustomDatePicker.h; sourceTree = "<group>"; };
 		5C78635A1A7AA33600EEB827 /* NNCustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNCustomDatePicker.m; path = NNCustomDatePicker/NNCustomDatePicker.m; sourceTree = "<group>"; };
 		5C951A541A602398008860BE /* NNObjectPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNObjectPickerField.h; sourceTree = "<group>"; };
 		5C951A551A602398008860BE /* NNObjectPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNObjectPickerField.m; sourceTree = "<group>"; };
-		5C951A591A604E39008860BE /* NNSelectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNSelectable.h; path = ../NNLibraries/NNSelectable.h; sourceTree = "<group>"; };
+		5CB117E81AA8DD420068DE40 /* NNAutolayoutLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNAutolayoutLabel.h; path = NNAutolayoutLabel/NNAutolayoutLabel.h; sourceTree = "<group>"; };
+		5CB117E91AA8DD420068DE40 /* NNAutolayoutLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNAutolayoutLabel.m; path = NNAutolayoutLabel/NNAutolayoutLabel.m; sourceTree = "<group>"; };
+		5CB117F21AA8E67A0068DE40 /* NSDate+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NNAdditions.h"; sourceTree = "<group>"; };
+		5CB117F31AA8E67A0068DE40 /* NSDate+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NNAdditions.m"; sourceTree = "<group>"; };
+		5CB117F51AA8E67A0068DE40 /* NSString+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NNAdditions.h"; sourceTree = "<group>"; };
+		5CB117F61AA8E67A0068DE40 /* NSString+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NNAdditions.m"; sourceTree = "<group>"; };
+		5CB117F91AA8E9B70068DE40 /* NNLibrariesNSFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNLibrariesNSFoundation.h; sourceTree = "<group>"; };
+		5CB117FB1AA8E9DB0068DE40 /* NNSelectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSelectable.h; sourceTree = "<group>"; };
 		5CB8B03E1A6E2F5D00838FA0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5CB8B03F1A6E2F5D00838FA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5CCE0A6D1A6AA5E8008C68A6 /* NNDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDatePickerField.h; path = NNPickerField/NNDatePickerField/NNDatePickerField.h; sourceTree = "<group>"; };
@@ -194,6 +207,7 @@
 				5CE461C41A445A330027FF22 /* NNLibraries.h */,
 				5CE461C51A445A330027FF22 /* NNLibrariesEssentials.h */,
 				5CE461C61A445A330027FF22 /* NNLibrariesUIKit.h */,
+				5CB117F91AA8E9B70068DE40 /* NNLibrariesNSFoundation.h */,
 			);
 			path = NNLibraries;
 			sourceTree = "<group>";
@@ -245,7 +259,7 @@
 			path = NNPickerField/NNObjectPickerField;
 			sourceTree = "<group>";
 		};
-		5C37F6FD1A80AD4500714D5D /* Class Extensions */ = {
+		5C37F6FD1A80AD4500714D5D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				5C37F6FF1A80AD7500714D5D /* UINavigationController+NNAdditions */,
@@ -257,12 +271,13 @@
 				5CE461B61A445A330027FF22 /* UIView+NNAdditions */,
 				5CE461B91A445A330027FF22 /* UIViewController+NNAdditions */,
 			);
-			name = "Class Extensions";
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		5C37F6FE1A80AD4E00714D5D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5CB117E71AA8DD080068DE40 /* NNAutoLayoutLabel */,
 				5C951A531A60236F008860BE /* NNPickerField */,
 				5C7863581A7AA07F00EEB827 /* NNCustomDatePicker */,
 				5C0CB9871A5C5E78007FDD86 /* NNCustomSwitch */,
@@ -302,23 +317,6 @@
 			name = NNMotionManager;
 			sourceTree = "<group>";
 		};
-		5C7863451A79645B00EEB827 /* NSDate+NNAdditions */ = {
-			isa = PBXGroup;
-			children = (
-				5C7863461A79647C00EEB827 /* NSDate+NNAdditions.h */,
-				5C7863471A79647C00EEB827 /* NSDate+NNAdditions.m */,
-			);
-			name = "NSDate+NNAdditions";
-			sourceTree = "<group>";
-		};
-		5C78634C1A7A040000EEB827 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5C951A591A604E39008860BE /* NNSelectable.h */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
 		5C7863581A7AA07F00EEB827 /* NNCustomDatePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +336,60 @@
 				5C3113A61AA1EB6900F36F35 /* NNDatePickerField */,
 			);
 			name = NNPickerField;
+			sourceTree = "<group>";
+		};
+		5CB117E71AA8DD080068DE40 /* NNAutoLayoutLabel */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117E81AA8DD420068DE40 /* NNAutolayoutLabel.h */,
+				5CB117E91AA8DD420068DE40 /* NNAutolayoutLabel.m */,
+			);
+			name = NNAutoLayoutLabel;
+			sourceTree = "<group>";
+		};
+		5CB117EB1AA8E5DC0068DE40 /* NSFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117EC1AA8E5E60068DE40 /* Categories */,
+			);
+			name = NSFoundation;
+			sourceTree = "<group>";
+		};
+		5CB117EC1AA8E5E60068DE40 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117F11AA8E67A0068DE40 /* NSDate */,
+				5CB117F41AA8E67A0068DE40 /* NSString */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		5CB117F11AA8E67A0068DE40 /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117F21AA8E67A0068DE40 /* NSDate+NNAdditions.h */,
+				5CB117F31AA8E67A0068DE40 /* NSDate+NNAdditions.m */,
+			);
+			name = NSDate;
+			path = NSFoundation/Categories/NSDate;
+			sourceTree = "<group>";
+		};
+		5CB117F41AA8E67A0068DE40 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117F51AA8E67A0068DE40 /* NSString+NNAdditions.h */,
+				5CB117F61AA8E67A0068DE40 /* NSString+NNAdditions.m */,
+			);
+			name = NSString;
+			path = NSFoundation/Categories/NSString;
+			sourceTree = "<group>";
+		};
+		5CB117FA1AA8E9DB0068DE40 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5CB117FB1AA8E9DB0068DE40 /* NNSelectable.h */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5CB8B03C1A6E2F5D00838FA0 /* ThirdParty */ = {
@@ -371,7 +423,7 @@
 		5CE461701A4459780027FF22 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C0157BC1A4BF3B200F6ECAF /* libNNLibraries.a */,
+				5C0157BC1A4BF3B200F6ECAF /* NNLibraries.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -379,10 +431,11 @@
 		5CE461891A445A330027FF22 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5C78634C1A7A040000EEB827 /* Protocols */,
+				5CB117FA1AA8E9DB0068DE40 /* Protocols */,
 				5CE4618A1A445A330027FF22 /* Frameworks */,
 				5CE461991A445A330027FF22 /* Networking */,
 				5CE461A01A445A330027FF22 /* UIKit */,
+				5CB117EB1AA8E5DC0068DE40 /* NSFoundation */,
 				5CE461BC1A445A330027FF22 /* Utilities */,
 			);
 			path = Classes;
@@ -469,7 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				5C37F6FE1A80AD4E00714D5D /* Components */,
-				5C37F6FD1A80AD4500714D5D /* Class Extensions */,
+				5C37F6FD1A80AD4500714D5D /* Categories */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -558,7 +611,6 @@
 		5CE461BC1A445A330027FF22 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				5C7863451A79645B00EEB827 /* NSDate+NNAdditions */,
 				5CE461BD1A445A330027FF22 /* NNLogger */,
 				5CE461C01A445A330027FF22 /* NNUtilities */,
 			);
@@ -600,7 +652,7 @@
 			);
 			name = NNLibraries;
 			productName = NNLibraries;
-			productReference = 5C0157BC1A4BF3B200F6ECAF /* libNNLibraries.a */;
+			productReference = 5C0157BC1A4BF3B200F6ECAF /* NNLibraries.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -641,17 +693,20 @@
 			files = (
 				5C3113A51AA1EAA900F36F35 /* NNNumberPickerField.m in Sources */,
 				5C0157EA1A4BF61600F6ECAF /* NNLocationManager.m in Sources */,
+				5CB117EA1AA8DD420068DE40 /* NNAutolayoutLabel.m in Sources */,
 				5C0157EB1A4BF61600F6ECAF /* NNReachabilityManager.m in Sources */,
 				5C37F7051A80ADDA00714D5D /* UINavigationController+NNAdditions.m in Sources */,
 				5CB8B0401A6E2F5D00838FA0 /* MBProgressHUD.m in Sources */,
 				5C3069271A776A1000A2476A /* CALayer+NNRuntimeAttributes.m in Sources */,
 				5C3113AA1AA1EC0400F36F35 /* NNPickerField.m in Sources */,
+				5CB117F71AA8E67A0068DE40 /* NSDate+NNAdditions.m in Sources */,
 				5C47BE3F1A600F7E008DDCEF /* NNAutocompleteViewController.m in Sources */,
 				5C0157EC1A4BF61600F6ECAF /* Reachability.m in Sources */,
 				5C78635B1A7AA33600EEB827 /* NNCustomDatePicker.m in Sources */,
 				5C0157ED1A4BF61600F6ECAF /* NNSimpleSoundsPlayer.m in Sources */,
 				5C0157EE1A4BF61600F6ECAF /* NNStoreKitHelper.m in Sources */,
 				5C0157EF1A4BF61600F6ECAF /* NNAsyncRequest.m in Sources */,
+				5CB117F81AA8E67A0068DE40 /* NSString+NNAdditions.m in Sources */,
 				5C0157F01A4BF61600F6ECAF /* NNImageCache.m in Sources */,
 				5C0157F11A4BF61600F6ECAF /* NNAsyncImageView.m in Sources */,
 				5C0157F21A4BF61600F6ECAF /* NNInsetTextField.m in Sources */,
@@ -668,7 +723,6 @@
 				5C0157F91A4BF61600F6ECAF /* UIViewController+NNAdditions.m in Sources */,
 				5C0157FA1A4BF61600F6ECAF /* NNLogger.m in Sources */,
 				5C0157FB1A4BF61600F6ECAF /* NNUtilities.m in Sources */,
-				5C7863481A79647C00EEB827 /* NSDate+NNAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -696,6 +751,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

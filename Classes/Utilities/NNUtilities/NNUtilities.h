@@ -11,7 +11,10 @@
 
 #define rgba(r, g, b, a) [UIColor colorWithRed:(r/255.0f) green:(g/255.0f) blue:(b/255.0f) alpha: a]
 
-/** All sorts of utilities (File, JSON parsing, device checking, etc). possibly when gets too large will be broken down to several different classes. */
+/** 
+ A collection of unsorted utilities.
+ Slowly moves to class categories for modulation and organization of code.
+ */
 @interface NNUtilities : NSObject
 
 //object validation methods
@@ -21,7 +24,6 @@
 + (float)validFloatFromObject:(id)object;
 + (double)validDoubleFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object;
-+ (NSString *)trimWhiteSpace:(NSString *)string;
 
 //JSON
 + (id)parseJsonFromData:(NSData *)data;

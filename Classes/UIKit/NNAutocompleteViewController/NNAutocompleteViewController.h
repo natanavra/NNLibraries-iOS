@@ -18,7 +18,7 @@
 
 /**
  *  @author natanavra
- *  @desc Use this for displaying autocomplete selection with UITableView and search bar. object in data must conform to the 'NNAutoCompleteObject' protocol.
+ *  @description Use this for displaying autocomplete selection with UITableView and search bar. object in data must conform to the 'NNAutoCompleteObject' protocol.
  *  @warning ONLY Use with Modal presentation style. This view has its own UINavigationBar.
  *  @warning To use the Built-in UI, copy the xib file to your application bundle.
  */
