@@ -1,16 +1,14 @@
 //
-//  UIView+NNAdditions.h
-//  FourSigns
+//  UIView+CGGeometry.h
+//  NNLibraries
 //
-//  Created by Natan Abramov on 10/11/14.
-//  Copyright (c) 2014 natanavra. All rights reserved.
+//  Created by Natan Abramov on 3/18/15.
+//  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (NNAdditions)
-- (void)removeAllSubviews;
-
+@interface UIView (CGGeometry)
 - (void)setFrameSize:(CGSize)size;
 - (void)setFrameOrigin:(CGPoint)origin;
 - (void)setFrameOriginX:(float)x;

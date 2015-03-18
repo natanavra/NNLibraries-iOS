@@ -26,21 +26,41 @@
 }
 
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
-    if(sender && logMessage) {
-        NSMutableString *output = [NSMutableString stringWithFormat: @"%@--%@", NSStringFromClass([sender class]), logMessage];
-        NSString *data = (NSString *)([object isKindOfClass: NSString.class] ? object : [object description]);
-        if(data) {
-            [output appendFormat: @"--%@", data];
-        }
-        return output;
-    } else if(logMessage) {
-        return logMessage;
-    } else if(object) {
-        NSString *data = (NSString *)([object isKindOfClass: NSString.class] ? object : [object description]);
-        return [NSString stringWithFormat: @"%@", data];
-    } else {
-        return @"BAD LOG";
+    NSMutableString *output = [NSMutableString string];
+    NSString *dataString = [self descriptionFromObject: object];
+    if(sender) {
+        [output appendFormat: @"%@", NSStringFromClass([sender class])];
     }
+    if(logMessage) {
+        if(output.length > 0) {
+            [output appendString: @": "];
+        }
+        [output appendFormat: @"%@", logMessage];
+    }
+    if(dataString.length > 0) {
+        if(output.length > 0) {
+            [output appendString: @", "];
+        }
+        [output appendFormat: @"%@", dataString];
+    }
+    if(output.length == 0) {
+        [output appendString: @"BAD LOG"];
+    }
+    return output;
+}
+
++ (NSString *)descriptionFromObject:(id)object {
+    NSString *description = nil;
+    if([object isKindOfClass: [NSString class]]) {
+        description = object;
+    } else if([object isKindOfClass: [NSData class]]) {
+        description = [[NSString alloc] initWithData: object encoding: NSUTF8StringEncoding];
+    }
+    
+    if(!description || description.length == 0) {
+        description = [object description];
+    }
+    return description;
 }
 
 @end

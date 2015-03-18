@@ -7,10 +7,12 @@
 //
 
 #import "UIViewController+NNAdditions.h"
-#import "NNLogger.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 
 #import "MBProgressHUD.h"
+#import "NNLogger.h"
+
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "UIAlertView+NNAdditions.h"
 
 @implementation UIViewController (NNAdditions)
 
@@ -44,6 +46,8 @@
         return YES;
     } else if(!available) {
         [NNLogger logFromInstance: self message: @"Camera is not available! Probably simulator!"];
+        [UIAlertView showAlertWithTitle: @"Error!" message: @"Camera is not available"
+                      cancelButtonTitle: @"OK" otherButtons: nil delegate: nil];
     }
     return NO;
 }
@@ -61,6 +65,8 @@
         return YES;
     } else if(!available) {
         [NNLogger logFromInstance: self message: @"Camera is not available! Probably simulator!"];
+        [UIAlertView showAlertWithTitle: @"Error!" message: @"Camera is not available"
+                      cancelButtonTitle: @"OK" otherButtons: nil delegate: nil];
     }
     return NO;
 }
@@ -92,5 +98,6 @@
     UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities: nil];
     [self presentViewController: activity animated: YES completion: completion];
 }
+
 
 @end

@@ -47,4 +47,5 @@
 - (UIToolbar *)PROTECTED(inputAccessoryToolbar);
 - (void)PROTECTED(closePicker);
 - (void)PROTECTED(clearField);
+- (void)unlinkPicker;
 @end

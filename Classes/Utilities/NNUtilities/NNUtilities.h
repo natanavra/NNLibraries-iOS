@@ -48,6 +48,9 @@
 + (UIColor *)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
 
 //Other
++ (NSString *)appShortVersionNumber;
++ (NSString *)appLongVersionNumber;
++ (NSString *)appLongLocalizedVersionNumber;
 + (NSString *)currentTimestampString;
 + (NSString *)NSStringFromUIInterfaceOrientation:(UIInterfaceOrientation)orientation;
 + (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName;

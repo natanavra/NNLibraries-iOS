@@ -25,15 +25,16 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 #pragma mark - Overrides
 
-- (BOOL)resignFirstResponder {
-    [_datePicker removeTarget: self action: @selector(dateChanged:) forControlEvents: UIControlEventValueChanged];
-    return [super resignFirstResponder];
-}
-
 - (void)PROTECTED(clearField) {
+    [super PROTECTED(clearField)];
     _selectedDate = nil;
     _datePicker.date = _datePicker.minimumDate ? _datePicker.minimumDate : [NSDate date];
-    [super PROTECTED(clearField)];
+}
+
+- (void)unlinkPicker {
+    //This method is called by the superclass 'resignFirstResponder'
+    [_datePicker removeTarget: self action: @selector(dateChanged:) forControlEvents: UIControlEventValueChanged];
+    _datePicker = nil;
 }
 
 #pragma mark - UIDatePicker Related
@@ -51,13 +52,13 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     [super PROTECTED(setupPicker)];
     
     UIDatePicker *datePicker = [self classDatePicker];
-    _datePicker = datePicker;
-    [datePicker addTarget: self action: @selector(dateChanged:) forControlEvents: UIControlEventValueChanged];
     datePicker.datePickerMode = _datePickerMode;
     datePicker.minimumDate = _minimumDate;
     datePicker.maximumDate = _maximumDate;
+    [datePicker addTarget: self action: @selector(dateChanged:) forControlEvents: UIControlEventValueChanged];
     [self setSelectedDate: _selectedDate ? _selectedDate : [NSDate date]];
     self.inputView = datePicker;
+    _datePicker = datePicker;
 }
 
 - (void)dateChanged:(UIDatePicker *)datePicker {
@@ -76,7 +77,6 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
         if(shouldChange) {
             _selectedDate = date;
             self.text = [self dateStringFromDate: date];
-            
             if([_pickerDelegate respondsToSelector: @selector(datePickerField:dateChangedToDate:)]) {
                 [_pickerDelegate datePickerField: self dateChangedToDate: _selectedDate];
             }
@@ -87,9 +87,6 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 - (void)setSelectedDate:(NSDate *)date {
     [self handleDateChangedWithDate: date];
-    /*_selectedDate = date;
-    _datePicker.date = date;
-    self.text = [self dateStringFromDate: date];*/
 }
 
 - (void)setMinimumDate:(NSDate *)date {
@@ -132,8 +129,9 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     }
     
     BOOL validDate = YES;
+    BOOL timePickerMode = [self isTimePickerMode];
     if(_minimumDate) {
-        if([self timePickerMode]) {
+        if(timePickerMode) {
             if([_minimumDate timeCompare: date] == NSOrderedDescending) {
                 validDate = NO;
             }
@@ -142,7 +140,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
         }
     }
     if(_maximumDate) {
-        if([self timePickerMode]) {
+        if(timePickerMode) {
             if([_maximumDate timeCompare: date] == NSOrderedDescending) {
                 validDate = NO;
             }
@@ -156,23 +154,22 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 #pragma mark - Helpers
 
-- (BOOL)timePickerMode {
-    return _datePickerMode == UIDatePickerModeTime || _datePickerMode == UIDatePickerModeCountDownTimer;
+- (BOOL)isTimePickerMode {
+    return (_datePickerMode == UIDatePickerModeTime) || (_datePickerMode == UIDatePickerModeCountDownTimer);
 }
 
 - (NSString *)dateStringFromDate:(NSDate *)date {
-    static NSDateFormatter *formatter = nil;
-    if(!formatter) {
-        formatter = [[NSDateFormatter alloc] init];
-    }
-    formatter.timeZone = [NSTimeZone defaultTimeZone];
     NSString *retVal = nil;
-    
     if(_dateDisplayFormat.length > 0) {
+        static NSDateFormatter *formatter = nil;
+        if(!formatter) {
+            formatter = [[NSDateFormatter alloc] init];
+        }
+        formatter.timeZone = [NSTimeZone defaultTimeZone];
+    
         [formatter setDateFormat: _dateDisplayFormat];
         retVal = [formatter stringFromDate: date];
     } else {
-        [formatter setDateFormat: nil];
         NSDateFormatterStyle dateStyle = NSDateFormatterShortStyle;
         NSDateFormatterStyle timeStyle = NSDateFormatterShortStyle;
         if(_datePickerMode == UIDatePickerModeTime || _datePickerMode == UIDatePickerModeCountDownTimer) {

@@ -28,6 +28,11 @@
 
 #pragma mark - Overrides
 
+- (void)unlinkPicker {
+    //This method is called by the superclass 'resignFirstResponder'
+    _picker = nil;
+}
+
 - (void)initZero {
     _selectedIndex = -1;
     _selectedNumber = NSNotFound;
@@ -104,6 +109,8 @@
         if([_pickerDelegate respondsToSelector: @selector(pickerField:didSelectNumber:)]) {
             [_pickerDelegate pickerField: self didSelectNumber: _selectedNumber];
         }
+    } else {
+        [_picker selectRow: _selectedIndex inComponent: 0 animated: YES];
     }
 }
 

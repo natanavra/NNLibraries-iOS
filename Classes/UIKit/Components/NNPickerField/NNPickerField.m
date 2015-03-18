@@ -36,7 +36,12 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 }
 
 - (BOOL)resignFirstResponder {
+    [self unlinkPicker];
     return [super resignFirstResponder];
+}
+
+- (void)unlinkPicker {
+    //Subclass should override this one
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {
@@ -52,6 +57,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     }
     return self;
 }
+
 
 #pragma mark - Static Components
 
@@ -115,11 +121,9 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
         [closeItem setTitle: _closeButtonTitle.length > 0 ? _closeButtonTitle : nil];
         [closeItem setTarget: self];
         
-        if(_title) {
-            UILabel *title = (UILabel *)titleItem.customView;
-            title.text = _title;
-            title.textColor = _titleColor ? _titleColor : [UIColor blackColor];
-        }
+        UILabel *title = (UILabel *)titleItem.customView;
+        title.text = _title;
+        title.textColor = _titleColor ? _titleColor : [UIColor blackColor];
         
         [toolbar setItems: items animated: YES];
         self.inputAccessoryView = toolbar;
@@ -158,6 +162,13 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     
     //To hide the blinking cursor.
     self.tintColor = [UIColor clearColor];
+}
+
+- (void)setPickerPlaceholder:(NSString *)pickerPlaceholder {
+    if([self.text isEqualToString: _pickerPlaceholder]) {
+        self.text = pickerPlaceholder;
+    }
+    _pickerPlaceholder = [pickerPlaceholder copy];
 }
 
 #pragma mark - UIPickerViewDelegate

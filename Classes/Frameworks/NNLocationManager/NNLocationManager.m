@@ -53,11 +53,11 @@
                 if([_locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
                     [_locMgr performSelector: @selector(requestWhenInUseAuthorization)];
                 }
-                
                 _locMgr.delegate = self;
                 _locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-                _currentLoc = _locMgr.location;
                 [_locMgr startUpdatingLocation];
+                
+                self.currentLoc = _locMgr.location;
             } else {
                 //Can't use location
                 failed = YES;

@@ -9,6 +9,7 @@
 #import "NNUtilities.h"
 #import "NNLogger.h"
 #import "NSString+NNAdditions.h"
+#import "NNConstants.h"
 
 @implementation NNUtilities
 
@@ -191,6 +192,23 @@
 }
 
 #pragma mark - Other
+
++ (NSString *)appShortVersionNumber {
+    NSString *shortVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    return shortVersion;
+}
+
++ (NSString *)appLongVersionNumber {
+    NSString *shortVersion = [self appShortVersionNumber];
+    NSString *longVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    return [shortVersion stringByAppendingFormat: @" (%@)", longVersion];
+}
+
++ (NSString *)appLongLocalizedVersionNumber {
+    NSString *shortVersion = [self appShortVersionNumber];
+    NSString *longVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    return [shortVersion stringByAppendingFormat: @" (%@ %@)", NNLocalizedString(@"Build"), longVersion];
+}
 
 + (NSString *)currentTimestampString {
     NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate];

@@ -22,8 +22,8 @@
 @property (nonatomic, strong) NSDate *minimumDate;
 @property (nonatomic, strong) NSDate *maximumDate;
 
-/** The format in which the selected date will be displayed. If not set, default to dd/MM/yyyy */
-@property (nonatomic, strong) NSString *dateDisplayFormat;
+/** The format in which the selected date will be displayed. */
+@property (nonatomic, copy) NSString *dateDisplayFormat;
 /** Defaults to UIDatePickerModeTime */
 @property (nonatomic) UIDatePickerMode datePickerMode;
 

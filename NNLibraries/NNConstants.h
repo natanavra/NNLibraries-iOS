@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 natanavra. All rights reserved.
 //
 
+#define NNLocalizedString(key) NSLocalizedString(key, nil)
+
 #define kStoreKitProductPurchasedNotification   @"NNStoreKit_ProductPurchased"
 #define kLocationAuthChanged                    @"LocationAuthChanged"
 

@@ -8,7 +8,7 @@
 
 #import "NNCustomSwitch.h"
 #import "NNLogger.h"
-#import "UIView+NNAdditions.h"
+#import "UIView+CGGeometry.h"
 
 @implementation NNCustomSwitch
 

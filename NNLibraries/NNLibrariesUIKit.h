@@ -10,6 +10,7 @@
 #import "NNPickerInputView.h"
 
 #import "UIView+NNAdditions.h"
+#import "UIView+CGGeometry.h"
 #import "UIImage+NNAdditions.h"
 #import "UIButton+NNAdditions.h"
 #import "UIAlertView+NNAdditions.h"

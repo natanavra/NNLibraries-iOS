@@ -44,6 +44,11 @@ static NSArray *_genericItems = nil;
 
 #pragma mark - Overrides
 
+- (void)unlinkPicker {
+    //This method is called by the superclass 'resignFirstResponder'
+    _picker = nil;
+}
+
 - (void)initZero {
     _selectedIndex = -1;
     _selectedObject = nil;
@@ -158,6 +163,15 @@ static NSArray *_genericItems = nil;
 }
 
 - (void)setItems:(NSArray *)items {
+    if(_items.count > 0) {
+        if(items.count > _selectedIndex) {
+            if(![items containsObject: _items[_selectedIndex]]) {
+                [self PROTECTED(clearField)];
+            }
+        } else {
+            [self protected_clearField];
+        }
+    }
     _items = [items copy];
     [_picker reloadAllComponents];
 }

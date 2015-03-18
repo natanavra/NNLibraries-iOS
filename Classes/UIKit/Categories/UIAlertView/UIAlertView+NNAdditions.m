@@ -15,6 +15,16 @@
 }
 
 + (UIAlertView *)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag {
+    UIAlertView *alert = [self alertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: btnTitles delegate: delegate tag: tag];
+    [alert show];
+    return alert;
+}
+
++ (UIAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate {
+    return [self alertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: btnTitles delegate: delegate tag: 0];
+}
+
++ (UIAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate tag:(NSInteger)tag {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(title, nil)
                                                     message: NSLocalizedString(message, nil)
                                                    delegate: delegate
@@ -27,12 +37,13 @@
         }
     }
     alert.tag = tag;
-    [alert show];
     return alert;
 }
 
 - (void)showWithDisplayTime:(NSTimeInterval)displayTime {
-    [self show];
+    if(!self.isVisible) {
+        [self show];
+    }
     [self dismissAfterDelay: displayTime];
 }
 
