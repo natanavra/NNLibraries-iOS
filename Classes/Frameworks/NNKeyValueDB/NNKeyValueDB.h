@@ -44,12 +44,14 @@ typedef enum {
 
 /** Objects that do not conform to the <NSCoding> protocol will not be saved. */
 - (NNKeyValueDBOperationResult)setObject:(id)object forKey:(id<NSCopying>)key;
-/* Support subscripting, e.g. set values like so 'baseKeyValueDB["myvalue"] = myNewValue' */
+/** Support subscripting, e.g. set values like so 'baseKeyValueDB["myvalue"] = myNewValue' **/
 - (void)setObject:(id)object forKeyedSubscript:(id<NSCopying>)key;
 
 - (id)objectForKey:(id<NSCopying>)key;
-/* Support subscripting, e.g. get values like so: 'value = baseKeyValueDB["myValue"]' */
+/** Support subscripting, e.g. get values like so: 'value = baseKeyValueDB["myValue"]' **/
 - (id)objectForKeyedSubscript:(id<NSCopying>)key;
+
+- (void)removeObjectForKey:(id<NSCopying>)key;
 
 - (BOOL)booleanForKey:(id<NSCopying>)key;
 - (void)setBoolean:(BOOL)boolean forKey:(id<NSCopying>)key;
@@ -57,9 +59,9 @@ typedef enum {
 - (NSInteger)integerForKey:(id<NSCopying>)key;
 - (void)setInteger:(NSInteger)integer forKey:(id<NSCopying>)key;
 
-- (NSArray *)allKeys;
-- (BOOL)saveDataToFile;
-
 - (BOOL)isKeySet:(id<NSCopying>)key;
+- (NSArray *)allKeys;
+
+- (BOOL)saveDataToFile;
 
 @end

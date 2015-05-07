@@ -7,18 +7,54 @@
 //
 
 #import "NNLogger.h"
+#import "NNUtilities.h"
+
+static NSUInteger kMaxLogLength = 1024; //characters
+BOOL const kGlobalForceLogAll = YES;
+
+@interface NNLogger ()
+@end
 
 @implementation NNLogger
+
+static NSMutableArray *_logs = nil;
+
++ (NSArray *)logEntries {
+    return [_logs copy];
+}
+
++ (NSString *)logEntriesFormatted {
+    return [_logs componentsJoinedByString: @"\n"];
+}
+
++ (NSArray *)clearLogs {
+    NSArray *logs = [self logEntries];
+    [_logs removeAllObjects];
+    return logs;
+}
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage {
     [self logFromInstance: sender message: logMessage data: nil];
 }
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
-#ifdef DEBUG
-    NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
-    NSLog(@"🅳 %@", log);
-#endif
+    [self logFromInstance: sender message: logMessage data: object forceLogAll: NO];
+}
+
++ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force {
+    if([NNUtilities isDebugMode]) {
+        NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
+        if(log.length > kMaxLogLength && !force && !kGlobalForceLogAll) {
+            log = [log substringToIndex: kMaxLogLength];
+            log = [log stringByAppendingString: @"\n... (Use 'forceLogAll' to see all content)"];
+        }
+        NSLog(@"😡 %@", log);
+        
+        if(!_logs) {
+            _logs = [[NSMutableArray alloc] init];
+        }
+        [_logs addObject: log];
+    }
 }
 
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage {
@@ -55,6 +91,8 @@
         description = object;
     } else if([object isKindOfClass: [NSData class]]) {
         description = [[NSString alloc] initWithData: object encoding: NSUTF8StringEncoding];
+    } else if([object isKindOfClass: [NSDictionary class]]) {
+        
     }
     
     if(!description || description.length == 0) {

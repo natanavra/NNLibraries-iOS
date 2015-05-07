@@ -8,25 +8,43 @@
 
 #import <Foundation/Foundation.h>
 
+extern BOOL const kGlobalForceLogAll;
+
 /** Simple Logger */
 @interface NNLogger : NSObject
 
-/** 
- 'className' and 'logMessage' must be valid objects, if either is 'nil' nothing will be logged! 
- Logs message only in DEBUG mode.
++ (NSArray *)logEntries;
++ (NSString *)logEntriesFormatted;
++ (NSArray *)clearLogs;
+
+/**
+ *  Logs a message from a sender object when in DEBUG.
+ *  @param sender     The object that requests to log the message.
+ *  @param logMessage The message to be logged (Capped to 1024 characters)
+ *  @warning To see the full content of you message - use 'logFromInstance:message:data:forceLogAll'.
  */
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage;
 
-/** 
- This method lets you print a message and an object.
- 'className' and 'logMessage' must be valid objects, if either is 'nil' nothing will be logged!
- Prints the data object using UTF8 string encoding
- Logs message only in DEBUG mode.
+/**
+ *  Logs a message and an object description from a sender object when in DEBUG.
+ *  @param sender     The object that requests to log the message.
+ *  @param logMessage The message to be logged (Capped to 1024 characters)
+ *  @param object     The object that a description will be logged for.
+ *  @warning To see the full content of you message - use 'logFromInstance:message:data:forceLogAll'.
  */
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object;
 
 /**
- *  Convinience method built for use with NSAssert, to get the message needed to be logged.
+ *  Logs a message and an object description from a sender object when in DEBUG.
+ *  @param sender     The object that requests to log the message.
+ *  @param logMessage The message to be logged (Capped to 1024 characters)
+ *  @param object     The object that a description will be logged for.
+ *  @param force      If 'YES' the max message cap will be ignored and everything will be logged to console.
+ */
++ (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force;
+
+/**
+ *  Convinience method to get the message needed to be logged.
  *  @param sender     The sender of the log
  *  @param logMessage The message the sender wants to log.
  *  @return Log formatted string, can be used by NSLog, etc.
@@ -34,7 +52,7 @@
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage;
 
 /**
- *  Convinience method built for use with NSAssert, to get a message logged with params
+ *  Convinience method built to get a message logged with params
  *  @param sender     The sender of the log.
  *  @param logMessage The message the sender wants to log.
  *  @param object     The object that has to do with the message.

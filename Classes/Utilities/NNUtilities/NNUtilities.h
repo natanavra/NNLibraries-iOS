@@ -24,11 +24,12 @@
 + (float)validFloatFromObject:(id)object;
 + (double)validDoubleFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object;
++ (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback;
 
 //JSON
-+ (id)parseJsonFromData:(NSData *)data;
-+ (NSData *)jsonDataFromDictionary:(NSDictionary *)json;
-+ (NSData *)jsonDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty;
++ (id)parseJSONFromData:(NSData *)data;
++ (NSData *)JSONDataFromDictionary:(NSDictionary *)json;
++ (NSData *)JSONDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty;
 
 //File Management
 + (NSString *)pathToDocumentsDirectory;
@@ -56,6 +57,7 @@
 + (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName;
 + (CGRect)CGRectByInseting:(CGRect)rect insets:(UIEdgeInsets)insets;
 + (CGRect)CGRectByOffseting:(CGRect)rect offset:(UIEdgeInsets)insets;
++ (BOOL)isDebugMode;
 /** Return YES if 0 <= number <= 1. NO otherwise. */
 + (BOOL)numberBetween0And1:(float)number;
 

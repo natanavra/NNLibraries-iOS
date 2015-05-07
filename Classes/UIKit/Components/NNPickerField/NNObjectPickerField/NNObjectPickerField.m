@@ -68,8 +68,8 @@ static NSArray *_genericItems = nil;
     return self;
 }
 
-- (void)PROTECTED(setupPicker) {
-    [super PROTECTED(setupPicker)];
+- (void)setupPicker {
+    [super setupPicker];
     
     UIPickerView *picker = [self pickerView];
     _picker = picker;
@@ -86,14 +86,13 @@ static NSArray *_genericItems = nil;
     [self setCurrentSelectedIndex: _selectedIndex == -1 ? 0 : _selectedIndex];
 }
 
-- (void)PROTECTED(clearField) {
-    [super PROTECTED(clearField)];
+- (void)clearField {
     _selectedIndex = -1;
     _selectedObject = nil;
+    [super clearField];
 }
 
 #pragma mark - UIPickerView Protocols
-
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
@@ -105,14 +104,7 @@ static NSArray *_genericItems = nil;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     id object = _items[row];
-    if([object conformsToProtocol: @protocol(NNSelectable)]) {
-        return [object title];
-    } else if([object isKindOfClass: NSString.class]) {
-        return object;
-    } else if([object isKindOfClass: [NSDictionary class]]) {
-        return [object allValues][row];
-    }
-    return @"";
+    return [self titleForObject: object];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -128,13 +120,19 @@ static NSArray *_genericItems = nil;
     if(shouldSelect) {
         _selectedObject = _items[row];
         _selectedIndex = row;
-        self.text = [_selectedObject conformsToProtocol: @protocol(NNSelectable)] ? [_selectedObject title] : _selectedObject;
+        [self updateText];
         
         if([_pickerDelegate respondsToSelector: @selector(pickerField:didSelectObject:atIndex:)]) {
             [_pickerDelegate pickerField: self didSelectObject: _selectedObject atIndex: _selectedIndex];
         }
     }
 }
+
+- (void)updateText {
+    self.text = [_selectedObject conformsToProtocol: @protocol(NNSelectable)] ? [_selectedObject title] : _selectedObject;
+}
+
+#pragma mark - Setters
 
 - (void)setCurrentSelectedIndex:(NSInteger)index {
     NSArray *useItems = _items;
@@ -147,6 +145,8 @@ static NSArray *_genericItems = nil;
             [self pickerView: _picker didSelectRow: index inComponent: 0];
         } else {
             _selectedIndex = index;
+            _selectedObject = useItems[index];
+            [self updateText];
         }
     }
 }
@@ -163,17 +163,30 @@ static NSArray *_genericItems = nil;
 }
 
 - (void)setItems:(NSArray *)items {
-    if(_items.count > 0) {
-        if(items.count > _selectedIndex) {
-            if(![items containsObject: _items[_selectedIndex]]) {
-                [self PROTECTED(clearField)];
-            }
-        } else {
-            [self protected_clearField];
-        }
+    if(_selectedIndex >= items.count) {
+        [self clearField];
+    } else if([items[_selectedIndex] isEqual: _items[_selectedIndex]]) {
+        [self clearField];
     }
     _items = [items copy];
     [_picker reloadAllComponents];
+}
+
+#pragma mark - Getters
+
+- (NSString *)titleForObject:(id)object {
+    if([object conformsToProtocol: @protocol(NNSelectable)]) {
+        return [object title];
+    } else if([object isKindOfClass: NSString.class]) {
+        return object;
+    } else if([object isKindOfClass: [NSDictionary class]]) {
+        return [object allValues][0];
+    }
+    return nil;
+}
+
+- (NSString *)selectedObjectTitle {
+    return [self titleForObject: _selectedObject];
 }
 
 @end

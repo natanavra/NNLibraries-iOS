@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 }
 
 - (BOOL)becomeFirstResponder {
-    [self PROTECTED(setupPicker)];
+    [self setupPicker];
     return [super becomeFirstResponder];
 }
 
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 #pragma mark - Static Components
 
-- (UIToolbar *)PROTECTED(inputAccessoryToolbar) {
+- (UIToolbar *)inputAccessoryToolbar {
     static UIToolbar *toolbar = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle: nil
                                                                  style: UIBarButtonItemStylePlain
                                                                 target: self
-                                                                action: @selector(PROTECTED(clearField))];
+                                                                action: @selector(clearField)];
         [toolbarItems addObject: item];
         
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
         item = [[UIBarButtonItem alloc] initWithTitle: nil
                                                 style: UIBarButtonItemStyleDone
                                                target: self
-                                               action: @selector(PROTECTED(closePicker))];
+                                               action: @selector(closePicker)];
         [toolbarItems addObject: item];
         toolbar.items = toolbarItems;
         
@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 - (void)updateToolBarDisplay {
     if(_showsToolbar) {
-        UIToolbar *toolbar = [self PROTECTED(inputAccessoryToolbar)];
+        UIToolbar *toolbar = [self inputAccessoryToolbar];
         NSMutableArray *items = [toolbar.items mutableCopy];
         UIBarButtonItem *clearItem = items[toolbarClearItemIndex];
         UIBarButtonItem *closeItem = items[toolbarCloseItemIndex];
@@ -132,19 +132,19 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     }
 }
 
-- (void)PROTECTED(closePicker) {
-    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidClose:)]) {
-        [_pickerDelegate pickerFieldDidClose: self];
-    }
+- (void)closePicker {
     [self resignFirstResponder];
+    if([self.pickerDelegate respondsToSelector: @selector(pickerFieldDidClose:)]) {
+        [self.pickerDelegate pickerFieldDidClose: self];
+    }
 }
 
-- (void)PROTECTED(clearField) {
-    if([_pickerDelegate respondsToSelector: @selector(pickerFieldDidClearSelection:)]) {
-        [_pickerDelegate pickerFieldDidClearSelection: self];
-    }
+- (void)clearField {
     self.text = _pickerPlaceholder;
     [self resignFirstResponder];
+    if([self.pickerDelegate respondsToSelector: @selector(pickerFieldDidClearSelection:)]) {
+        [self.pickerDelegate pickerFieldDidClearSelection: self];
+    }
 }
 
 - (void)setShowsToolBarWithTitle:(NSString *)title withCloseButtonTitle:(NSString *)closeTitle withClearTitle:(NSString *)clearTitle withTitleColor:(UIColor *)color {
@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 #pragma mark - Picker Related
 
-- (void)PROTECTED(setupPicker) {
+- (void)setupPicker {
     [self updateToolBarDisplay];
     
     //To hide the blinking cursor.
@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 }
 
 - (void)setPickerPlaceholder:(NSString *)pickerPlaceholder {
-    if([self.text isEqualToString: _pickerPlaceholder]) {
+    if([self.text isEqualToString: _pickerPlaceholder] || self.text.length == 0) {
         self.text = pickerPlaceholder;
     }
     _pickerPlaceholder = [pickerPlaceholder copy];

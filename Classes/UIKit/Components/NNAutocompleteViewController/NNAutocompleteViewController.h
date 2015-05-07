@@ -18,15 +18,16 @@
 
 /**
  *  @author natanavra
- *  @description Use this for displaying autocomplete selection with UITableView and search bar. object in data must conform to the 'NNAutoCompleteObject' protocol.
+ *  @description Use this for displaying autocomplete selection with UITableView and search bar. 
+ *  @warning object in data must conform to the 'NNSelectable' protocol.
  *  @warning ONLY Use with Modal presentation style. This view has its own UINavigationBar.
  *  @warning To use the Built-in UI, copy the xib file to your application bundle.
  */
 @interface NNAutocompleteViewController : UIViewController
-@property (nonatomic, strong) NSArray *autocompleteData;
 @property (nonatomic, weak) id<NNAutoCompleteDelegate> delegate;
-@property (nonatomic) NSTextAlignment textAlignment;
+@property (nonatomic, strong) NSArray *autocompleteData;
 @property (nonatomic, copy) NSString *closeTitle;
+@property (nonatomic) NSTextAlignment textAlignment;
 
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<NNAutoCompleteDelegate>)delegate data:(NSArray *)data;
 @end

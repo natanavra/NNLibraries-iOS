@@ -54,40 +54,47 @@
 }
 
 + (BOOL)validBooleanFromObject:(id)object {
+    return [self validBooleanFromObject: object fallbackValue: NO];
+}
+
++ (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback {
     if([self validObjectFromObject: object]) {
         return [object boolValue];
     }
-    return NO;
+    return fallback;
 }
 
 #pragma mark - JSON
 
-+ (id)parseJsonFromData:(NSData *)data {
-    if(data) {
-        NSError *err = nil;
-        id json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
-        if(err) {
-            //Maybe implement some kind of error handling?
-            [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to parse JSON! %@", err]];
-            return nil;
-        } else {
-            return json;
-        }
++ (id)parseJSONFromData:(NSData *)data {
+    if(!data) {
+        [NNLogger logFromInstance: self message: @"'parseJSONFromData:' not valid data"];
+        return nil;
     }
-    return nil;
-}
-
-+ (NSData *)jsonDataFromDictionary:(NSDictionary *)json {
-    return [self jsonDataFromDictionary: json prettyPrinted: NO];
-}
-
-+ (NSData *)jsonDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty {
     NSError *err = nil;
-    NSData *retVal = [NSData data];
+    id json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
+    if(err) {
+        [NNLogger logFromInstance: self message: @"'parseJSONFromData:' unable to parse data" data: err];
+        return nil;
+    } else {
+        return json;
+    }
+}
+
++ (NSData *)JSONDataFromDictionary:(NSDictionary *)json {
+    return [self JSONDataFromDictionary: json prettyPrinted: NO];
+}
+
++ (NSData *)JSONDataFromDictionary:(NSDictionary *)json prettyPrinted:(BOOL)pretty {
+    if(!json) {
+        [NNLogger logFromInstance: self message: @"'JSONDataFromDictionary:' not valid JSON/Dictionary object"];
+    }
+    NSData *retVal = nil;
     if([NSJSONSerialization isValidJSONObject: json]) {
+        NSError *err = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: pretty ? NSJSONWritingPrettyPrinted : kNilOptions error: &err];
         if(err) {
-            [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Unable to create data from NSDictionary: %@", err]];
+            [NNLogger logFromInstance: self message: @"'JSONDataFromDictionary:' unable to create JSON data from object" data: err];
         } else {
             retVal = jsonData;
         }
@@ -257,7 +264,16 @@
     return @"Unexpected";
 }
 
++ (BOOL)isDebugMode {
+#ifdef DEBUG
+    return YES;
+#else 
+    return NO;
+#endif
+}
+
 #pragma mark - URLs
+
 + (BOOL)navigateWazeOrMapsWithAddress:(NSString *)address {
     [NNLogger logFromInstance: self message: @"Navigating to address" data: address];
     NSString *mapsURL = [NSString stringWithFormat: @"waze://?q=%@&navigate=yes", address];

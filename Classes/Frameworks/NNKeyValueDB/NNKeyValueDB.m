@@ -68,29 +68,32 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     if(_persistent) {
         [encoder encodeObject: _databaseID forKey: @"db_id"];
+        [encoder encodeObject: [NSNumber numberWithBool: _persistent] forKey: @"isPersistent"];
+        [encoder encodeObject: [NSNumber numberWithUnsignedInteger: _maxNumberOfRecords] forKey: @"maxNumRecords"];
         
         //Remove objects that do not support being saved to file.
-        NSMutableDictionary *temporary = [NSMutableDictionary dictionary];
+        NSMutableDictionary *nonSavedValues = [NSMutableDictionary dictionary];
+        //Done this way to preserve the original '_keys' array which is ordered by FIFO.
+        NSMutableArray *savedKeys = [NSMutableArray array];
         for(id key in _keys) {
             id object = _dictionary[key];
             if(![object conformsToProtocol: @protocol(NSCoding)]) {
-                temporary[key] = object;
+                nonSavedValues[key] = object;
                 [_dictionary removeObjectForKey: key];
+            } else {
+                [savedKeys addObject: key];
             }
         }
         //Save the dictionary to file.
         [encoder encodeObject: _dictionary forKey: @"dictionary"];
+        //Save the keys to a file
+        [encoder encodeObject: savedKeys forKey: @"hash"];
         
-        if(temporary.count > 0) {
-            [NNLogger logFromInstance: self message: [self formatMessage: @"Not saved objects"] data: temporary];
+        if(nonSavedValues.count > 0) {
+            //Re-enter the objects that do not support being saved.
+            [_dictionary addEntriesFromDictionary: nonSavedValues];
+            [NNLogger logFromInstance: self message: [self formatMessage: @"Not saved objects"] data: nonSavedValues];
         }
-        
-        //Re-enter the objects that do not support being saved.
-        [_dictionary addEntriesFromDictionary: temporary];
-        
-        [encoder encodeObject: _keys forKey: @"hash"];
-        [encoder encodeObject: [NSNumber numberWithBool: _persistent] forKey: @"isPersistent"];
-        [encoder encodeObject: [NSNumber numberWithUnsignedInteger: _maxNumberOfRecords] forKey: @"maxNumRecords"];
     }
 }
 
@@ -132,6 +135,12 @@
 
 - (void)setObject:(id<NSCoding>)object forKeyedSubscript:(id<NSCopying>)key {
     [self setObject: object forKey: key];
+}
+
+- (void)removeObjectForKey:(id<NSCopying>)key {
+    if(key) {
+        [_dictionary removeObjectForKey: key];
+    }
 }
 
 #pragma mark - Boolean Handlers

@@ -15,4 +15,5 @@
     UIActivityIndicatorView *_indicator;
 }
 - (void)setImageFromURL:(NSURL *)imgUrl;
+- (void)setImageWithURL:(NSURL *)imgUrl;
 @end

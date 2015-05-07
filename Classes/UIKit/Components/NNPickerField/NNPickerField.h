@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef PROTECTED
-#define PROTECTED(method) protected_ ## method
-#endif
-
 @class NNPickerField;
 
 @protocol NNPickerFieldDelegate <NSObject>
@@ -27,7 +23,9 @@
  *  <strong>Abstract class!!! DO NOT USE IT!</strong>
  *  Used as a super class for the different picker fields e.g.: NNObjectPickerField and NNDatePickerField.
  */
-@interface NNPickerField : UITextField
+@interface NNPickerField : UITextField {
+    id pickerDelegate;
+}
 @property (nonatomic, weak) id<NNPickerFieldDelegate> pickerDelegate;
 @property (nonatomic, copy) NSString *pickerPlaceholder;
 
@@ -43,9 +41,16 @@
                   withClearTitle:(NSString *)clearTitle
                   withTitleColor:(UIColor *)color;
 
-- (void)PROTECTED(setupPicker);
-- (UIToolbar *)PROTECTED(inputAccessoryToolbar);
-- (void)PROTECTED(closePicker);
-- (void)PROTECTED(clearField);
+
+#pragma mark - PRIVATE METHODS
+/** @warning Private method! Calling this method will result in unexpected behavior! */
+- (void)setupPicker;
+/** @warning Private method! Calling this method will result in unexpected behavior! */
+- (UIToolbar *)inputAccessoryToolbar;
+/** @warning Private method! Calling this method will result in unexpected behavior! */
+- (void)closePicker;
+/** @warning Private method! Calling this method will result in unexpected behavior! */
+- (void)clearField;
+/** @warning Private method! Calling this method will result in unexpected behavior! */
 - (void)unlinkPicker;
 @end

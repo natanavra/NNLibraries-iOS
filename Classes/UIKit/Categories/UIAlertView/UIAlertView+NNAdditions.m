@@ -10,6 +10,10 @@
 
 @implementation UIAlertView (NNAdditions)
 
++ (UIAlertView *)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle {
+    return [self showAlertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: nil delegate: nil];
+}
+
 + (UIAlertView *)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle otherButtons:(NSArray *)btnTitles delegate:(id<UIAlertViewDelegate>)delegate {
     return [self showAlertWithTitle: title message: message cancelButtonTitle: cancelTitle otherButtons: btnTitles delegate: delegate tag: 0];
 }

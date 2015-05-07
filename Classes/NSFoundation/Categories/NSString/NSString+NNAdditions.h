@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "NNSelectable.h"
 
-@interface NSString (NNAdditions)
+@interface NSString (NNAdditions) <NNSelectable>
 /** 
  @return new NSString without white spaces in the begining and the end.
  */
@@ -17,4 +19,11 @@
  @return new NSString without any white spaces in it
  */
 - (NSString *)stringByRemovingAllWhiteSpace;
+@end
+
+/** ------------------------------------------ */
+
+@interface NSString (NSAttributedString)
+- (NSAttributedString *)attributedStringWithFontName:(NSString *)fontName withSize:(CGFloat)size;
+- (NSAttributedString *)attributedStringWithFont:(UIFont *)font;
 @end

@@ -29,4 +29,6 @@
 - (void)setCurrentSelectedObject:(id)selectedObject;
 - (void)setGenericItems:(NSArray *)items;
 
+- (NSString *)selectedObjectTitle;
+
 @end

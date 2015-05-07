@@ -12,11 +12,6 @@ extern NSString *const kEncryptionKey;
 
 @interface NNSecurity : NSObject
 
-+ (NSData *)encryptedDataFromData:(NSData *)data;
-+ (NSData *)encryptedDataForData:(NSData *)data
-                        password:(NSString *)password
-                              iv:(NSData **)iv
-                            salt:(NSData **)salt
-                           error:(NSError **)error;
++ (NSData *)encrypt:(NSString *)message;
 
 @end

@@ -25,10 +25,11 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 
 #pragma mark - Overrides
 
-- (void)PROTECTED(clearField) {
-    [super PROTECTED(clearField)];
+- (void)clearField {
+    [super clearField];
     _selectedDate = nil;
-    _datePicker.date = _datePicker.minimumDate ? _datePicker.minimumDate : [NSDate date];
+    NSDate *newDate = _datePicker.minimumDate ? _datePicker.minimumDate : [NSDate date];
+    [_datePicker setDate: newDate animated: YES];
 }
 
 - (void)unlinkPicker {
@@ -48,17 +49,28 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     return picker;
 }
 
-- (void)PROTECTED(setupPicker) {
-    [super PROTECTED(setupPicker)];
+- (void)setupPicker {
+    [super setupPicker];
     
     UIDatePicker *datePicker = [self classDatePicker];
+    _datePicker = datePicker;
     datePicker.datePickerMode = _datePickerMode;
     datePicker.minimumDate = _minimumDate;
     datePicker.maximumDate = _maximumDate;
     [datePicker addTarget: self action: @selector(dateChanged:) forControlEvents: UIControlEventValueChanged];
-    [self setSelectedDate: _selectedDate ? _selectedDate : [NSDate date]];
+    
+    NSDate *newDate = nil;
+    if(_selectedDate) {
+        newDate = _selectedDate;
+    } else if(_minimumDate) {
+        newDate = _minimumDate;
+    } else if(_maximumDate) {
+        newDate = _maximumDate;
+    } else {
+        newDate = [NSDate date];
+    }
+    [self setSelectedDate: newDate];
     self.inputView = datePicker;
-    _datePicker = datePicker;
 }
 
 - (void)dateChanged:(UIDatePicker *)datePicker {
@@ -82,7 +94,8 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
             }
         }
     }
-    _datePicker.date = _selectedDate ? _selectedDate : [NSDate date];
+    NSDate *newDate = _selectedDate ? _selectedDate : [NSDate date];
+    [_datePicker setDate: newDate animated: YES];
 }
 
 - (void)setSelectedDate:(NSDate *)date {
@@ -92,8 +105,11 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 - (void)setMinimumDate:(NSDate *)date {
     if(!_maximumDate) {
         _minimumDate = date;
-    } else if([_maximumDate compare: date] != NSOrderedAscending) {
-        _minimumDate = date;
+    } else {
+        NSComparisonResult compare = [self compareDateByMode: _maximumDate withDate: date];
+        if(compare != NSOrderedAscending) {
+            _minimumDate = date;
+        }
     }
     
     //If current date is invalid - change it to the minimum date.
@@ -105,8 +121,11 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 - (void)setMaximumDate:(NSDate *)date {
     if(!_minimumDate) {
         _maximumDate = date;
-    } else if([_minimumDate compare: date] != NSOrderedDescending) {
-        _maximumDate = date;
+    } else {
+        NSComparisonResult compare = [self compareDateByMode: _minimumDate withDate: date];
+        if(compare != NSOrderedDescending) {
+            _maximumDate = date;
+        }
     }
     
     //If current selected date is invalid - change it to the maximum date.
@@ -129,22 +148,13 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
     }
     
     BOOL validDate = YES;
-    BOOL timePickerMode = [self isTimePickerMode];
     if(_minimumDate) {
-        if(timePickerMode) {
-            if([_minimumDate timeCompare: date] == NSOrderedDescending) {
-                validDate = NO;
-            }
-        } else if([_minimumDate compare: date] == NSOrderedDescending) {
+        if([self compareDateByMode: _minimumDate withDate: date] == NSOrderedDescending) {
             validDate = NO;
         }
     }
     if(_maximumDate) {
-        if(timePickerMode) {
-            if([_maximumDate timeCompare: date] == NSOrderedDescending) {
-                validDate = NO;
-            }
-        } else if([_maximumDate compare: date] == NSOrderedAscending) {
+        if([self compareDateByMode: _maximumDate withDate: date] == NSOrderedAscending) {
             validDate = NO;
         }
     }
@@ -153,6 +163,16 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 }
 
 #pragma mark - Helpers
+
+- (NSComparisonResult)compareDateByMode:(NSDate *)date withDate:(NSDate *)otherDate {
+    NSComparisonResult result;
+    if([self isTimePickerMode]) {
+        result = [date timeCompare: otherDate];
+    } else {
+        result = [date compare: otherDate];
+    }
+    return result;
+}
 
 - (BOOL)isTimePickerMode {
     return (_datePickerMode == UIDatePickerModeTime) || (_datePickerMode == UIDatePickerModeCountDownTimer);
@@ -166,7 +186,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
             formatter = [[NSDateFormatter alloc] init];
         }
         formatter.timeZone = [NSTimeZone defaultTimeZone];
-    
+        
         [formatter setDateFormat: _dateDisplayFormat];
         retVal = [formatter stringFromDate: date];
     } else {

@@ -252,13 +252,13 @@ NNDateUnit fullUnitMask() {
     NNDateUnit comp = unitInBitMaskWithIndex(_units, component);
     NSString *title = @"";
     if(comp & NNDateUnitSecond || comp & NNDateUnitMinute) {
-        title = [NSString stringWithFormat: @"%zi", row];
+        title = [NSString stringWithFormat: @"%zd", row];
     } else if(comp & NNDateUnitHour) {
-        title = [NSString stringWithFormat: @"%zi", row];
+        title = [NSString stringWithFormat: @"%zd", row];
     } else if(comp & NNDateUnitYear) {
-        title = [NSString stringWithFormat: @"%zi", row];
+        title = [NSString stringWithFormat: @"%zd", row];
     } else if(comp & NNDateUnitDay) {
-        title = [NSString stringWithFormat: @"%zi", row + 1];
+        title = [NSString stringWithFormat: @"%zd", row + 1];
     } else if(comp & NNDateUnitMonth) {
         title = [[[self class] months] objectAtIndex: row];
     }

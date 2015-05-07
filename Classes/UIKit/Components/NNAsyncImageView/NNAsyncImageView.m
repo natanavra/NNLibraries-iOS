@@ -15,7 +15,6 @@
 - (void)setImageFromURL:(NSURL *)imgUrl {
     _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
     [self addSubview: _indicator];
-    _indicator.center = [self convertPoint: self.center fromView: self.superview];
     [_indicator startAnimating];
     
     NNAsyncRequest *request = [[NNAsyncRequest alloc] initWithURL: imgUrl complete: ^(NSURLResponse *response, NSData *responseData, NSError *error) {
@@ -32,6 +31,15 @@
         _indicator = nil;
     }];
     [request startAsyncConnection];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _indicator.center = CGPointMake(self.frame.size.width / 2,  self.frame.size.height / 2);
+}
+
+- (void)setImageWithURL:(NSURL *)imgUrl {
+    [self setImageFromURL: imgUrl];
 }
 
 @end

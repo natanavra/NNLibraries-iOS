@@ -18,6 +18,8 @@ extern NSString *const NSDatePOSIXFormat;
 - (NSString *)POSIXFormatString;
 - (BOOL)isDateInSameDay:(NSDate *)date;
 
+- (NSString *)dateStringWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle;
+
 /**
  *  Returns a string representation of the date with the given format.
  *  @param format Date format (RFC-something standard, Apple way...) must be valid <b><i>non-nil</b></i>
@@ -30,6 +32,8 @@ extern NSString *const NSDatePOSIXFormat;
  *  @return String representation of the date parameter in the given format with the device's default time zone.
  */
 + (NSString *)dateStringFromDate:(NSDate *)date withFormat:(NSString *)format;
+
++ (NSString *)timeFormattedStringFromTimeInterval:(NSTimeInterval)interval withDelimiter:(NSString *)delimiter;
 
 /**
  *  @param date     A valid date object
@@ -47,12 +51,15 @@ extern NSString *const NSDatePOSIXFormat;
 - (NSDateComponents *)dateComponents:(NSCalendarUnit)comps;
 - (NSDate *)dateFromSpecificComponents:(NSCalendarUnit)comps;
 
+
 - (NSComparisonResult)timeCompare:(NSDate *)otherDate;
 
 + (NSArray *)monthSymbols;
 + (NSArray *)weekdaySymbols;
 + (NSString *)AMSymbol;
 + (NSString *)PMSymbol;
+
+- (NSInteger)daysDifferenceFromDate:(NSDate *)date;
 
 + (NSInteger)numberOfDaysInMonth:(NSDate *)date;
 + (NSInteger)numberOfDaysInMonth:(NSInteger)month inYear:(NSInteger)year;

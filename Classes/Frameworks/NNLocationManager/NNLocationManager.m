@@ -25,6 +25,9 @@
 
 @implementation NNLocationManager
 
+static NSString *const kRequestWhenInUseAuthKey = @"NSLocationWhenInUseUsageDescription";
+static NSString *const kRequestUseAlwaysKey = @"NSLocationAlwaysUsageDescription";
+
 #pragma mark - init
 
 + (instancetype)sharedLocation {
@@ -49,9 +52,16 @@
             if(gpsStatus != kCLAuthorizationStatusDenied &&
                gpsStatus != kCLAuthorizationStatusRestricted) {
                 //Can use location
+                
                 self.locMgr = [[CLLocationManager alloc] init];
-                if([_locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
-                    [_locMgr performSelector: @selector(requestWhenInUseAuthorization)];
+                if([[NSBundle mainBundle] objectForInfoDictionaryKey: kRequestUseAlwaysKey]) {
+                    if([_locMgr respondsToSelector: @selector(requestAlwaysAuthorization)]) {
+                        [_locMgr performSelector: @selector(requestAlwaysAuthorization)];
+                    }
+                } else if([[NSBundle mainBundle] objectForInfoDictionaryKey: kRequestWhenInUseAuthKey]) {
+                    if([_locMgr respondsToSelector: @selector(requestWhenInUseAuthorization)]) {
+                        [_locMgr performSelector: @selector(requestWhenInUseAuthorization)];
+                    }
                 }
                 _locMgr.delegate = self;
                 _locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
@@ -136,10 +146,11 @@
 #pragma mark - Getters
 
 - (BOOL)locationChanged {
+    BOOL retVal = NO;
     if([self.lastLocation distanceFromLocation: _currentLoc] > 50) {
-        return YES;
+        retVal = YES;
     }
-    return NO;
+    return retVal;
 }
 
 - (CLLocation *)currentLocation {
@@ -169,17 +180,15 @@
 }
 
 - (BOOL)currentLocationAvailable {
+    BOOL retVal = NO;
     if(_currentLoc != nil) {
         //BOOL accurate = (currentLoc.horizontalAccuracy <= kAccuracyThreshold && currentLoc.verticalAccuracy <= kAccuracyThreshold);
         BOOL notZero = (_currentLoc.coordinate.latitude != 0 && _currentLoc.coordinate.longitude != 0);
         if(notZero) {
-            return YES;
-        } else {
-            //Location is not accurate enough
-            return NO;
+            retVal = YES;
         }
     }
-    return NO;
+    return retVal;
 }
 
 - (NSString *)parsedDistance:(double)distance {
@@ -192,7 +201,7 @@
                 return [NSString stringWithFormat: @"%.1f ק״מ", kilometers];
             }
         } else {
-            return [NSString stringWithFormat: @"%zi מטר", (NSInteger)distance];
+            return [NSString stringWithFormat: @"%zd מטר", (NSInteger)distance];
         }
     }
     return nil;

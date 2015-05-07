@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, NNHTTPErrorCode) {
     NNHTTPErrorNotFound = 404,
 };
 
+extern NSInteger NNOfflineError;
+
 /* The completion block is called on the main thread. */
 typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
 typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
@@ -30,7 +32,7 @@ static NSString *const httpMethodGET    = @"GET";
 /** Simple asynchronous request */
 @interface NNAsyncRequest : NSObject <NSURLConnectionDataDelegate> {
     NSMutableURLRequest *_request;
-    NSURLResponse *_response;
+    NSHTTPURLResponse *_response;
     NSURLConnection *_connection;
     NSMutableData *_responseData;
     

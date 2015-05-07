@@ -7,6 +7,7 @@
 //
 
 #import "NNAutocompleteViewController.h"
+#import "NSString+NNAdditions.h"
 
 @interface NNAutocompleteViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *autocompleteTable;

@@ -10,6 +10,8 @@
 #import "NNUtilities.h"
 #import "NNLogger.h"
 
+NSInteger NNOfflineError = -1009;
+
 @implementation NNAsyncRequest
 
 #pragma mark - init
@@ -53,7 +55,7 @@
             NSString *requestURL = [url stringByAppendingString: query];
             [_request setURL: [NSURL URLWithString: requestURL]];
         } else if(method == NNHTTPMethodPOST) {
-            NSData *data = [NNUtilities jsonDataFromDictionary: params prettyPrinted: YES];
+            NSData *data = [NNUtilities JSONDataFromDictionary: params prettyPrinted: YES];
             _request.HTTPBody = data;
         }
         _request.HTTPMethod = [NNAsyncRequest httpMethodName: method];
@@ -117,9 +119,16 @@
 
 - (NSString *)responseStringWithEncoding:(NSStringEncoding)encoding {
     if(_responseData) {
+        NSDictionary *headers = [_response allHeaderFields];
+        if([headers[@"content-type"] rangeOfString: @"json"].location != NSNotFound) {
+            id object = [NNUtilities parseJSONFromData: _responseData];
+            if(object) {
+                return [object description];
+            }
+        }
         return [[NSString alloc] initWithData: _responseData encoding: encoding];
     }
-    return @"";
+    return nil;
 }
 
 #pragma mark - NSURLConnectionDataDelegate
@@ -142,9 +151,19 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         _callback(_response, _responseData, [self requestError]);
     });
-    [NNLogger logFromInstance: self message: @"Connection success"
-                         data: [NSString stringWithFormat: @"Connection: %@, Error : %@, Data: %@",
-                                connection, [self requestError], [self responseString]]];
+    
+    NSMutableString *string = [NSMutableString string];
+    [string appendFormat: @"Connection: %@", connection];
+    NSError *error = [self requestError];
+    if(error) {
+        [string appendFormat: @",\nError: %@", error];
+    }
+    NSString *data = [self responseString];
+    if(data.length > 0) {
+        [string appendFormat: @",\nData: %@", data];
+    }
+    
+    [NNLogger logFromInstance: self message: @"Connection success" data: string];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -152,7 +171,7 @@
         _callback(_response, nil, error);
     });
     [NNLogger logFromInstance: self message: @"Connection failed"
-                         data: [NSString stringWithFormat: @"Connection: %@, Error: %@", connection, error]];
+                         data: [NSString stringWithFormat: @"\nConnection: %@, Error: %@", connection, error]];
 }
 
 - (BOOL)badRequest {

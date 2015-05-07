@@ -9,13 +9,15 @@
 #import "NSDate+NNAdditions.h"
 #import "NNLogger.h"
 
-#define kUTCTimeZone [NSTimeZone timeZoneWithName: @"UTC"]
-
 NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 
 @implementation NSDate (NNAdditions)
 
 #pragma mark - toString Transformers
+
+- (NSString *)dateStringWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
+    return [NSDateFormatter localizedStringFromDate: self dateStyle: dateStyle timeStyle: timeStyle];
+}
 
 - (NSString *)dateStringWithFormat:(NSString *)format {
     return [NSDate dateStringFromDate: self withFormat: format];
@@ -52,6 +54,17 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
         return [formatter stringFromDate: date];
     }
     return nil;
+}
+
++ (NSString *)timeFormattedStringFromTimeInterval:(NSTimeInterval)interval withDelimiter:(NSString *)delimiter {
+    if(!delimiter) {
+        delimiter = @":";
+    }
+    NSInteger hours = (NSInteger)(interval / 3600.0f);
+    NSInteger left = (NSInteger)(interval - hours);
+    NSInteger minutes = (NSInteger)(left / 60.0f);
+    NSInteger seconds = (NSInteger)left % 60;
+    return [NSString stringWithFormat: @"%02li%@%02li", (long)minutes, delimiter, (long)seconds];
 }
 
 #pragma mark - Date Constructors
@@ -95,7 +108,8 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
         NSCalendarUnit flags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
         NSDate *selfTime = [self dateFromSpecificComponents: flags];
         NSDate *otherTime = [otherDate dateFromSpecificComponents: flags];
-        return [selfTime compare: otherTime];
+        NSComparisonResult retval = [selfTime compare: otherTime];
+        return retval;
         //For some reason modulo does not return the correct (something with timezones again) (Time interval returns seconds with timezone)
         /*NSInteger thisTime = (NSInteger)fabs([self timeIntervalSince1970]);
         NSInteger otherTime = (NSInteger)fabs([date timeIntervalSince1970]);
@@ -115,6 +129,13 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
         }*/
     }
     return NSOrderedDescending;
+}
+
+- (NSInteger)daysDifferenceFromDate:(NSDate *)date {
+    NSTimeInterval difference = [self timeIntervalSinceDate: date];
+    NSDate *differenceAsDate = [NSDate dateWithTimeIntervalSince1970: difference];
+    NSDateComponents *components = [NSDate dateComponents: NSCalendarUnitDay fromDate: differenceAsDate];
+    return components.day;
 }
 
 #pragma mark - Calendar Methods
@@ -197,7 +218,6 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
         formatter = [[NSDateFormatter alloc] init];
     });
     formatter.timeZone = [NSTimeZone defaultTimeZone];
-    
     return formatter;
 }
 

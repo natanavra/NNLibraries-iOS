@@ -52,8 +52,8 @@
     return self;
 }
 
-- (void)PROTECTED(setupPicker) {
-    [super PROTECTED(setupPicker)];
+- (void)setupPicker {
+    [super setupPicker];
     UIPickerView *picker = [self pickerView];
     _picker = picker;
     picker.delegate = self;
@@ -63,8 +63,8 @@
     [self setCurrentSelectedIndex: _selectedIndex == -1 ? 0 : _selectedIndex];
 }
 
-- (void)PROTECTED(clearField) {
-    [super PROTECTED(clearField)];
+- (void)clearField {
+    [super clearField];
     _selectedIndex = -1;
     _selectedNumber = NSNotFound;
 }
@@ -94,7 +94,7 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [NSString stringWithFormat: @"%zi", _fromNumber + row];
+    return [NSString stringWithFormat: @"%zd", _fromNumber + row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -105,7 +105,7 @@
     if(shouldSelect) {
         _selectedIndex = row;
         _selectedNumber = _fromNumber + row;
-        self.text = [NSString stringWithFormat: @"%zi", _selectedNumber];
+        self.text = [NSString stringWithFormat: @"%zd", _selectedNumber];
         if([_pickerDelegate respondsToSelector: @selector(pickerField:didSelectNumber:)]) {
             [_pickerDelegate pickerField: self didSelectNumber: _selectedNumber];
         }
