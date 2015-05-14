@@ -7,8 +7,7 @@
 //
 
 #import "UINavigationController+NNAdditions.h"
-
-NSTimeInterval kDefaultAnimationDuration = 0.3f;
+#import "NNConstants.h"
 
 @implementation UINavigationController (NNAdditions)
 
@@ -36,7 +35,7 @@ NSTimeInterval kDefaultAnimationDuration = 0.3f;
     CATransition *transition = [CATransition animation];
     transition.type = type;
     transition.subtype = direction;
-    transition.duration = kDefaultAnimationDuration;
+    transition.duration = NNDefaultAnimationDuration;
     return transition;
 }
 

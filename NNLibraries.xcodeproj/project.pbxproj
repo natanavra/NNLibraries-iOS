@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5C0BF5461ADC3771000364AA /* NNFromXIBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0BF5451ADC3771000364AA /* NNFromXIBView.m */; };
+		5C2232C81B03AE3200A6A4E6 /* NNFullscreenPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */; };
 		5C3537081AE2A0E40009773B /* NSURL+NNAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3537071AE2A0E40009773B /* NSURL+NNAddtions.m */; };
+		5C42B9E31B052A5800327D1C /* UIImage+Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */; };
+		5C42B9E61B052A6500327D1C /* UIImage+AssetLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E51B052A6500327D1C /* UIImage+AssetLaunchImage.m */; };
 		5C56390E1AED4DF900E53DE5 /* UIFont+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C56390D1AED4DF900E53DE5 /* UIFont+NNAdditions.m */; };
 		5C56390F1AED5A4200E53DE5 /* UIFont+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C56390C1AED4DF900E53DE5 /* UIFont+NNAdditions.h */; };
 		5C5639131AED5A6500E53DE5 /* UIColor+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */; };
@@ -96,6 +99,7 @@
 		5CCD5E861AB8E90E007E94BF /* NNCustomSwitch.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DD71AB8E67E007E94BF /* NNCustomSwitch.h */; };
 		5CCD5E871AB8E90E007E94BF /* NNLogger.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DDB1AB8E67E007E94BF /* NNLogger.h */; };
 		5CCD5E881AB8E90E007E94BF /* NNUtilities.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DDE1AB8E67E007E94BF /* NNUtilities.h */; };
+		5CECB13E1AFC10810001785F /* NNConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECB13D1AFC10810001785F /* NNConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -161,8 +165,14 @@
 		5C0157BC1A4BF3B200F6ECAF /* NNLibraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = NNLibraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C0BF5441ADC3771000364AA /* NNFromXIBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNFromXIBView.h; sourceTree = "<group>"; };
 		5C0BF5451ADC3771000364AA /* NNFromXIBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNFromXIBView.m; sourceTree = "<group>"; };
+		5C2232C61B03AE3200A6A4E6 /* NNFullscreenPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNFullscreenPopup.h; path = NNFullscreenPopup/NNFullscreenPopup.h; sourceTree = "<group>"; };
+		5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNFullscreenPopup.m; path = NNFullscreenPopup/NNFullscreenPopup.m; sourceTree = "<group>"; };
 		5C3537061AE2A0E40009773B /* NSURL+NNAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+NNAddtions.h"; path = "NSURL/NSURL+NNAddtions.h"; sourceTree = "<group>"; };
 		5C3537071AE2A0E40009773B /* NSURL+NNAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+NNAddtions.m"; path = "NSURL/NSURL+NNAddtions.m"; sourceTree = "<group>"; };
+		5C42B9E11B052A5800327D1C /* UIImage+Stamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Stamps.h"; sourceTree = "<group>"; };
+		5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Stamps.m"; sourceTree = "<group>"; };
+		5C42B9E41B052A6500327D1C /* UIImage+AssetLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AssetLaunchImage.h"; sourceTree = "<group>"; };
+		5C42B9E51B052A6500327D1C /* UIImage+AssetLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AssetLaunchImage.m"; sourceTree = "<group>"; };
 		5C56390C1AED4DF900E53DE5 /* UIFont+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+NNAdditions.h"; sourceTree = "<group>"; };
 		5C56390D1AED4DF900E53DE5 /* UIFont+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+NNAdditions.m"; sourceTree = "<group>"; };
 		5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NNAdditions.h"; sourceTree = "<group>"; };
@@ -255,6 +265,7 @@
 		5CCD5DE91AB8E67E007E94BF /* NNAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NNAutocompleteViewController.xib; sourceTree = "<group>"; };
 		5CCD5E0E1AB8E685007E94BF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5CCD5E0F1AB8E685007E94BF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		5CECB13D1AFC10810001785F /* NNConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +286,15 @@
 				5C0BF5451ADC3771000364AA /* NNFromXIBView.m */,
 			);
 			path = NNFromXIBView;
+			sourceTree = "<group>";
+		};
+		5C2232C51B03AE1300A6A4E6 /* NNFullscreenPopup */ = {
+			isa = PBXGroup;
+			children = (
+				5C2232C61B03AE3200A6A4E6 /* NNFullscreenPopup.h */,
+				5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */,
+			);
+			name = NNFullscreenPopup;
 			sourceTree = "<group>";
 		};
 		5C3537051AE2A0D10009773B /* NSURL */ = {
@@ -547,8 +567,12 @@
 		5CCD5DA61AB8E67E007E94BF /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				5C42B9E41B052A6500327D1C /* UIImage+AssetLaunchImage.h */,
+				5C42B9E51B052A6500327D1C /* UIImage+AssetLaunchImage.m */,
 				5CCD5DA71AB8E67E007E94BF /* UIImage+NNAdditions.h */,
 				5CCD5DA81AB8E67E007E94BF /* UIImage+NNAdditions.m */,
+				5C42B9E11B052A5800327D1C /* UIImage+Stamps.h */,
+				5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -594,6 +618,7 @@
 		5CCD5DB71AB8E67E007E94BF /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5C2232C51B03AE1300A6A4E6 /* NNFullscreenPopup */,
 				5C0BF5431ADC3771000364AA /* NNFromXIBView */,
 				5C659B771AC9196B007AAC76 /* NNDisplayImageViewController */,
 				5CCD5DB81AB8E67E007E94BF /* NNAsyncImageView */,
@@ -741,6 +766,7 @@
 			isa = PBXGroup;
 			children = (
 				5CCD5DE11AB8E67E007E94BF /* NNConstants.h */,
+				5CECB13D1AFC10810001785F /* NNConstants.m */,
 				5CCD5DE21AB8E67E007E94BF /* NNLibraries.h */,
 				5CCD5DE31AB8E67E007E94BF /* NNLibrariesEssentials.h */,
 				5CCD5DE41AB8E67E007E94BF /* NNLibrariesNSFoundation.h */,
@@ -868,10 +894,13 @@
 				5CCD5DFF1AB8E67E007E94BF /* NNAsyncImageView.m in Sources */,
 				5CCD5DF41AB8E67E007E94BF /* NSDate+NNAdditions.m in Sources */,
 				5CCD5E071AB8E67E007E94BF /* NNPickerField.m in Sources */,
+				5C42B9E61B052A6500327D1C /* UIImage+AssetLaunchImage.m in Sources */,
 				5CC544771AD118820023B6EF /* NSData+NNAdditions.m in Sources */,
 				5CCD5DEC1AB8E67E007E94BF /* NNLocationManager.m in Sources */,
 				5CCD5DED1AB8E67E007E94BF /* NNMotionManager.m in Sources */,
+				5C42B9E31B052A5800327D1C /* UIImage+Stamps.m in Sources */,
 				5CCD5DEA1AB8E67E007E94BF /* NNKeyValueDB.m in Sources */,
+				5C2232C81B03AE3200A6A4E6 /* NNFullscreenPopup.m in Sources */,
 				5C659B7B1AC919A5007AAC76 /* NNDisplayImageViewController.m in Sources */,
 				5CCD5DF21AB8E67E007E94BF /* NNStoreKitHelper.m in Sources */,
 				5CCD5E031AB8E67E007E94BF /* NNInsetTextField.m in Sources */,
@@ -880,6 +909,7 @@
 				5CCD5E011AB8E67E007E94BF /* NNAutolayoutLabel.m in Sources */,
 				5CCD5DFA1AB8E67E007E94BF /* UINavigationBar+NNAdditions.m in Sources */,
 				5CCD5E001AB8E67E007E94BF /* NNAutocompleteViewController.m in Sources */,
+				5CECB13E1AFC10810001785F /* NNConstants.m in Sources */,
 				5CCD5E081AB8E67E007E94BF /* NNPickerInputView.m in Sources */,
 				5C5639131AED5A6500E53DE5 /* UIColor+NNAdditions.m in Sources */,
 				5CCD5DF91AB8E67E007E94BF /* UIImage+NNAdditions.m in Sources */,

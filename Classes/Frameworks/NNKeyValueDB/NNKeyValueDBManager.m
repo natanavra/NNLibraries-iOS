@@ -35,15 +35,18 @@
             _databases = [NSMutableArray array];
             [self addDatabase: [[NNKeyValueDB alloc] init]];
         }
+        
         //Save data when app crashes or goes to background.
         [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(saveDataToFile) name: UIApplicationWillTerminateNotification object: nil];
         [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(saveDataToFile) name: UIApplicationDidEnterBackgroundNotification object: nil];
         
-        //Save data every 2 minutes. Regardless of app state.
-        [NSTimer scheduledTimerWithTimeInterval: 60.0f * 2
-                                         target: self
-                                       selector: @selector(saveDataToFile)
-                                       userInfo: nil repeats: YES];
+        if([NNUtilities isDebugMode]) {
+            //Save data every 2 minutes only in debug mode to bypass the "stop debugging". Regardless of app state.
+            [NSTimer scheduledTimerWithTimeInterval: 60.0f * 2
+                                             target: self
+                                           selector: @selector(saveDataToFile)
+                                           userInfo: nil repeats: YES];
+        }
     }
     return self;
 }
@@ -58,7 +61,13 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject: _databases forKey: @"databases"];
+    NSMutableArray *persistantDBs = [NSMutableArray array];
+    for(NNKeyValueDB *db in _databases) {
+        if(db.isPersistent) {
+            [persistantDBs addObject: db];
+        }
+    }
+    [encoder encodeObject: persistantDBs forKey: @"databases"];
 }
 
 #pragma mark - Database Management
@@ -107,25 +116,8 @@
 
 - (BOOL)saveDataToFile {
     [NNLogger logFromInstance: self message: @"Saving databases"];
-    //Remove the non persistent databases before save.
-    NSMutableArray *notSavedDbs = [NSMutableArray array];
-    for(NNKeyValueDB *db in _databases) {
-        if(!db.isPersistent) {
-            [notSavedDbs addObject: db];
-        }
-    }
-    if(notSavedDbs.count > 0) {
-        [NNLogger logFromInstance: self message: @"Not saving databases" data: notSavedDbs];
-    }
-    [_databases removeObjectsInArray: notSavedDbs];
-    
-    //Save the databases to file.
     NSString *path = [self filePath];
     BOOL success = [NSKeyedArchiver archiveRootObject: self toFile: path];
-    
-    //Re-add the non persistent databases after the save.
-    [_databases addObjectsFromArray: notSavedDbs];
-    
     return success;
 }
 

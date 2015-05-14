@@ -56,9 +56,6 @@ typedef enum {
 - (BOOL)booleanForKey:(id<NSCopying>)key;
 - (void)setBoolean:(BOOL)boolean forKey:(id<NSCopying>)key;
 
-- (NSInteger)integerForKey:(id<NSCopying>)key;
-- (void)setInteger:(NSInteger)integer forKey:(id<NSCopying>)key;
-
 - (BOOL)isKeySet:(id<NSCopying>)key;
 - (NSArray *)allKeys;
 

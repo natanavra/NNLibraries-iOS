@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (NNAdditions)
++ (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName;
 - (UIImage *)imageResizedToSize:(CGSize)size;
 @end

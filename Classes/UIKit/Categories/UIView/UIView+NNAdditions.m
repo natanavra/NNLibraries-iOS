@@ -31,4 +31,12 @@
     }
 }
 
+- (UIImage *)snapshotImage {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
+    [self drawViewHierarchyInRect: self.bounds afterScreenUpdates: YES];
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return snapshot;
+}
+
 @end

@@ -12,4 +12,5 @@
 - (instancetype)initWithNibName:(NSString *)nibName;
 - (instancetype)initWithNibName:(NSString *)nibName withOwner:(id)owner;
 - (void)removeAllSubviews;
+- (UIImage *)snapshotImage;
 @end

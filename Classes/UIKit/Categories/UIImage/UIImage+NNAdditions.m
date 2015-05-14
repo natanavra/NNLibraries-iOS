@@ -10,8 +10,12 @@
 
 @implementation UIImage (NNAdditions)
 
++ (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName {
+    return [[UIImage imageNamed: imageName] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+}
+
 - (UIImage *)imageResizedToSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     [self drawInRect: CGRectMake(0, 0, size.width, size.height)];
     UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -19,3 +23,4 @@
 }
 
 @end
+

@@ -71,28 +71,26 @@
         [encoder encodeObject: [NSNumber numberWithBool: _persistent] forKey: @"isPersistent"];
         [encoder encodeObject: [NSNumber numberWithUnsignedInteger: _maxNumberOfRecords] forKey: @"maxNumRecords"];
         
-        //Remove objects that do not support being saved to file.
-        NSMutableDictionary *nonSavedValues = [NSMutableDictionary dictionary];
+        //Collect only objects that support being saved to file.
+        NSMutableDictionary *encodableValues = [NSMutableDictionary dictionary];
         //Done this way to preserve the original '_keys' array which is ordered by FIFO.
-        NSMutableArray *savedKeys = [NSMutableArray array];
+        NSMutableArray *encodableKeys = [NSMutableArray array];
         for(id key in _keys) {
             id object = _dictionary[key];
-            if(![object conformsToProtocol: @protocol(NSCoding)]) {
-                nonSavedValues[key] = object;
-                [_dictionary removeObjectForKey: key];
-            } else {
-                [savedKeys addObject: key];
+            if([object conformsToProtocol: @protocol(NSCoding)]) {
+                [encodableKeys addObject: key];
+                encodableValues[key] = object;
             }
         }
         //Save the dictionary to file.
-        [encoder encodeObject: _dictionary forKey: @"dictionary"];
+        [encoder encodeObject: encodableValues forKey: @"dictionary"];
         //Save the keys to a file
-        [encoder encodeObject: savedKeys forKey: @"hash"];
+        [encoder encodeObject: encodableKeys forKey: @"hash"];
         
-        if(nonSavedValues.count > 0) {
-            //Re-enter the objects that do not support being saved.
-            [_dictionary addEntriesFromDictionary: nonSavedValues];
-            [NNLogger logFromInstance: self message: [self formatMessage: @"Not saved objects"] data: nonSavedValues];
+        if(encodableKeys.count > _keys.count) {
+            NSMutableDictionary *nonSaved = [NSMutableDictionary dictionaryWithDictionary: _dictionary];
+            [nonSaved removeObjectsForKeys: encodableKeys];
+            [NNLogger logFromInstance: self message: [self formatMessage: @"Not saved objects"] data: nonSaved];
         }
     }
 }
@@ -100,35 +98,41 @@
 #pragma mark - Setters
 
 - (NNKeyValueDBOperationResult)setObject:(id<NSCoding>)object forKey:(id<NSCopying>)key {
-    if(key == nil || object == nil) {
-        [NNLogger logFromInstance: self message: [self formatMessage: @"Key and Object must not be 'nil'"]];
-        return NNKeyValueDBOperationFailed;
-    } else {
-        //If key exists, don't manipulate the hash, just move it to be a new key. (i.e. changing the "freshness" of the key).
-        BOOL existed = NO;
-        if([_keys containsObject: key]) {
-            [_keys exchangeObjectAtIndex: [_keys indexOfObject: key] withObjectAtIndex: _keys.count - 1];
-            existed = YES;
+    @synchronized(self) {
+        if(key == nil || object == nil) {
+            [NNLogger logFromInstance: self message: [self formatMessage: @"Key and Object must not be 'nil'"]];
+            return NNKeyValueDBOperationFailed;
         } else {
-            //If exceeds max number of records, remove the oldest record.
-            if(_keys.count >= _maxNumberOfRecords) {
-                id oldestKey = _keys[0];
-                [_dictionary removeObjectForKey: oldestKey];
-                [_keys removeObjectAtIndex: 0];
-                
-                NSString *message = [self formatMessage: @"Exceeded max records, deleting key"];
-                [NNLogger logFromInstance: self message: message data: oldestKey];
+            //If key exists, don't manipulate the hash, just move it to be a new key. (i.e. changing the "freshness" of the key).
+            BOOL existed = NO;
+            if([_keys containsObject: key]) {
+                [_keys exchangeObjectAtIndex: [_keys indexOfObject: key] withObjectAtIndex: _keys.count - 1];
+                existed = YES;
+            } else {
+                //If number of records in hash don't match records in the map, attempt to cleanup.
+                if(_keys.count != _dictionary.count || _keys.count >= _maxNumberOfRecords) {
+                    [self cleanupKeys];
+                }
+                //If number of records exceeds the max allowed number, delete the oldest key (which is the first)
+                if(_keys.count >= _maxNumberOfRecords) {
+                    id oldestKey = _keys[0];
+                    [_dictionary removeObjectForKey: oldestKey];
+                    [_keys removeObjectAtIndex: 0];
+                    
+                    NSString *message = [self formatMessage: @"Exceeded max records, deleting key"];
+                    [NNLogger logFromInstance: self message: message data: oldestKey];
+                }
+                [_keys addObject: key];
             }
-            [_keys addObject: key];
-        }
-        [_dictionary setObject: object forKey: key];
-        
-        if(existed) {
-            [NNLogger logFromInstance: self message: [self formatMessage: @"updated"] data: @{key : object}];
-            return NNKeyValueDBOperationObjectUpdated;
-        } else {
-            [NNLogger logFromInstance: self message: [self formatMessage: @"set"] data: @{key : object}];
-            return NNKeyValueDBOperationSuccess;
+            
+            [_dictionary setObject: object forKey: key];
+            if(existed) {
+                [NNLogger logFromInstance: self message: [self formatMessage: @"updated"] data: @{key : object}];
+                return NNKeyValueDBOperationObjectUpdated;
+            } else {
+                [NNLogger logFromInstance: self message: [self formatMessage: @"set"] data: @{key : object}];
+                return NNKeyValueDBOperationSuccess;
+            }
         }
     }
 }
@@ -140,6 +144,19 @@
 - (void)removeObjectForKey:(id<NSCopying>)key {
     if(key) {
         [_dictionary removeObjectForKey: key];
+        [_keys removeObject: key];
+    }
+}
+
+- (void)cleanupKeys {
+    @synchronized(self) {
+        NSMutableArray *emptyKeys = [NSMutableArray array];
+        for(id key in _keys) {
+            if(_dictionary[key] == nil) {
+                [emptyKeys addObject: key];
+            }
+        }
+        [_keys removeObjectsInArray: emptyKeys];
     }
 }
 
@@ -152,18 +169,6 @@
 
 - (void)setBoolean:(BOOL)boolean forKey:(id<NSCopying>)key {
     NSNumber *number = [NSNumber numberWithBool: boolean];
-    [self setObject: number forKey: key];
-}
-
-#pragma mark - NSInteger Handlers
-
-- (NSInteger)integerForKey:(id<NSCopying>)key {
-    NSNumber *number = [self objectForKey: key];
-    return [number integerValue];
-}
-
-- (void)setInteger:(NSInteger)integer forKey:(id<NSCopying>)key {
-    NSNumber *number = [NSNumber numberWithInteger: integer];
     [self setObject: number forKey: key];
 }
 

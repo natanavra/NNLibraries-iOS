@@ -21,4 +21,5 @@
 
 /** Sharing Menu */
 - (void)presentSharingMenuWithItems:(NSArray *)items completion:(void(^)())completion;
+
 @end

@@ -12,3 +12,12 @@
 #define kLocationAuthChanged                    @"LocationAuthChanged"
 
 #define kEmptyStatusCode 0
+
+#import <Foundation/Foundation.h>
+
+FOUNDATION_EXPORT const NSTimeInterval NNDefaultAnimationDuration;
+
+typedef void (^NNObjectAndErrorCallback)(id object, NSError *error);
+
+@interface NNConstants : NSObject
+@end
