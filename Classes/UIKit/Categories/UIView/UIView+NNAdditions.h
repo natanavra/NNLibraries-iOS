@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSInteger const kNonRemovableSubviewTag;
+
 @interface UIView (NNAdditions)
 - (instancetype)initWithNibName:(NSString *)nibName;
 - (instancetype)initWithNibName:(NSString *)nibName withOwner:(id)owner;

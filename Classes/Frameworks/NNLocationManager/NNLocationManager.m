@@ -34,7 +34,7 @@ static NSString *const kRequestUseAlwaysKey = @"NSLocationAlwaysUsageDescription
     static NNLocationManager *mgr = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        mgr = [[self alloc] init];
+        mgr = [[NNLocationManager alloc] init];
     });
     return mgr;
 }

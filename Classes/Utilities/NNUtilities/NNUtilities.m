@@ -136,12 +136,40 @@
 
 #pragma mark - Device Utilities
 
++ (BOOL)isDeviceSimulator {
+#if TARGET_IPHONE_SIMULATOR
+    return YES;
+#else 
+    return NO;
+#endif
+}
+
++ (BOOL)iPhone4Screen {
+    return [self screenHeight] == 480;
+}
+
++ (BOOL)iPhone5Screen {
+    return [self screenHeight] == 568;
+}
+
++ (BOOL)iPhone6Screen {
+    return [self screenHeight] == 667;
+}
+
++ (BOOL)iPhone6PlusScreen {
+    return [self screenHeight] == 736;
+}
+
 + (BOOL)isBigDevice {
     return [[UIScreen mainScreen] bounds].size.height > 480;
 }
 
 + (CGFloat)deviceWidth {
     return [[UIScreen mainScreen] bounds].size.width;
+}
+
++ (CGFloat)screenHeight {
+    return [[UIScreen mainScreen] bounds].size.height;
 }
 
 + (NSString *)UDID {

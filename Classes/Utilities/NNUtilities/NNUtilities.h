@@ -40,7 +40,13 @@
 + (id)unarchiveObjectFromDocumentsDirectory:(NSString *)fileName;
 
 //Device specific utilities
++ (BOOL)isDeviceSimulator;
++ (BOOL)iPhone4Screen;
++ (BOOL)iPhone5Screen;
++ (BOOL)iPhone6Screen;
++ (BOOL)iPhone6PlusScreen;
 + (BOOL)isBigDevice;
++ (CGFloat)screenHeight;
 + (CGFloat)deviceWidth;
 + (NSString *)UDID;
 

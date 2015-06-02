@@ -10,6 +10,8 @@
 
 @implementation UIView (NNAdditions)
 
+NSInteger const kNonRemovableSubviewTag = 403;
+
 - (instancetype)initWithNibName:(NSString *)nibName {
     return [self initWithNibName: nibName withOwner: self];
 }
@@ -27,7 +29,9 @@
 
 - (void)removeAllSubviews {
     for(UIView *subview in self.subviews) {
-        [subview removeFromSuperview];
+        if(subview.tag != kNonRemovableSubviewTag) {
+            [subview removeFromSuperview];
+        }
     }
 }
 

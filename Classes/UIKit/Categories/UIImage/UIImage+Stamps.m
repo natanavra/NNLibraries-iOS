@@ -83,7 +83,7 @@ static const CGFloat kDefaultPadding = 5; //points
 - (UILabel *)generateTimestampLabel {
     UILabel *timestampLabel = [[UILabel alloc] init];
     timestampLabel.text = [[NSDate date] POSIXFormatString];
-    timestampLabel.textColor = [UIColor colorWithRed: 1 green: 0.3 blue: 0 alpha:1];
+    timestampLabel.textColor = [UIColor colorWithRed:0.235 green:0.784 blue:0.078 alpha:1.000];
     timestampLabel.font = [UIFont systemFontOfSize: 14];
     return timestampLabel;
 }
