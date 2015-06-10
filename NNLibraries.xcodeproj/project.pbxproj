@@ -19,6 +19,7 @@
 		5C5639141AED5B4600E53DE5 /* UIColor+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */; };
 		5C659B7B1AC919A5007AAC76 /* NNDisplayImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */; };
 		5C86B9971B26343700E0C92C /* NSObject+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */; };
+		5C86B9A91B28037200E0C92C /* NNNotificationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B9A81B28037200E0C92C /* NNNotificationIndicatorView.m */; };
 		5C8E69B31ABFE61D00717C19 /* NSData+Security.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E69B21ABFE61D00717C19 /* NSData+Security.m */; };
 		5C8E69B41ABFE70500717C19 /* NSData+Security.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C8E69B11ABFE61D00717C19 /* NSData+Security.h */; };
 		5C99FB2C1ABC20DC008C0E01 /* NNCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C99FB2A1ABC20DC008C0E01 /* NNCacheManager.m */; };
@@ -186,6 +187,8 @@
 		5C659B7A1AC919A5007AAC76 /* NNDisplayImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NNDisplayImageViewController.xib; path = ../../Classes/UIKit/Components/NNDisplayImageViewController/NNDisplayImageViewController.xib; sourceTree = "<group>"; };
 		5C86B9951B26343700E0C92C /* NSObject+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+NNAdditions.h"; path = "NSObject/NSObject+NNAdditions.h"; sourceTree = "<group>"; };
 		5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+NNAdditions.m"; path = "NSObject/NSObject+NNAdditions.m"; sourceTree = "<group>"; };
+		5C86B9A71B28037200E0C92C /* NNNotificationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNNotificationIndicatorView.h; sourceTree = "<group>"; };
+		5C86B9A81B28037200E0C92C /* NNNotificationIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNNotificationIndicatorView.m; sourceTree = "<group>"; };
 		5C8E69B11ABFE61D00717C19 /* NSData+Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Security.h"; path = "NSData/NSData+Security.h"; sourceTree = "<group>"; };
 		5C8E69B21ABFE61D00717C19 /* NSData+Security.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Security.m"; path = "NSData/NSData+Security.m"; sourceTree = "<group>"; };
 		5C99FB291ABC20DC008C0E01 /* NNCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNCacheManager.h; path = NNCacheManager/NNCacheManager.h; sourceTree = "<group>"; };
@@ -346,6 +349,15 @@
 				5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */,
 			);
 			name = NSObject;
+			sourceTree = "<group>";
+		};
+		5C86B9A61B28037200E0C92C /* NNNotificationIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				5C86B9A71B28037200E0C92C /* NNNotificationIndicatorView.h */,
+				5C86B9A81B28037200E0C92C /* NNNotificationIndicatorView.m */,
+			);
+			path = NNNotificationIndicatorView;
 			sourceTree = "<group>";
 		};
 		5C8E69B01ABFE5FE00717C19 /* NSData */ = {
@@ -636,6 +648,7 @@
 		5CCD5DB71AB8E67E007E94BF /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5C86B9A61B28037200E0C92C /* NNNotificationIndicatorView */,
 				5C2232C51B03AE1300A6A4E6 /* NNFullscreenPopup */,
 				5C0BF5431ADC3771000364AA /* NNFromXIBView */,
 				5C659B771AC9196B007AAC76 /* NNDisplayImageViewController */,
@@ -944,6 +957,7 @@
 				5CCD5E021AB8E67E007E94BF /* NNCustomDatePicker.m in Sources */,
 				5CCD5DF01AB8E67E007E94BF /* NNSecurity.m in Sources */,
 				5CCD5E101AB8E685007E94BF /* MBProgressHUD.m in Sources */,
+				5C86B9A91B28037200E0C92C /* NNNotificationIndicatorView.m in Sources */,
 				5CCD5DF81AB8E67E007E94BF /* UIButton+NNAdditions.m in Sources */,
 				5C1274131B25623700747FFB /* UIView+Autolayout.m in Sources */,
 				5CCD5E041AB8E67E007E94BF /* NNDatePickerField.m in Sources */,

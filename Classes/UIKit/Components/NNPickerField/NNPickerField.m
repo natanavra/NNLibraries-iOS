@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, toolbarItemIndex) {
 @end
 
 @implementation NNPickerField
+@dynamic pickerDelegate;
 
 #pragma mark - Overrides
 

@@ -73,6 +73,11 @@
 #pragma mark - Database Management
 
 - (NNKeyValueDB *)databaseWithID:(NSString *)databaseID {
+    if(databaseID.length == 0) {
+        [NNLogger logFromInstance: self message: @"'databaseWithID:' must provide a valid ID. returning default database"];
+        return [self defaultDatabase];
+    }
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat: @"databaseID MATCHES[c] %@", databaseID];
     NSArray *filtered = [_databases filteredArrayUsingPredicate: predicate];
     id retVal = nil;
