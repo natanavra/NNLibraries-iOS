@@ -200,13 +200,20 @@
     return [self objectForKey: key];
 }
 
+- (id)popObjectForKey:(id<NSCopying>)key {
+    id object = [self objectForKey: key];
+    [self removeObjectForKey: key];
+    return object;
+}
+
 - (NSArray *)allKeys {
     return [_dictionary allKeys];
 }
 
 #pragma mark - Fast Enumeration
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len {
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                  objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len {
     return [_dictionary countByEnumeratingWithState: state objects: buffer count: len];
 }
 

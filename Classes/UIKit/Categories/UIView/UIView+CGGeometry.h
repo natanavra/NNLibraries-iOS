@@ -16,4 +16,8 @@
 - (void)setCenterX:(float)x;
 - (void)setCenterY:(float)y;
 - (CGPoint)bottomLeft;
+
+- (CGSize)boundsSize;
+- (CGFloat)boundsHeight;
+- (CGFloat)boundsWidth;
 @end

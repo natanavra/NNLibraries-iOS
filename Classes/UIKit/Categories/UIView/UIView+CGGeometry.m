@@ -10,6 +10,9 @@
 
 @implementation UIView (CGGeometry)
 
+
+#pragma mark - Frames
+
 - (void)setFrameSize:(CGSize)size {
     CGRect frame = self.frame;
     frame.size = size;
@@ -33,6 +36,9 @@
     self.frame = frame;
 }
 
+#pragma mark - Points
+
+
 - (void)setCenterX:(float)x {
     CGPoint center = self.center;
     center.x = x;
@@ -47,6 +53,20 @@
 
 - (CGPoint)bottomLeft {
     return CGPointMake(self.frame.origin.x, CGRectGetMaxY(self.frame));
+}
+
+#pragma mark - Sizes
+
+- (CGSize)boundsSize {
+    return self.bounds.size;
+}
+
+- (CGFloat)boundsHeight {
+    return self.bounds.size.height;
+}
+
+- (CGFloat)boundsWidth {
+    return self.bounds.size.width;
 }
 
 @end

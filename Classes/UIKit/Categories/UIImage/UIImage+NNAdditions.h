@@ -11,4 +11,5 @@
 @interface UIImage (NNAdditions)
 + (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName;
 - (UIImage *)imageResizedToSize:(CGSize)size;
+- (UIImage *)resizeImageTo640;
 @end

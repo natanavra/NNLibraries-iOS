@@ -42,10 +42,15 @@ typedef enum {
 /** The file name to which the database will be saved, if not specified the class name will be used. */
 @property (nonatomic, strong) NSString *fileName;
 
+
+#pragma mark - Setters
+
 /** Objects that do not conform to the <NSCoding> protocol will not be saved. */
 - (NNKeyValueDBOperationResult)setObject:(id)object forKey:(id<NSCopying>)key;
 /** Support subscripting, e.g. set values like so 'baseKeyValueDB["myvalue"] = myNewValue' **/
 - (void)setObject:(id)object forKeyedSubscript:(id<NSCopying>)key;
+
+#pragma mark - Getters
 
 - (id)objectForKey:(id<NSCopying>)key;
 /** Support subscripting, e.g. get values like so: 'value = baseKeyValueDB["myValue"]' **/
@@ -53,11 +58,17 @@ typedef enum {
 
 - (void)removeObjectForKey:(id<NSCopying>)key;
 
-- (BOOL)booleanForKey:(id<NSCopying>)key;
-- (void)setBoolean:(BOOL)boolean forKey:(id<NSCopying>)key;
+- (id)popObjectForKey:(id<NSCopying>)key;
 
 - (BOOL)isKeySet:(id<NSCopying>)key;
 - (NSArray *)allKeys;
+
+#pragma mark - Convinience
+
+- (BOOL)booleanForKey:(id<NSCopying>)key;
+- (void)setBoolean:(BOOL)boolean forKey:(id<NSCopying>)key;
+
+#pragma mark - Saving
 
 - (BOOL)saveDataToFile;
 

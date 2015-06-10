@@ -10,9 +10,10 @@
 
 #import "MBProgressHUD.h"
 #import "NNLogger.h"
-
-#import <MobileCoreServices/MobileCoreServices.h>
 #import "UIAlertView+NNAdditions.h"
+
+@import AVFoundation;
+@import MobileCoreServices;
 
 @implementation UIViewController (NNAdditions)
 
@@ -69,6 +70,32 @@
                       cancelButtonTitle: @"OK" otherButtons: nil delegate: nil];
     }
     return NO;
+}
+
+#pragma mark - Camera Access Permissions
+
+- (void)requestPermissionForCamera {
+#warning Check this one
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType: mediaType];
+    if(authStatus == AVAuthorizationStatusAuthorized) {
+        // do your logic
+    } else if(authStatus == AVAuthorizationStatusDenied){
+        // denied
+    } else if(authStatus == AVAuthorizationStatusRestricted){
+        // restricted, normally won't happen
+    } else if(authStatus == AVAuthorizationStatusNotDetermined){
+        // not determined?!
+        [AVCaptureDevice requestAccessForMediaType: mediaType completionHandler:^(BOOL granted) {
+            if(granted){
+                NSLog(@"Granted access to %@", mediaType);
+            } else {
+                NSLog(@"Not granted access to %@", mediaType);
+            }
+        }];
+    } else {
+        // impossible, unknown authorization status
+    }
 }
 
 #pragma mark - MBProgressHUD

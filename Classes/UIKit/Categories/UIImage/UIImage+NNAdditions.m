@@ -7,11 +7,29 @@
 //
 
 #import "UIImage+NNAdditions.h"
+#import <ImageIO/ImageIO.h>
 
 @implementation UIImage (NNAdditions)
 
 + (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName {
     return [[UIImage imageNamed: imageName] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+}
+
+- (UIImage *)resizeImageTo640 {
+    // Create the image source
+    CGImageSourceRef src = CGImageSourceCreateWithData((CFDataRef)UIImageJPEGRepresentation(self, 0.8), NULL);
+    // Create thumbnail options
+    CFDictionaryRef options = (__bridge CFDictionaryRef) @{
+                                                           (id) kCGImageSourceCreateThumbnailWithTransform : @YES,
+                                                           (id) kCGImageSourceCreateThumbnailFromImageAlways : @YES,
+                                                           (id) kCGImageSourceThumbnailMaxPixelSize : @(640)
+                                                           };
+    // Generate the thumbnail
+    CGImageRef thumbnail = CGImageSourceCreateThumbnailAtIndex(src, 0, options); 
+    CFRelease(src);
+    UIImage *img = [UIImage imageWithCGImage: thumbnail];;
+    CGImageRelease(thumbnail);
+    return img;
 }
 
 - (UIImage *)imageResizedToSize:(CGSize)size {

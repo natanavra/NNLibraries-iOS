@@ -18,5 +18,5 @@
  */
 
 @interface NNFromXIBView : UIView
-
+- (void)loadedFromOtherXIB;
 @end

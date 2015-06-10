@@ -18,7 +18,9 @@
             NSArray *allViews = [[NSBundle mainBundle] loadNibNamed: nibName owner: nil options: nil];
             if(allViews.count > 0) {
                 __typeof__(self) loadedView = allViews[0];
-                loadedView.frame = self.frame;
+                if(!CGRectEqualToRect(self.frame, CGRectZero)) {
+                    loadedView.frame = self.frame;
+                }
                 loadedView.autoresizingMask = self.autoresizingMask;
                 loadedView.translatesAutoresizingMaskIntoConstraints = self.translatesAutoresizingMaskIntoConstraints;
                 
@@ -42,12 +44,16 @@
                                                                            multiplier: constraint.multiplier
                                                                              constant: constraint.constant]];
                 }
-                
+                [loadedView loadedFromOtherXIB];
                 return loadedView;
             }
         }
     }
     return self;
+}
+
+- (void)loadedFromOtherXIB {
+    
 }
 
 @end

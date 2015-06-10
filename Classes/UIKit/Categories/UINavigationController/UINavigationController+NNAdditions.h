@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, NNAnimationDirection) {
+    NNAnimationDirectionFromTop = 0,
+    NNAnimationDirectionFromRight,
+    NNAnimationDirectionFromBottom,
+    NNAnimationDirectionFromLeft
+};
+
 @interface UINavigationController (NNAdditions)
+- (void)pushViewController:(UIViewController *)controller fromDirection:(NNAnimationDirection)direction;
+- (void)popViewControllerToDirection:(NNAnimationDirection)direction;
+- (void)setViewControllers:(NSArray *)viewControllers withAnimationFromDirection:(NNAnimationDirection)direction;
+
 - (void)pushViewControllerFromBottom:(UIViewController *)controller;
 - (void)popViewControllerFromBottom;
 @end

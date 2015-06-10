@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C0BF5461ADC3771000364AA /* NNFromXIBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0BF5451ADC3771000364AA /* NNFromXIBView.m */; };
+		5C1274131B25623700747FFB /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1274121B25623700747FFB /* UIView+Autolayout.m */; };
 		5C2232C81B03AE3200A6A4E6 /* NNFullscreenPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */; };
 		5C3537081AE2A0E40009773B /* NSURL+NNAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3537071AE2A0E40009773B /* NSURL+NNAddtions.m */; };
 		5C42B9E31B052A5800327D1C /* UIImage+Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */; };
@@ -17,6 +18,7 @@
 		5C5639131AED5A6500E53DE5 /* UIColor+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */; };
 		5C5639141AED5B4600E53DE5 /* UIColor+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */; };
 		5C659B7B1AC919A5007AAC76 /* NNDisplayImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */; };
+		5C86B9971B26343700E0C92C /* NSObject+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */; };
 		5C8E69B31ABFE61D00717C19 /* NSData+Security.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E69B21ABFE61D00717C19 /* NSData+Security.m */; };
 		5C8E69B41ABFE70500717C19 /* NSData+Security.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C8E69B11ABFE61D00717C19 /* NSData+Security.h */; };
 		5C99FB2C1ABC20DC008C0E01 /* NNCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C99FB2A1ABC20DC008C0E01 /* NNCacheManager.m */; };
@@ -165,6 +167,8 @@
 		5C0157BC1A4BF3B200F6ECAF /* NNLibraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = NNLibraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C0BF5441ADC3771000364AA /* NNFromXIBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNFromXIBView.h; sourceTree = "<group>"; };
 		5C0BF5451ADC3771000364AA /* NNFromXIBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNFromXIBView.m; sourceTree = "<group>"; };
+		5C1274111B25623700747FFB /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
+		5C1274121B25623700747FFB /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
 		5C2232C61B03AE3200A6A4E6 /* NNFullscreenPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNFullscreenPopup.h; path = NNFullscreenPopup/NNFullscreenPopup.h; sourceTree = "<group>"; };
 		5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNFullscreenPopup.m; path = NNFullscreenPopup/NNFullscreenPopup.m; sourceTree = "<group>"; };
 		5C3537061AE2A0E40009773B /* NSURL+NNAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+NNAddtions.h"; path = "NSURL/NSURL+NNAddtions.h"; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		5C659B781AC919A5007AAC76 /* NNDisplayImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDisplayImageViewController.h; path = NNDisplayImageViewController/NNDisplayImageViewController.h; sourceTree = "<group>"; };
 		5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNDisplayImageViewController.m; path = NNDisplayImageViewController/NNDisplayImageViewController.m; sourceTree = "<group>"; };
 		5C659B7A1AC919A5007AAC76 /* NNDisplayImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NNDisplayImageViewController.xib; path = ../../Classes/UIKit/Components/NNDisplayImageViewController/NNDisplayImageViewController.xib; sourceTree = "<group>"; };
+		5C86B9951B26343700E0C92C /* NSObject+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+NNAdditions.h"; path = "NSObject/NSObject+NNAdditions.h"; sourceTree = "<group>"; };
+		5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+NNAdditions.m"; path = "NSObject/NSObject+NNAdditions.m"; sourceTree = "<group>"; };
 		5C8E69B11ABFE61D00717C19 /* NSData+Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Security.h"; path = "NSData/NSData+Security.h"; sourceTree = "<group>"; };
 		5C8E69B21ABFE61D00717C19 /* NSData+Security.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Security.m"; path = "NSData/NSData+Security.m"; sourceTree = "<group>"; };
 		5C99FB291ABC20DC008C0E01 /* NNCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNCacheManager.h; path = NNCacheManager/NNCacheManager.h; sourceTree = "<group>"; };
@@ -333,6 +339,15 @@
 			name = NNDisplayImageViewController;
 			sourceTree = "<group>";
 		};
+		5C86B9941B26341F00E0C92C /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				5C86B9951B26343700E0C92C /* NSObject+NNAdditions.h */,
+				5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */,
+			);
+			name = NSObject;
+			sourceTree = "<group>";
+		};
 		5C8E69B01ABFE5FE00717C19 /* NSData */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +491,7 @@
 		5CCD5D921AB8E67E007E94BF /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				5C86B9941B26341F00E0C92C /* NSObject */,
 				5C3537051AE2A0D10009773B /* NSURL */,
 				5C8E69B01ABFE5FE00717C19 /* NSData */,
 				5CCD5D931AB8E67E007E94BF /* NSDate */,
@@ -602,6 +618,8 @@
 				5CCD5DB11AB8E67E007E94BF /* UIView+CGGeometry.m */,
 				5CCD5DB21AB8E67E007E94BF /* UIView+NNAdditions.h */,
 				5CCD5DB31AB8E67E007E94BF /* UIView+NNAdditions.m */,
+				5C1274111B25623700747FFB /* UIView+Autolayout.h */,
+				5C1274121B25623700747FFB /* UIView+Autolayout.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -917,6 +935,7 @@
 				5CCD5DF61AB8E67E007E94BF /* CALayer+NNRuntimeAttributes.m in Sources */,
 				5CCD5DFC1AB8E67E007E94BF /* UIView+CGGeometry.m in Sources */,
 				5CCD5E091AB8E67E007E94BF /* NNCustomSwitch.m in Sources */,
+				5C86B9971B26343700E0C92C /* NSObject+NNAdditions.m in Sources */,
 				5CCD5E0A1AB8E67E007E94BF /* NNLogger.m in Sources */,
 				5C99FB2C1ABC20DC008C0E01 /* NNCacheManager.m in Sources */,
 				5CCD5E0B1AB8E67E007E94BF /* NNUtilities.m in Sources */,
@@ -926,6 +945,7 @@
 				5CCD5DF01AB8E67E007E94BF /* NNSecurity.m in Sources */,
 				5CCD5E101AB8E685007E94BF /* MBProgressHUD.m in Sources */,
 				5CCD5DF81AB8E67E007E94BF /* UIButton+NNAdditions.m in Sources */,
+				5C1274131B25623700747FFB /* UIView+Autolayout.m in Sources */,
 				5CCD5E041AB8E67E007E94BF /* NNDatePickerField.m in Sources */,
 				5CCD5E051AB8E67E007E94BF /* NNNumberPickerField.m in Sources */,
 				5CCD5DEF1AB8E67E007E94BF /* Reachability.m in Sources */,
