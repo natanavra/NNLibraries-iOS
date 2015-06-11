@@ -14,4 +14,6 @@
 - (void)alignToSuperviewCenterX;
 - (void)alignToSuperviewCenterY;
 - (void)alignToSuperviewCenters;
+
+- (UIView *)spacerView;
 @end

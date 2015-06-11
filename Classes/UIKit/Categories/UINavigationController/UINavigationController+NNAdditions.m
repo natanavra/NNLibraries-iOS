@@ -21,7 +21,7 @@
 
 - (void)pushViewController:(UIViewController *)controller fromDirection:(NNAnimationDirection)direction {
     NSString *transitionDirection = [self transitionDirectionFromAnimationDirection: direction];
-    [self pushViewController: controller animation: kCATransitionMoveIn fromDirection: transitionDirection];
+    [self pushViewController: controller animation: kCATransitionPush fromDirection: transitionDirection];
 }
 
 - (void)popViewControllerToDirection:(NNAnimationDirection)direction {
@@ -31,7 +31,7 @@
 
 - (void)setViewControllers:(NSArray *)viewControllers withAnimationFromDirection:(NNAnimationDirection)direction {
     NSString *transitionDirection = [self transitionDirectionFromAnimationDirection: direction];
-    CATransition *transition = [self transitionAnimationWithType: kCATransitionMoveIn fromDirection: transitionDirection];
+    CATransition *transition = [self transitionAnimationWithType: kCATransitionPush fromDirection: transitionDirection];
     [self.view.layer addAnimation: transition forKey: nil];
     [self setViewControllers: viewControllers animated: NO];
 }

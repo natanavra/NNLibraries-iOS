@@ -42,7 +42,7 @@ static NSMutableArray *_logs = nil;
 }
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force {
-//    if([NNUtilities isDebugMode]) {
+    if([NNUtilities isDebugMode]) {
         NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
         if(log.length > kMaxLogLength && !force && !kGlobalForceLogAll) {
             log = [log substringToIndex: kMaxLogLength];
@@ -54,7 +54,7 @@ static NSMutableArray *_logs = nil;
             _logs = [[NSMutableArray alloc] init];
         }
         [_logs addObject: log];
-//    }
+    }
 }
 
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage {
