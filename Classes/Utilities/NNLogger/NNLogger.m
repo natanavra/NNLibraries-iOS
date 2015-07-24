@@ -8,9 +8,11 @@
 
 #import "NNLogger.h"
 #import "NNUtilities.h"
+#import "NNConstants.h"
+#import "NSObject+NNAdditions.h"
 
 static NSUInteger kMaxLogLength = 1024; //characters
-BOOL const kGlobalForceLogAll = YES;
+BOOL const kGlobalForceLogAll = NO;
 
 @interface NNLogger ()
 @end
@@ -41,14 +43,23 @@ static NSMutableArray *_logs = nil;
     [self logFromInstance: sender message: logMessage data: object forceLogAll: NO];
 }
 
++ (void)logFromInstance:(id)sender fromSelector:(SEL)cmd withLine:(NSUInteger)line message:(NSString *)logMessage {
+    [self logFromInstance: sender fromSelector: cmd withLine: line message: logMessage data: nil];
+}
+
++ (void)logFromInstance:(id)sender fromSelector:(SEL)cmd withLine:(NSUInteger)line message:(NSString *)logMessage data:(id)object {
+    NSString *message = [NSString stringWithFormat: @"\n%@ (Line %li), %@", NSStringFromSelector(cmd), (unsigned long)line, logMessage];
+    [self logFromInstance: sender message: message data: object forceLogAll: NO];
+}
+
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force {
-    if([NNUtilities isDebugMode]) {
+    if([NNUtilities isDebugMode] && !NNProductionBuild) {
         NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
         if(log.length > kMaxLogLength && !force && !kGlobalForceLogAll) {
             log = [log substringToIndex: kMaxLogLength];
             log = [log stringByAppendingString: @"\n... (Use 'forceLogAll' to see all content)"];
         }
-        NSLog(@"😡 %@", log);
+        NSLog(@"🔴 %@", log);
         
         if(!_logs) {
             _logs = [[NSMutableArray alloc] init];
@@ -57,25 +68,26 @@ static NSMutableArray *_logs = nil;
     }
 }
 
+
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage {
     return [self logStringFromInstance: sender message: logMessage data: nil];
 }
 
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
     NSMutableString *output = [NSMutableString string];
-    NSString *dataString = [self descriptionFromObject: object];
+    NSString *dataString = [object nnDescription];
     if(sender) {
         [output appendFormat: @"%@", NSStringFromClass([sender class])];
     }
     if(logMessage) {
         if(output.length > 0) {
-            [output appendString: @": "];
+            [output appendString: @" 📄 "];
         }
         [output appendFormat: @"%@", logMessage];
     }
     if(dataString.length > 0) {
         if(output.length > 0) {
-            [output appendString: @", "];
+            [output appendString: @" 📊 "];
         }
         [output appendFormat: @"%@", dataString];
     }
@@ -83,22 +95,6 @@ static NSMutableArray *_logs = nil;
         [output appendString: @"BAD LOG"];
     }
     return output;
-}
-
-+ (NSString *)descriptionFromObject:(id)object {
-    NSString *description = nil;
-    if([object isKindOfClass: [NSString class]]) {
-        description = object;
-    } else if([object isKindOfClass: [NSData class]]) {
-        description = [[NSString alloc] initWithData: object encoding: NSUTF8StringEncoding];
-    } else if([object isKindOfClass: [NSDictionary class]]) {
-        
-    }
-    
-    if(!description || description.length == 0) {
-        description = [object description];
-    }
-    return description;
 }
 
 @end

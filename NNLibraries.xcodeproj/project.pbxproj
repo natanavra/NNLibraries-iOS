@@ -18,6 +18,11 @@
 		5C5639131AED5A6500E53DE5 /* UIColor+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */; };
 		5C5639141AED5B4600E53DE5 /* UIColor+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */; };
 		5C659B7B1AC919A5007AAC76 /* NNDisplayImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */; };
+		5C8214A51B5FCC28003DFF04 /* NSArray+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8214A41B5FCC28003DFF04 /* NSArray+NNAdditions.m */; };
+		5C8214AE1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8214AD1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.m */; };
+		5C8214AF1B5FD43C003DFF04 /* NSArray+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C8214A31B5FCC28003DFF04 /* NSArray+NNAdditions.h */; };
+		5C8214B01B5FD43E003DFF04 /* NSDictionary+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C8214AC1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.h */; };
+		5C8214B11B5FD4F8003DFF04 /* NSURL+NNAddtions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C3537061AE2A0E40009773B /* NSURL+NNAddtions.h */; };
 		5C86B9971B26343700E0C92C /* NSObject+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */; };
 		5C86B9A91B28037200E0C92C /* NNNotificationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B9A81B28037200E0C92C /* NNNotificationIndicatorView.m */; };
 		5C8E69B31ABFE61D00717C19 /* NSData+Security.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E69B21ABFE61D00717C19 /* NSData+Security.m */; };
@@ -102,6 +107,11 @@
 		5CCD5E861AB8E90E007E94BF /* NNCustomSwitch.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DD71AB8E67E007E94BF /* NNCustomSwitch.h */; };
 		5CCD5E871AB8E90E007E94BF /* NNLogger.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DDB1AB8E67E007E94BF /* NNLogger.h */; };
 		5CCD5E881AB8E90E007E94BF /* NNUtilities.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCD5DDE1AB8E67E007E94BF /* NNUtilities.h */; };
+		5CCE34AC1B57C2AF00B79117 /* NNJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34AB1B57C2AF00B79117 /* NNJSONUtilities.m */; };
+		5CCE34B31B57D28A00B79117 /* NSError+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34B21B57D28A00B79117 /* NSError+NNAdditions.m */; };
+		5CCE34B41B57D44700B79117 /* NSError+NNAdditions.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCE34B11B57D28A00B79117 /* NSError+NNAdditions.h */; };
+		5CCE34B51B57D45A00B79117 /* NNJSONUtilities.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CCE34AA1B57C2AF00B79117 /* NNJSONUtilities.h */; };
+		5CCE34CD1B5B919700B79117 /* UIDevice+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34CC1B5B919700B79117 /* UIDevice+NNAdditions.m */; };
 		5CECB13E1AFC10810001785F /* NNConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECB13D1AFC10810001785F /* NNConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -112,16 +122,20 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				5CCE34B51B57D45A00B79117 /* NNJSONUtilities.h in Copy Files */,
 				5C5639141AED5B4600E53DE5 /* UIColor+NNAdditions.h in Copy Files */,
 				5CC4AF8A1AD42B9E00B8A604 /* NNJSONObject.h in Copy Files */,
 				5C56390F1AED5A4200E53DE5 /* UIFont+NNAdditions.h in Copy Files */,
 				5CC544781AD1192B0023B6EF /* NSData+NNAdditions.h in Copy Files */,
 				5CCD5E611AB8E90D007E94BF /* NNConstants.h in Copy Files */,
+				5C8214B01B5FD43E003DFF04 /* NSDictionary+NNAdditions.h in Copy Files */,
+				5C8214AF1B5FD43C003DFF04 /* NSArray+NNAdditions.h in Copy Files */,
 				5CCD5E621AB8E90D007E94BF /* NNLibraries.h in Copy Files */,
 				5CCD5E631AB8E90D007E94BF /* NNLibrariesEssentials.h in Copy Files */,
 				5C8E69B41ABFE70500717C19 /* NSData+Security.h in Copy Files */,
 				5CCD5E641AB8E90D007E94BF /* NNLibrariesNSFoundation.h in Copy Files */,
 				5CCD5E651AB8E90D007E94BF /* NNLibrariesUIKit.h in Copy Files */,
+				5C8214B11B5FD4F8003DFF04 /* NSURL+NNAddtions.h in Copy Files */,
 				5CCD5E661AB8E90D007E94BF /* NNKeyValueDB.h in Copy Files */,
 				5CCD5E671AB8E90D007E94BF /* NNKeyValueDBManager.h in Copy Files */,
 				5CCD5E681AB8E90D007E94BF /* NNLocationManager.h in Copy Files */,
@@ -143,6 +157,7 @@
 				5CCD5E771AB8E90D007E94BF /* UINavigationBar+NNAdditions.h in Copy Files */,
 				5CCD5E781AB8E90D007E94BF /* UINavigationController+NNAdditions.h in Copy Files */,
 				5CCD5E791AB8E90D007E94BF /* UIView+CGGeometry.h in Copy Files */,
+				5CCE34B41B57D44700B79117 /* NSError+NNAdditions.h in Copy Files */,
 				5CCD5E7A1AB8E90D007E94BF /* UIView+NNAdditions.h in Copy Files */,
 				5CCD5E7B1AB8E90D007E94BF /* UIViewController+NNAdditions.h in Copy Files */,
 				5CCD5E7C1AB8E90D007E94BF /* NNAsyncImageView.h in Copy Files */,
@@ -185,6 +200,10 @@
 		5C659B781AC919A5007AAC76 /* NNDisplayImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDisplayImageViewController.h; path = NNDisplayImageViewController/NNDisplayImageViewController.h; sourceTree = "<group>"; };
 		5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNDisplayImageViewController.m; path = NNDisplayImageViewController/NNDisplayImageViewController.m; sourceTree = "<group>"; };
 		5C659B7A1AC919A5007AAC76 /* NNDisplayImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NNDisplayImageViewController.xib; path = ../../Classes/UIKit/Components/NNDisplayImageViewController/NNDisplayImageViewController.xib; sourceTree = "<group>"; };
+		5C8214A31B5FCC28003DFF04 /* NSArray+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+NNAdditions.h"; path = "NSArray/NSArray+NNAdditions.h"; sourceTree = "<group>"; };
+		5C8214A41B5FCC28003DFF04 /* NSArray+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+NNAdditions.m"; path = "NSArray/NSArray+NNAdditions.m"; sourceTree = "<group>"; };
+		5C8214AC1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NNAdditions.h"; path = "NSDictionary/NSDictionary+NNAdditions.h"; sourceTree = "<group>"; };
+		5C8214AD1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+NNAdditions.m"; path = "NSDictionary/NSDictionary+NNAdditions.m"; sourceTree = "<group>"; };
 		5C86B9951B26343700E0C92C /* NSObject+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+NNAdditions.h"; path = "NSObject/NSObject+NNAdditions.h"; sourceTree = "<group>"; };
 		5C86B9961B26343700E0C92C /* NSObject+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+NNAdditions.m"; path = "NSObject/NSObject+NNAdditions.m"; sourceTree = "<group>"; };
 		5C86B9A71B28037200E0C92C /* NNNotificationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNNotificationIndicatorView.h; sourceTree = "<group>"; };
@@ -274,6 +293,12 @@
 		5CCD5DE91AB8E67E007E94BF /* NNAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NNAutocompleteViewController.xib; sourceTree = "<group>"; };
 		5CCD5E0E1AB8E685007E94BF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5CCD5E0F1AB8E685007E94BF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		5CCE34AA1B57C2AF00B79117 /* NNJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNJSONUtilities.h; path = NNJSONUtilities/NNJSONUtilities.h; sourceTree = "<group>"; };
+		5CCE34AB1B57C2AF00B79117 /* NNJSONUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNJSONUtilities.m; path = NNJSONUtilities/NNJSONUtilities.m; sourceTree = "<group>"; };
+		5CCE34B11B57D28A00B79117 /* NSError+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+NNAdditions.h"; path = "NSError/NSError+NNAdditions.h"; sourceTree = "<group>"; };
+		5CCE34B21B57D28A00B79117 /* NSError+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+NNAdditions.m"; path = "NSError/NSError+NNAdditions.m"; sourceTree = "<group>"; };
+		5CCE34CB1B5B919700B79117 /* UIDevice+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+NNAdditions.h"; path = "UIDevice/UIDevice+NNAdditions.h"; sourceTree = "<group>"; };
+		5CCE34CC1B5B919700B79117 /* UIDevice+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+NNAdditions.m"; path = "UIDevice/UIDevice+NNAdditions.m"; sourceTree = "<group>"; };
 		5CECB13D1AFC10810001785F /* NNConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -340,6 +365,24 @@
 				5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */,
 			);
 			name = NNDisplayImageViewController;
+			sourceTree = "<group>";
+		};
+		5C8214A21B5FCC11003DFF04 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				5C8214A31B5FCC28003DFF04 /* NSArray+NNAdditions.h */,
+				5C8214A41B5FCC28003DFF04 /* NSArray+NNAdditions.m */,
+			);
+			name = NSArray;
+			sourceTree = "<group>";
+		};
+		5C8214AB1B5FD08C003DFF04 /* NSDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				5C8214AC1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.h */,
+				5C8214AD1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.m */,
+			);
+			name = NSDictionary;
 			sourceTree = "<group>";
 		};
 		5C86B9941B26341F00E0C92C /* NSObject */ = {
@@ -503,6 +546,9 @@
 		5CCD5D921AB8E67E007E94BF /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				5C8214AB1B5FD08C003DFF04 /* NSDictionary */,
+				5C8214A21B5FCC11003DFF04 /* NSArray */,
+				5CCE34B01B57D26800B79117 /* NSError */,
 				5C86B9941B26341F00E0C92C /* NSObject */,
 				5C3537051AE2A0D10009773B /* NSURL */,
 				5C8E69B01ABFE5FE00717C19 /* NSData */,
@@ -551,6 +597,7 @@
 		5CCD5D9C1AB8E67E007E94BF /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				5CCE34CA1B5B917E00B79117 /* UIDevice */,
 				5C5639101AED5A5600E53DE5 /* UIColor */,
 				5C56390B1AED4DE800E53DE5 /* UIFont */,
 				5CCD5D9D1AB8E67E007E94BF /* CALayer */,
@@ -769,6 +816,7 @@
 		5CCD5DD91AB8E67E007E94BF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5CCE34A91B57C29A00B79117 /* NNJSONUtilities */,
 				5CCD5DDA1AB8E67E007E94BF /* NNLogger */,
 				5CCD5DDD1AB8E67E007E94BF /* NNUtilities */,
 			);
@@ -796,8 +844,7 @@
 		5CCD5DE01AB8E67E007E94BF /* NNLibraries */ = {
 			isa = PBXGroup;
 			children = (
-				5CCD5DE11AB8E67E007E94BF /* NNConstants.h */,
-				5CECB13D1AFC10810001785F /* NNConstants.m */,
+				5CCE34AD1B57D21C00B79117 /* Constants */,
 				5CCD5DE21AB8E67E007E94BF /* NNLibraries.h */,
 				5CCD5DE31AB8E67E007E94BF /* NNLibrariesEssentials.h */,
 				5CCD5DE41AB8E67E007E94BF /* NNLibrariesNSFoundation.h */,
@@ -839,6 +886,42 @@
 				5CCD5E0F1AB8E685007E94BF /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		5CCE34A91B57C29A00B79117 /* NNJSONUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE34AA1B57C2AF00B79117 /* NNJSONUtilities.h */,
+				5CCE34AB1B57C2AF00B79117 /* NNJSONUtilities.m */,
+			);
+			name = NNJSONUtilities;
+			sourceTree = "<group>";
+		};
+		5CCE34AD1B57D21C00B79117 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				5CCD5DE11AB8E67E007E94BF /* NNConstants.h */,
+				5CECB13D1AFC10810001785F /* NNConstants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		5CCE34B01B57D26800B79117 /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE34B11B57D28A00B79117 /* NSError+NNAdditions.h */,
+				5CCE34B21B57D28A00B79117 /* NSError+NNAdditions.m */,
+			);
+			name = NSError;
+			sourceTree = "<group>";
+		};
+		5CCE34CA1B5B917E00B79117 /* UIDevice */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE34CB1B5B919700B79117 /* UIDevice+NNAdditions.h */,
+				5CCE34CC1B5B919700B79117 /* UIDevice+NNAdditions.m */,
+			);
+			name = UIDevice;
 			sourceTree = "<group>";
 		};
 		5CE461661A4459780027FF22 = {
@@ -929,12 +1012,14 @@
 				5CC544771AD118820023B6EF /* NSData+NNAdditions.m in Sources */,
 				5CCD5DEC1AB8E67E007E94BF /* NNLocationManager.m in Sources */,
 				5CCD5DED1AB8E67E007E94BF /* NNMotionManager.m in Sources */,
+				5CCE34B31B57D28A00B79117 /* NSError+NNAdditions.m in Sources */,
 				5C42B9E31B052A5800327D1C /* UIImage+Stamps.m in Sources */,
 				5CCD5DEA1AB8E67E007E94BF /* NNKeyValueDB.m in Sources */,
 				5C2232C81B03AE3200A6A4E6 /* NNFullscreenPopup.m in Sources */,
 				5C659B7B1AC919A5007AAC76 /* NNDisplayImageViewController.m in Sources */,
 				5CCD5DF21AB8E67E007E94BF /* NNStoreKitHelper.m in Sources */,
 				5CCD5E031AB8E67E007E94BF /* NNInsetTextField.m in Sources */,
+				5C8214A51B5FCC28003DFF04 /* NSArray+NNAdditions.m in Sources */,
 				5C56390E1AED4DF900E53DE5 /* UIFont+NNAdditions.m in Sources */,
 				5C0BF5461ADC3771000364AA /* NNFromXIBView.m in Sources */,
 				5CCD5E011AB8E67E007E94BF /* NNAutolayoutLabel.m in Sources */,
@@ -949,6 +1034,7 @@
 				5CCD5DFC1AB8E67E007E94BF /* UIView+CGGeometry.m in Sources */,
 				5CCD5E091AB8E67E007E94BF /* NNCustomSwitch.m in Sources */,
 				5C86B9971B26343700E0C92C /* NSObject+NNAdditions.m in Sources */,
+				5CCE34CD1B5B919700B79117 /* UIDevice+NNAdditions.m in Sources */,
 				5CCD5E0A1AB8E67E007E94BF /* NNLogger.m in Sources */,
 				5C99FB2C1ABC20DC008C0E01 /* NNCacheManager.m in Sources */,
 				5CCD5E0B1AB8E67E007E94BF /* NNUtilities.m in Sources */,
@@ -963,6 +1049,8 @@
 				5CCD5E041AB8E67E007E94BF /* NNDatePickerField.m in Sources */,
 				5CCD5E051AB8E67E007E94BF /* NNNumberPickerField.m in Sources */,
 				5CCD5DEF1AB8E67E007E94BF /* Reachability.m in Sources */,
+				5CCE34AC1B57C2AF00B79117 /* NNJSONUtilities.m in Sources */,
+				5C8214AE1B5FD0A3003DFF04 /* NSDictionary+NNAdditions.m in Sources */,
 				5CCD5DEB1AB8E67E007E94BF /* NNKeyValueDBManager.m in Sources */,
 				5CCD5DFD1AB8E67E007E94BF /* UIView+NNAdditions.m in Sources */,
 				5CCD5DF51AB8E67E007E94BF /* NSString+NNAdditions.m in Sources */,

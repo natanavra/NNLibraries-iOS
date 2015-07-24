@@ -11,4 +11,9 @@
 @interface NSObject (NNAdditions)
 + (NSString *)className;
 - (NSString *)className;
+
+- (NSString *)fileName;
+
+- (NSString *)nnDescription;
+
 @end

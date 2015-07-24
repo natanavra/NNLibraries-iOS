@@ -9,6 +9,7 @@
 #import "NNConstants.h"
 
 const NSTimeInterval NNDefaultAnimationDuration = 0.3f;
+const BOOL NNProductionBuild = NO;
 
 @implementation NNConstants
 

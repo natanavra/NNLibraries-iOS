@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import <CommonCrypto/CommonCryptor.h>
+typedef uint32_t CCOperation;
 
 @interface NSMutableData (Security)
 - (BOOL)doCipher:(NSString *)key operation:(CCOperation)operation;
+- (BOOL)encryptWithKey:(NSString *)key;
+- (BOOL)decryptWithKey:(NSString *)key;
 @end
 
 @interface NSData (Security)
 - (NSData *)AES256EncryptWithKey:(NSString *)key;
 - (NSString*)hexStringFromData:(NSData *)data;
-- (NSData *)dataFromHexString:(NSString *)string;
++ (NSData *)dataFromHexString:(NSString *)string;
 @end

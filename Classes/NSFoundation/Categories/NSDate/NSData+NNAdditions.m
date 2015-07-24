@@ -10,11 +10,31 @@
 
 @implementation NSData (NNAdditions)
 
++ (NSData *)dataFromHexString:(NSString *)string {
+    NSMutableData *stringData = [NSMutableData data];
+    unsigned char whole_byte;
+    char byte_chars[3] = {'\0','\0','\0'};
+    int i;
+    for (i=0; i < [string length] / 2; i++) {
+        byte_chars[0] = [string characterAtIndex:i*2];
+        byte_chars[1] = [string characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [stringData appendBytes:&whole_byte length:1];
+    }
+    return stringData;
+}
+
 - (NSString *)hexString {
     NSString *desc = [self description];
     NSString *trim = [desc stringByTrimmingCharactersInSet: [self descriptionCharacterSet]];
     return [trim stringByReplacingOccurrencesOfString: @" " withString: @""];
 }
+
+- (NSString *)stringWithEncoding:(NSStringEncoding)encoding {
+    return [[NSString alloc] initWithData: self encoding: encoding];
+}
+
+#pragma mark - Helpers
 
 - (NSCharacterSet *)descriptionCharacterSet {
     static NSCharacterSet *charSet = nil;

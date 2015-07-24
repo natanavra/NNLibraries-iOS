@@ -10,4 +10,5 @@
 
 @interface NSData (NNAdditions)
 - (NSString *)hexString;
+- (NSString *)stringWithEncoding:(NSStringEncoding)encoding;
 @end

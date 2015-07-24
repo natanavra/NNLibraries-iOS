@@ -24,28 +24,27 @@
 }
 
 - (instancetype)initWithFileName:(NSString *)fileName {
-    if(self = [super init]) {
-        _persistent = YES;
-        //Try to load from file name.
-        BOOL defaultFile = [fileName isEqualToString: NSStringFromClass(self.class)];
-        id object = [NNUtilities unarchiveObjectFromDocumentsDirectory: fileName];
-        //If no file with the specified name, and it's not the default file. Try to load the default file.
-        if(!object && !defaultFile) {
-            object = [NNUtilities unarchiveObjectFromDocumentsDirectory: NSStringFromClass(self.class)];
-        }
-        
-        //If no file was found - initialize from scratch.
-        if(!object) {
-            self = [self init];
-        } else {
-            self = object;
-        }
+    _persistent = YES;
+    //Try to load from file name.
+    BOOL defaultFile = [fileName isEqualToString: NSStringFromClass(self.class)];
+    id object = [NNUtilities unarchiveObjectFromDocumentsDirectory: fileName];
+    //If no file with the specified name, and it's not the default file. Try to load the default file.
+    if(!object && !defaultFile) {
+        object = [NNUtilities unarchiveObjectFromDocumentsDirectory: NSStringFromClass(self.class)];
     }
+    
+    //If no file was found - initialize from scratch.
+    if(!object) {
+        self = [self init];
+    } else {
+        self = object;
+    }
+    
     return self;
 }
 
 - (instancetype)initWithDatabaseID:(NSString *)dbID {
-    if(self = [self init]) {
+    if(self = [self initWithFileName: dbID]) {
         _databaseID = dbID;
     }
     return self;
@@ -127,10 +126,10 @@
             
             [_dictionary setObject: object forKey: key];
             if(existed) {
-                [NNLogger logFromInstance: self message: [self formatMessage: @"updated"] data: @{key : object}];
+                //[NNLogger logFromInstance: self message: [self formatMessage: @"updated"] data: @{key : object}];
                 return NNKeyValueDBOperationObjectUpdated;
             } else {
-                [NNLogger logFromInstance: self message: [self formatMessage: @"set"] data: @{key : object}];
+                //[NNLogger logFromInstance: self message: [self formatMessage: @"set"] data: @{key : object}];
                 return NNKeyValueDBOperationSuccess;
             }
         }
@@ -146,6 +145,13 @@
         [_dictionary removeObjectForKey: key];
         [_keys removeObject: key];
     }
+}
+
+- (void)removeAllObjectsAndKeys {
+    for(id key in _keys) {
+        [_dictionary removeObjectForKey: key];
+    }
+    [_keys removeAllObjects];
 }
 
 - (void)cleanupKeys {
@@ -179,7 +185,11 @@
         return NO;
     }
     if(!_fileName) {
-        self.fileName = NSStringFromClass(self.class);
+        if(_databaseID) {
+            self.fileName = _databaseID;
+        } else {
+         self.fileName = NSStringFromClass(self.class);
+        }
     }
     [NNLogger logFromInstance: self message: [self formatMessage: @"Saving data with file name"] data: _fileName];
     NSString *filePath = [NNUtilities pathToFileInDocumentsDirectory: _fileName];

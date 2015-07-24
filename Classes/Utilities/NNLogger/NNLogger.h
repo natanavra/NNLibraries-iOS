@@ -34,6 +34,9 @@ extern BOOL const kGlobalForceLogAll;
  */
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object;
 
++ (void)logFromInstance:(id)sender fromSelector:(SEL)cmd withLine:(NSUInteger)line message:(NSString *)logMessage;
++ (void)logFromInstance:(id)sender fromSelector:(SEL)cmd withLine:(NSUInteger)line message:(NSString *)logMessage data:(id)object;
+
 /**
  *  Logs a message and an object description from a sender object when in DEBUG.
  *  @param sender     The object that requests to log the message.

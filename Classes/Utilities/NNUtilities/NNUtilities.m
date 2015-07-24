@@ -64,15 +64,36 @@
     return fallback;
 }
 
++ (NSString *)descriptionFromObject:(id)object {
+    NSString *description = nil;
+    if([object isKindOfClass: [NSString class]]) {
+        description = object;
+    } else if([object isKindOfClass: [NSData class]]) {
+        description = [[NSString alloc] initWithData: object encoding: NSUTF8StringEncoding];
+    } else if([object isKindOfClass: [NSDictionary class]]) {
+        
+    }
+    
+    if(!description || description.length == 0) {
+        description = [object description];
+    }
+    return description;
+}
+
 #pragma mark - JSON
 
 + (id)parseJSONFromData:(NSData *)data {
+    return [self parseJSONFromData: data error: nil];
+}
+
++ (id)parseJSONFromData:(NSData *)data error:(NSError **)error {
     if(!data) {
         [NNLogger logFromInstance: self message: @"'parseJSONFromData:' not valid data"];
         return nil;
     }
     NSError *err = nil;
     id json = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: &err];
+    
     if(err) {
         [NNLogger logFromInstance: self message: @"'parseJSONFromData:' unable to parse data" data: err];
         return nil;
@@ -93,11 +114,14 @@
     if([NSJSONSerialization isValidJSONObject: json]) {
         NSError *err = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject: json options: pretty ? NSJSONWritingPrettyPrinted : kNilOptions error: &err];
+        
         if(err) {
             [NNLogger logFromInstance: self message: @"'JSONDataFromDictionary:' unable to create JSON data from object" data: err];
         } else {
             retVal = jsonData;
         }
+    } else {
+        [NNLogger logFromInstance: self message: @"Not a valid json object" data: json];
     }
     return retVal;
 }
@@ -227,6 +251,13 @@
 }
 
 #pragma mark - Other
+
++ (NSString *)uniqueIdentifier {
+    NSUUID *uuid = [NSUUID UUID];
+    NSString *uuidStr = [uuid UUIDString];
+    uuidStr = [uuidStr stringByReplacingOccurrencesOfString: @"-" withString: @""];
+    return uuidStr;
+}
 
 + (NSString *)appShortVersionNumber {
     NSString *shortVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];

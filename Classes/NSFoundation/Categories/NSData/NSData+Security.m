@@ -104,7 +104,6 @@
     return 1;
 }
 
-
 - (BOOL)encryptWithKey:(NSString *)key {
     return [self doCipher:key operation:kCCEncrypt];
 }
@@ -148,7 +147,7 @@
     return nil;
 }
 
-- (NSData *)dataFromHexString:(NSString *)string
++ (NSData *)dataFromHexString:(NSString *)string
 {
     NSMutableData *stringData = [NSMutableData data];
     unsigned char whole_byte;

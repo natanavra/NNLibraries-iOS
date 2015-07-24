@@ -121,4 +121,8 @@ static CGRect CGRectFromRectWithCornerAndSize(CGRect rect, CGRectCorner corner, 
 
 @implementation NNStringStampProperties
 
+- (instancetype)initWithCorner:(CGRectCorner)corner withRelativeSize:(CGFloat)relative {
+    return nil;
+}
+
 @end

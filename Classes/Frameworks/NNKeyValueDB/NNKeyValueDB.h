@@ -39,7 +39,7 @@ typedef enum {
 /** Determines if the database will be saved to file or not. Defaults to YES. */
 @property (nonatomic, getter=isPersistent) BOOL persistent;
 
-/** The file name to which the database will be saved, if not specified the class name will be used. */
+/** The file name to which the database will be saved, if not specified - the databaseID will be use, if not specified - the class name will be used. */
 @property (nonatomic, strong) NSString *fileName;
 
 
@@ -57,6 +57,7 @@ typedef enum {
 - (id)objectForKeyedSubscript:(id<NSCopying>)key;
 
 - (void)removeObjectForKey:(id<NSCopying>)key;
+- (void)removeAllObjectsAndKeys;
 
 - (id)popObjectForKey:(id<NSCopying>)key;
 

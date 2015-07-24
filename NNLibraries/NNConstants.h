@@ -16,6 +16,7 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT const NSTimeInterval NNDefaultAnimationDuration;
+FOUNDATION_EXPORT const BOOL NNProductionBuild;
 
 typedef void (^NNObjectAndErrorCallback)(id object, NSError *error);
 

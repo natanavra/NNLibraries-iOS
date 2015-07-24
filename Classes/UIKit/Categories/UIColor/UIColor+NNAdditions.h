@@ -22,4 +22,7 @@
  */
 + (UIColor *)color255WithRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
 
++ (UIColor *)colorWithHexString: (NSString *)stringToConvert;
++ (UIColor *)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
+
 @end
