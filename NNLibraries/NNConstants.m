@@ -8,6 +8,8 @@
 
 #import "NNConstants.h"
 
+const NSUInteger kNNLibrariesMajorVersion = 2;
+
 const NSTimeInterval NNDefaultAnimationDuration = 0.3f;
 const BOOL NNProductionBuild = NO;
 

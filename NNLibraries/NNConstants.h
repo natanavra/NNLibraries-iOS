@@ -15,6 +15,8 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT const NSUInteger kNNLibrariesMajorVersion;
+
 FOUNDATION_EXPORT const NSTimeInterval NNDefaultAnimationDuration;
 FOUNDATION_EXPORT const BOOL NNProductionBuild;
 
