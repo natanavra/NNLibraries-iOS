@@ -7,18 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>98867D8F-7A59-4A64-B7A6-8196D8879894</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>NNLibraries</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E2C7931C825E5EB210D873D1C51F30A77910C53F</key>
 		<string>https://bitbucket.org/natanavra/nnlibraries.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>NNLibraries.xcodeproj/project.xcworkspace</string>
+	<string>Master/NNLibraries.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E2C7931C825E5EB210D873D1C51F30A77910C53F</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/natanavra/nnlibraries.git</string>

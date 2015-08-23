@@ -17,6 +17,15 @@ typedef NS_ENUM(NSUInteger, NNHTTPMethod) {
     NNHTTPMethodPOST,
 };
 
+typedef NS_ENUM(NSInteger, NNHTTPErrorCode) {
+    NNHTTPErrorBadRequest = 400,
+    NNHTTPErrorNotAuthorized = 401,
+    NNHTTPErrorForbidden = 403,
+    NNHTTPErrorNotFound = 404,
+};
+
+FOUNDATION_EXPORT NSInteger NNOfflineError;
+
 FOUNDATION_EXPORT NSString *const NNURLConnectionResponseErrorDomain;
 
 

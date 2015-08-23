@@ -11,8 +11,6 @@
 #import "NNLogger.h"
 #import "NNJSONUtilities.h"
 
-NSInteger NNOfflineError = -1009;
-
 @implementation NNAsyncRequest
 
 #pragma mark - init

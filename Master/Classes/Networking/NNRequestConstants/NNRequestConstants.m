@@ -8,6 +8,8 @@
 
 #import "NNRequestConstants.h"
 
+NSInteger NNOfflineError = -1009;
+
 NSString *const NNURLConnectionResponseErrorDomain = @"com.nnurlconnection.response";
 
 @implementation NNRequestConstants

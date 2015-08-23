@@ -7,20 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSInteger, NNHTTPMethod) {
-    NNHTTPMethodGET = 0,
-    NNHTTPMethodPOST = 1,
-};
-
-typedef NS_ENUM(NSInteger, NNHTTPErrorCode) {
-    NNHTTPErrorBadRequest = 400,
-    NNHTTPErrorNotAuthorized = 401,
-    NNHTTPErrorForbidden = 403,
-    NNHTTPErrorNotFound = 404,
-};
-
-extern NSInteger NNOfflineError;
+#import "NNRequestConstants.h"
 
 /* The completion block is called on the main thread. */
 typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
@@ -43,8 +30,11 @@ static NSString *const httpMethodGET    = @"GET";
 - (instancetype)initWithRequest:(NSURLRequest *)request;
 - (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNAsyncCompleteBlock)block;
 - (instancetype)initWithURL:(NSURL *)url complete:(NNAsyncCompleteBlock)block;
-- (instancetype)initWithURL:(NSString *)url withParams:(NSDictionary *)params
-                withHeaders:(NSDictionary *)headers withHTTPMethod:(NNHTTPMethod)method completionBlock:(NNAsyncCompleteBlock)block;
+- (instancetype)initWithURL:(NSString *)url
+                 withParams:(NSDictionary *)params
+                withHeaders:(NSDictionary *)headers
+             withHTTPMethod:(NNHTTPMethod)method
+            completionBlock:(NNAsyncCompleteBlock)block;
 
 /** Key/Value http headers. Read as is. */
 - (void)setHTTPHeaders:(NSDictionary *)headers;
