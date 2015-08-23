@@ -71,13 +71,24 @@
 }
 
 + (id)parseJSONFromData:(NSData *)data error:(NSError **)error {
+    return [self JSONObjectFromData: data withOptions: kNilOptions error: error];
+}
+
++ (id)JSONObjectFromData:(NSData *)data error:(NSError **)error {
+    return [self JSONObjectFromData: data withOptions: kNilOptions error: error];
+}
+
++ (id)JSONObjectFromData:(NSData *)data withOptions:(NSJSONReadingOptions)options error:(NSError **)error {
     id object = nil;
     if(!data) {
         if(error) {
             *error = [NSError nnErrorWithCode: kNilObjectError];
         }
     } else {
-        object = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingAllowFragments error: error];
+        if(options == kNilOptions) {
+            options = NSJSONReadingAllowFragments;
+        }
+        object = [NSJSONSerialization JSONObjectWithData: data options: options error: error];
     }
     return object;
 }

@@ -14,5 +14,7 @@
  *  If the URL has a scheme - tries to create a URL.
  *  If no scheme, tries to create a file url in documents directory
  */
-+ (NSURL *)validURLFromString:(NSString *)string;
++ (NSURL *)nnValidURLFromString:(NSString *)string;
+
+- (NSURL *)nnURLByAddingGETQueryParams:(NSDictionary *)params;
 @end

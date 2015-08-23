@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Autolayout)
+@interface UIView (NNAutolayout)
 - (void)removeConstraintsForView:(UIView *)view;
 - (void)distributeViews:(NSArray *)views horizontallyWithMarginsFromSuperView:(CGFloat)margin;
 - (void)alignToSuperviewCenterX;

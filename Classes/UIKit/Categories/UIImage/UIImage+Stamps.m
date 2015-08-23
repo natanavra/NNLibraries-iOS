@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
-#import "UIImage+Stamps.h"
+#import "UIImage+NNStamps.h"
 #import "NSDate+NNAdditions.h"
 #import "UIView+NNAdditions.h"
 
 static const CGFloat kDefaultPadding = 5; //points
 
-@implementation UIImage (Stamps)
+@implementation UIImage (NNStamps)
 
 - (UIImage *)imageByAddingWatermarkImage:(UIImage *)watermark inRect:(CGRect)rect {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);

@@ -18,6 +18,8 @@ typedef void (^NNReachabilityChangedBlock)(BOOL reachable);
 
 + (NNReachabilityManager *)sharedManager;
 - (BOOL)isReachable;
+- (BOOL)isReachableViaWiFi;
+- (BOOL)isReachableViaCellular;
 
 - (void)invokeCallback;
 - (void)setReachabilityChangedCallback:(NNReachabilityChangedBlock)callback;

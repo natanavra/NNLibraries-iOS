@@ -10,10 +10,20 @@
 
 @implementation NSDictionary (NNAdditions)
 
-- (NSDictionary *)dictionaryWithValuesOfClass:(Class)cls {
+- (NSDictionary *)nnDictionaryWithValuesOfClass:(Class)cls {
     NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary: self];
-    [newDict removeObjectsAndKeysNotOfClass: cls];
-    return [newDict copy];
+    [newDict nnRemoveObjectsAndKeysNotOfClass: cls];
+    return newDict;
+}
+
+- (NSDictionary *)nnDictionaryByRemovingValuesOfClass:(Class)cls {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary: self];
+    [dict nnRemoveObjectsAndKeysOfClass: cls];
+    return dict;
+}
+
+- (NSDictionary *)nnDictionaryWithoutNSNulls {
+    return [self nnDictionaryByRemovingValuesOfClass: [NSNull class]];
 }
 
 @end
@@ -23,14 +33,14 @@
 
 #pragma mark - NNAdditions
 
-- (void)safeSetObject:(id)object forKey:(id<NSCopying>)key {
+- (void)nnSafeSetObject:(id)object forKey:(id<NSCopying>)key {
     if(!object || !key) {
         return;
     }
     self[key] = object;
 }
 
-- (void)removeObjectsAndKeysNotOfClass:(Class)cls {
+- (void)nnRemoveObjectsAndKeysNotOfClass:(Class)cls {
     NSMutableArray *badKeys = [NSMutableArray array];
     for(id keyObject in self) {
         BOOL bad = NO;
@@ -45,6 +55,27 @@
         }
     }
     [self removeObjectsForKeys: badKeys];
+}
+
+- (void)nnRemoveObjectsAndKeysOfClass:(Class)cls {
+    NSMutableArray *badKeys = [NSMutableArray array];
+    for(id keyObject in self) {
+        BOOL bad = NO;
+        if([keyObject isKindOfClass: cls]) {
+            bad = YES;
+        } else if([self[keyObject] isKindOfClass: cls]) {
+            bad = YES;
+        }
+        
+        if(bad) {
+            [badKeys addObject: keyObject];
+        }
+    }
+    [self removeObjectsForKeys: badKeys];
+}
+
+- (void)nnRemoveNSNulls {
+    [self nnRemoveObjectsAndKeysOfClass: [NSNull class]];
 }
 
 @end

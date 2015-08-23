@@ -7,7 +7,7 @@
 //
 
 #import "NNNotificationIndicatorView.h"
-#import "UIView+CGGeometry.h"
+#import "UIView+NNGeometry.h"
 
 @interface NNNotificationIndicatorView ()
 @property (nonatomic, weak) UILabel *countLabel;

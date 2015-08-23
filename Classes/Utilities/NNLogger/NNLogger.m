@@ -12,7 +12,7 @@
 #import "NSObject+NNAdditions.h"
 
 static NSUInteger kMaxLogLength = 1024; //characters
-BOOL const kGlobalForceLogAll = NO;
+BOOL const kGlobalForceLogAll = YES;
 
 @interface NNLogger ()
 @end
@@ -48,7 +48,7 @@ static NSMutableArray *_logs = nil;
 }
 
 + (void)logFromInstance:(id)sender fromSelector:(SEL)cmd withLine:(NSUInteger)line message:(NSString *)logMessage data:(id)object {
-    NSString *message = [NSString stringWithFormat: @"\n%@ (Line %li), %@", NSStringFromSelector(cmd), (unsigned long)line, logMessage];
+    NSString *message = [NSString stringWithFormat: @"%@ (Line %li), %@", NSStringFromSelector(cmd), (unsigned long)line, logMessage];
     [self logFromInstance: sender message: message data: object forceLogAll: NO];
 }
 
@@ -75,7 +75,12 @@ static NSMutableArray *_logs = nil;
 
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
     NSMutableString *output = [NSMutableString string];
-    NSString *dataString = [object nnDescription];
+    NSString *dataString = nil;
+    if([object respondsToSelector: @selector(nnDescription)]) {
+        dataString = [object nnDescription];
+    } else {
+        dataString = [object description];
+    }
     if(sender) {
         [output appendFormat: @"%@", NSStringFromClass([sender class])];
     }
@@ -89,7 +94,7 @@ static NSMutableArray *_logs = nil;
         if(output.length > 0) {
             [output appendString: @" 📊 "];
         }
-        [output appendFormat: @"%@", dataString];
+        [output appendFormat: @"\n%@", dataString];
     }
     if(output.length == 0) {
         [output appendString: @"BAD LOG"];

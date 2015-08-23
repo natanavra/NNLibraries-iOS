@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
-#import "UIView+CGGeometry.h"
+#import "UIView+NNGeometry.h"
 
-@implementation UIView (CGGeometry)
+@implementation UIView (NNGeometry)
 
 
 #pragma mark - Frames

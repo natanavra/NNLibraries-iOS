@@ -10,7 +10,7 @@
 
 @implementation NSData (NNAdditions)
 
-+ (NSData *)dataFromHexString:(NSString *)string {
++ (NSData *)nnDataFromHexString:(NSString *)string {
     NSMutableData *stringData = [NSMutableData data];
     unsigned char whole_byte;
     char byte_chars[3] = {'\0','\0','\0'};
@@ -24,19 +24,19 @@
     return stringData;
 }
 
-- (NSString *)hexString {
+- (NSString *)nnHexString {
     NSString *desc = [self description];
-    NSString *trim = [desc stringByTrimmingCharactersInSet: [self descriptionCharacterSet]];
+    NSString *trim = [desc stringByTrimmingCharactersInSet: [self nnDescriptionCharacterSet]];
     return [trim stringByReplacingOccurrencesOfString: @" " withString: @""];
 }
 
-- (NSString *)stringWithEncoding:(NSStringEncoding)encoding {
+- (NSString *)nnStringWithEncoding:(NSStringEncoding)encoding {
     return [[NSString alloc] initWithData: self encoding: encoding];
 }
 
 #pragma mark - Helpers
 
-- (NSCharacterSet *)descriptionCharacterSet {
+- (NSCharacterSet *)nnDescriptionCharacterSet {
     static NSCharacterSet *charSet = nil;
     if(!charSet) {
         charSet = [NSCharacterSet characterSetWithCharactersInString: @"< >"];

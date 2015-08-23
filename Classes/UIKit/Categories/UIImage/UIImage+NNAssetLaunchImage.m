@@ -20,7 +20,7 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "UIImage+AssetLaunchImage.h"
+#import "UIImage+NNAssetLaunchImage.h"
 
 // Thanks to http://stackoverflow.com/a/20045142/2082172
 // This category supports only iOS 7+, although it should be easy to add 6- support.
@@ -46,7 +46,7 @@ static NSString *const kAssetImageLandscapeLeftString = @"-LandscapeLeft";
 static NSString *const kAssetImagePathToFileFormatString = @"~/Library/Caches/LaunchImages/%@/%@";
 static NSString *const kAssetImageSizeFormatString = @"{%.0f,%.0f}";
 
-@implementation UIImage (AssetLaunchImage)
+@implementation UIImage (NNAssetLaunchImage)
 
 + (UIImage *)assetLaunchImageWithOrientation:(UIInterfaceOrientation)orientation useSystemCache:(BOOL)cache
 {

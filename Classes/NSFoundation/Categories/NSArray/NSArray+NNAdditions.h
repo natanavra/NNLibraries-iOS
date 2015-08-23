@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSArray (NNAdditions)
++ (NSArray *)uniqueCopyArray:(NSArray *)array;
 - (NSArray *)arrayWithValuesOfClass:(Class)cls;
 @end
 

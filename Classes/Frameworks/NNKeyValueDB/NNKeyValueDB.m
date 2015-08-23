@@ -9,6 +9,7 @@
 #import "NNKeyValueDB.h"
 #import "NNUtilities.h"
 #import "NNLogger.h"
+#import "NNJSONUtilities.h"
 
 @implementation NNKeyValueDB
 
@@ -199,7 +200,7 @@
 #pragma mark - Getters
 
 - (BOOL)isKeySet:(id<NSCopying>)key {
-    return [NNUtilities validObjectFromObject: [self objectForKey: key]] != nil;
+    return [NNJSONUtilities validObjectFromObject: [self objectForKey: key]] != nil;
 }
 
 - (id)objectForKey:(id<NSCopying>)key {

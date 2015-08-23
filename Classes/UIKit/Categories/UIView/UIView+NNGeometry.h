@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (CGGeometry)
+@interface UIView (NNGeometry)
 - (void)setFrameSize:(CGSize)size;
 - (void)setFrameOrigin:(CGPoint)origin;
 - (void)setFrameOriginX:(float)x;

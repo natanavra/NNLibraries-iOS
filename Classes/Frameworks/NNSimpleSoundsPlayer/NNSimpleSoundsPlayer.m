@@ -10,6 +10,7 @@
 
 #import "NNLogger.h"
 #import "NNUtilities.h"
+#import "NNJSONUtilities.h"
 
 @import AudioToolbox;
 
@@ -47,12 +48,12 @@
     }
     
     @synchronized(self) {
-        id soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
+        id soundObject = [NNJSONUtilities validObjectFromObject: _sounds[soundFile]];
         if(!soundObject) {
             [NNLogger logFromInstance: self message: @"Sound file not cached" data: soundFile];
             BOOL success = [self addSound: soundFile];
             if(success) {
-                soundObject = [NNUtilities validObjectFromObject: _sounds[soundFile]];
+                soundObject = [NNJSONUtilities validObjectFromObject: _sounds[soundFile]];
             }
         }
         

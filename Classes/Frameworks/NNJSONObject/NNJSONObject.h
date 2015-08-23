@@ -13,3 +13,6 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)jsonRepresentation;
 @end
+
+@interface NNJSONObject : NSObject <NNJSONObject>
+@end

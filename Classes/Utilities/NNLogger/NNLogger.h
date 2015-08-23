@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define NNLogDebug(m, d) [NNLogger logFromInstance: self fromSelector: _cmd withLine: __LINE__ message: m data: d]
+
 extern BOOL const kGlobalForceLogAll;
 
 /** Simple Logger */

@@ -8,7 +8,7 @@
 
 #import "UIViewController+NNAdditions.h"
 
-#import "MBProgressHUD.h"
+#import "NNMBProgressHUD.h"
 #import "NNLogger.h"
 #import "UIAlertView+NNAdditions.h"
 
@@ -103,9 +103,9 @@
 - (void)showLoadingViewWithText:(NSString *)text withSubtitle:(NSString *)subtitle {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        [MBProgressHUD hideAllHUDsForView: window animated: YES];
+        [NNMBProgressHUD hideAllHUDsForView: window animated: YES];
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo: window animated: YES];
+        NNMBProgressHUD *hud = [NNMBProgressHUD showHUDAddedTo: window animated: YES];
         hud.dimBackground = YES;
         hud.labelText = text;
         hud.detailsLabelText = subtitle;
@@ -115,7 +115,7 @@
 - (void)hideLoadingView {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        [MBProgressHUD hideAllHUDsForView: window animated: YES];
+        [NNMBProgressHUD hideAllHUDsForView: window animated: YES];
     });
 }
 

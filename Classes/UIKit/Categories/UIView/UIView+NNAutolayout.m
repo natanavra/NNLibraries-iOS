@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
-#import "UIView+Autolayout.h"
+#import "UIView+NNAutolayout.h"
 
-@implementation UIView (Autolayout)
+@implementation UIView (NNAutolayout)
 
 - (void)removeConstraintsForView:(UIView *)view {
     NSMutableArray *constraintsToRemove = [NSMutableArray array];

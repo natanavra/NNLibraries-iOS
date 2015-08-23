@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSData (NNAdditions)
-- (NSString *)hexString;
-- (NSString *)stringWithEncoding:(NSStringEncoding)encoding;
++ (NSData *)nnDataFromHexString:(NSString *)string;
+
+- (NSString *)nnHexString;
+- (NSString *)nnStringWithEncoding:(NSStringEncoding)encoding;
 @end

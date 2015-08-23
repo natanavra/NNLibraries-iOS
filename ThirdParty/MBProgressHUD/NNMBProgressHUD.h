@@ -30,32 +30,32 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@protocol MBProgressHUDDelegate;
+@protocol NNMBProgressHUDDelegate;
 
 
 typedef enum {
 	/** Progress is shown using an UIActivityIndicatorView. This is the default. */
-	MBProgressHUDModeIndeterminate,
-	/** Progress is shown using a round, pie-chart like, progress view. */
-	MBProgressHUDModeDeterminate,
-	/** Progress is shown using a horizontal progress bar */
-	MBProgressHUDModeDeterminateHorizontalBar,
-	/** Progress is shown using a ring-shaped progress view. */
-	MBProgressHUDModeAnnularDeterminate,
-	/** Shows a custom view */
-	MBProgressHUDModeCustomView,
-	/** Shows only labels */
-	MBProgressHUDModeText
-} MBProgressHUDMode;
+    NNMBProgressHUDModeIndeterminate,
+    /** Progress is shown using a round, pie-chart like, progress view. */
+    NNMBProgressHUDModeDeterminate,
+    /** Progress is shown using a horizontal progress bar */
+    NNMBProgressHUDModeDeterminateHorizontalBar,
+    /** Progress is shown using a ring-shaped progress view. */
+    NNMBProgressHUDModeAnnularDeterminate,
+    /** Shows a custom view */
+    NNMBProgressHUDModeCustomView,
+    /** Shows only labels */
+    NNMBProgressHUDModeText
+} NNMBProgressHUDMode;
 
 typedef enum {
-	/** Opacity animation */
-	MBProgressHUDAnimationFade,
-	/** Opacity + scale animation */
-	MBProgressHUDAnimationZoom,
-	MBProgressHUDAnimationZoomOut = MBProgressHUDAnimationZoom,
-	MBProgressHUDAnimationZoomIn
-} MBProgressHUDAnimation;
+    /** Opacity animation */
+    NNMBProgressHUDAnimationFade,
+    /** Opacity + scale animation */
+    NNMBProgressHUDAnimationZoom,
+    NNMBProgressHUDAnimationZoomOut = NNMBProgressHUDAnimationZoom,
+    NNMBProgressHUDAnimationZoomIn
+} NNMBProgressHUDAnimation;
 
 
 #ifndef MB_INSTANCETYPE
@@ -85,7 +85,7 @@ typedef enum {
 #endif
 
 #if NS_BLOCKS_AVAILABLE
-typedef void (^MBProgressHUDCompletionBlock)();
+typedef void (^NNMBProgressHUDCompletionBlock)();
 #endif
 
 
@@ -108,7 +108,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
  *   indicator view.
  * - If also the detailsLabelText property is set then another label is placed below the first label.
  */
-@interface MBProgressHUD : UIView
+@interface NNMBProgressHUD : UIView
 
 /**
  * Creates a new HUD, adds it to provided view and shows it. The counterpart to this method is hideHUDForView:animated:.
@@ -246,7 +246,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
  *
  * @see showAnimated:whileExecutingBlock:onQueue:completionBlock:
  */
-- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(MBProgressHUDCompletionBlock)completion;
+- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(NNMBProgressHUDCompletionBlock)completion;
 
 /**
  * Shows the HUD while a block is executing on the specified dispatch queue, then hides the HUD.
@@ -267,12 +267,12 @@ typedef void (^MBProgressHUDCompletionBlock)();
  * @see completionBlock
  */
 - (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block onQueue:(dispatch_queue_t)queue
-		  completionBlock:(MBProgressHUDCompletionBlock)completion;
+		  completionBlock:(NNMBProgressHUDCompletionBlock)completion;
 
 /**
  * A block that gets called after the HUD was completely hidden.
  */
-@property (copy) MBProgressHUDCompletionBlock completionBlock;
+@property (copy) NNMBProgressHUDCompletionBlock completionBlock;
 
 #endif
 
@@ -281,14 +281,14 @@ typedef void (^MBProgressHUDCompletionBlock)();
  *
  * @see MBProgressHUDMode
  */
-@property (assign) MBProgressHUDMode mode;
+@property (assign) NNMBProgressHUDMode mode;
 
 /**
  * The animation type that should be used when the HUD is shown and hidden. 
  *
  * @see MBProgressHUDAnimation
  */
-@property (assign) MBProgressHUDAnimation animationType;
+@property (assign) NNMBProgressHUDAnimation animationType;
 
 /**
  * The UIView (e.g., a UIImageView) to be shown when the HUD is in MBProgressHUDModeCustomView.
@@ -301,7 +301,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
  *
  * @see MBProgressHUDDelegate
  */
-@property (MB_WEAK) id<MBProgressHUDDelegate> delegate;
+@property (MB_WEAK) id<NNMBProgressHUDDelegate> delegate;
 
 /** 
  * An optional short message to be displayed below the activity indicator. The HUD is automatically resized to fit
@@ -442,14 +442,14 @@ typedef void (^MBProgressHUDCompletionBlock)();
 @end
 
 
-@protocol MBProgressHUDDelegate <NSObject>
+@protocol NNMBProgressHUDDelegate <NSObject>
 
 @optional
 
 /** 
  * Called after the HUD was fully hidden from the screen. 
  */
-- (void)hudWasHidden:(MBProgressHUD *)hud;
+- (void)hudWasHidden:(NNMBProgressHUD *)hud;
 
 @end
 
@@ -457,7 +457,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
 /**
  * A progress view for showing definite progress by filling up a circle (pie chart).
  */
-@interface MBRoundProgressView : UIView 
+@interface NNMBRoundProgressView : UIView 
 
 /**
  * Progress (0.0 to 1.0)
@@ -487,7 +487,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
 /**
  * A flat bar progress view. 
  */
-@interface MBBarProgressView : UIView
+@interface NNMBBarProgressView : UIView
 
 /**
  * Progress (0.0 to 1.0)

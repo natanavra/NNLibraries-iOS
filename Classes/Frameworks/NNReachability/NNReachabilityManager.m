@@ -7,11 +7,11 @@
 //
 
 #import "NNReachabilityManager.h"
-#import "Reachability.h"
+#import "NNReachability.h"
 #import "NNLogger.h"
 
 @interface NNReachabilityManager()
-@property (nonatomic, strong) Reachability *reach;
+@property (nonatomic, strong) NNReachability *reach;
 @property (nonatomic, readwrite, copy) NNReachabilityChangedBlock callback;
 @end
 
@@ -28,11 +28,11 @@
 
 - (id)init {
     if(self = [super init]) {
-        self.reach = [Reachability reachabilityForInternetConnection];
+        self.reach = [NNReachability reachabilityForInternetConnection];
         _reach.reachableOnWWAN = YES;
         
         __weak typeof(self) weakSelf = self;
-        [_reach setReachableBlock: ^(Reachability *r) {
+        [_reach setReachableBlock: ^(NNReachability *r) {
             [NNLogger logFromInstance: weakSelf message: @"Internet is reachable"];
             __strong typeof(weakSelf) strongSelf = weakSelf;
             if(strongSelf.callback) {
@@ -41,7 +41,7 @@
                 });
             }
         }];
-        [_reach setUnreachableBlock: ^(Reachability *r) {
+        [_reach setUnreachableBlock: ^(NNReachability *r) {
             [NNLogger logFromInstance: weakSelf message: @"Internet not reachable"];
             __strong typeof(weakSelf) strongSelf = weakSelf;
             if(strongSelf.callback) {
@@ -67,6 +67,14 @@
 
 - (BOOL)isReachable {
     return [_reach isReachable];
+}
+
+- (BOOL)isReachableViaWiFi {
+    return [_reach isReachableViaWiFi];
+}
+
+- (BOOL)isReachableViaCellular {
+    return [_reach isReachableViaWWAN];
 }
 
 @end

@@ -16,6 +16,11 @@
     return [cleanedArray copy];
 }
 
++ (NSArray *)uniqueCopyArray:(NSArray *)array {
+    NSSet *set = [NSSet setWithArray: array];
+    return [set allObjects];
+}
+
 @end
 
 

@@ -70,7 +70,9 @@
 /** Return YES if 0 <= number <= 1. NO otherwise. */
 + (BOOL)numberBetween0And1:(float)number;
 
-+ (NSArray *)uniqueCopyArray:(NSArray *)array;
++ (BOOL)isValidEmail:(NSString *)email;
+
++ (NSArray *)uniqueCopyArray:(NSArray *)array DEPRECATED_MSG_ATTRIBUTE("Use 'NSArray+NNAdditions' instead");
 
 //URLs
 + (BOOL)navigateWazeOrMapsWithAddress:(NSString *)address;

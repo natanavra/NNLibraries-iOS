@@ -323,6 +323,13 @@
     return @"Unexpected";
 }
 
++ (BOOL)isValidEmail:(NSString *)email {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat: @"SELF MATCHES %@", emailRegex];
+    BOOL validEmail = [emailPredicate evaluateWithObject: email];
+    return validEmail;
+}
+
 + (BOOL)isDebugMode {
 #ifdef DEBUG
     return YES;

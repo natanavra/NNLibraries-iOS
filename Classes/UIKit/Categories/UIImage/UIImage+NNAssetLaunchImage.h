@@ -22,7 +22,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (AssetLaunchImage)
+@interface UIImage (NNAssetLaunchImage)
 
 /**
  *	Constructs launch image name and returns it via @code [UIImage imageNamed:] @endcode method.

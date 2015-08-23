@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDictionary (NNAdditions)
-- (NSDictionary *)dictionaryWithValuesOfClass:(Class)cls;
+- (NSDictionary *)nnDictionaryWithValuesOfClass:(Class)cls;
+- (NSDictionary *)nnDictionaryByRemovingValuesOfClass:(Class)cls;
+- (NSDictionary *)nnDictionaryWithoutNSNulls;
 @end
 
 @interface NSMutableDictionary (NNAdditions)
-- (void)safeSetObject:(id)object forKey:(id<NSCopying>)key;
-- (void)removeObjectsAndKeysNotOfClass:(Class)cls;
+- (void)nnSafeSetObject:(id)object forKey:(id<NSCopying>)key;
+- (void)nnRemoveObjectsAndKeysNotOfClass:(Class)cls;
+- (void)nnRemoveObjectsAndKeysOfClass:(Class)cls;
+- (void)nnRemoveNSNulls;
 @end

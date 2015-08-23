@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
-#import "NSData+Security.h"
+#import "NSData+NNSecurity.h"
 
 #import <CommonCrypto/CommonCrypto.h>
 
-@implementation NSMutableData (Security)
+@implementation NSMutableData (NNSecurity)
 
 #define kChunkSizeBytes (1024 * 1024) // 1 MB
 

@@ -10,7 +10,7 @@
 
 typedef uint32_t CCOperation;
 
-@interface NSMutableData (Security)
+@interface NSMutableData (NNSecurity)
 - (BOOL)doCipher:(NSString *)key operation:(CCOperation)operation;
 - (BOOL)encryptWithKey:(NSString *)key;
 - (BOOL)decryptWithKey:(NSString *)key;

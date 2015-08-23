@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, CGRectCorner) {
     CGRectCornerBottomRight
 };
 
-@interface UIImage (Stamps)
+@interface UIImage (NNStamps)
 - (UIImage *)imageByAddingWatermarkImage:(UIImage *)watermark inRect:(CGRect)rect;
 - (UIImage *)imageByAddingPOSIXTimestampInRect:(CGRect)rect withFontSize:(CGFloat)size withColor:(UIColor *)stampColor;
 - (UIImage *)imageByAddingPOSIXTimestampInCorner:(CGRectCorner)corner withFontSize:(CGFloat)size withColor:(UIColor *)stampColor;

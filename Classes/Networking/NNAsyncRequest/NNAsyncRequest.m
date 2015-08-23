@@ -9,6 +9,7 @@
 #import "NNAsyncRequest.h"
 #import "NNUtilities.h"
 #import "NNLogger.h"
+#import "NNJSONUtilities.h"
 
 NSInteger NNOfflineError = -1009;
 
@@ -55,7 +56,7 @@ NSInteger NNOfflineError = -1009;
             NSString *requestURL = [url stringByAppendingString: query];
             [_request setURL: [NSURL URLWithString: requestURL]];
         } else if(method == NNHTTPMethodPOST) {
-            NSData *data = [NNUtilities JSONDataFromDictionary: params prettyPrinted: YES];
+            NSData *data = [NNJSONUtilities JSONDataFromObject: params prettyPrint: YES error: nil];
             _request.HTTPBody = data;
         }
         _request.HTTPMethod = [NNAsyncRequest httpMethodName: method];
@@ -121,7 +122,7 @@ NSInteger NNOfflineError = -1009;
     if(_responseData) {
         NSDictionary *headers = [_response allHeaderFields];
         if([headers[@"content-type"] rangeOfString: @"json"].location != NSNotFound) {
-            id object = [NNUtilities parseJSONFromData: _responseData];
+            id object = [NNJSONUtilities JSONObjectFromData: _responseData error: nil];
             if(object) {
                 return [object description];
             }
