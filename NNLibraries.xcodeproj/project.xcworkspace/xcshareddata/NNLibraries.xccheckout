@@ -14,11 +14,11 @@
 		<string>https://bitbucket.org/natanavra/nnlibraries.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Master/NNLibraries.xcodeproj</string>
+	<string>NNLibraries.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E2C7931C825E5EB210D873D1C51F30A77910C53F</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/natanavra/nnlibraries.git</string>
