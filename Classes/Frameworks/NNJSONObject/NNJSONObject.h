@@ -11,7 +11,9 @@
 @protocol NNJSONObject <NSObject>
 @required
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *)jsonRepresentation;
+- (NSDictionary *)dictionaryRepresentation;
+@optional
+- (NSDictionary *)jsonRepresentation; //Deprecated
 @end
 
 @interface NNJSONObject : NSObject <NNJSONObject>

@@ -18,6 +18,7 @@
 #pragma mark - Private Declarations
 
 @interface NNURLConnection ()
+@property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSURLSessionDataTask *currentTask;
 @property (nonatomic, readwrite) NSHTTPURLResponse *response;
 @property (nonatomic, readwrite) NSData *data;
@@ -29,6 +30,17 @@
 
 
 #pragma mark - Init
+
+- (instancetype)initWithRequest:(NSURLRequest *)request withCompletion:(NNURLConnectionCompletion)completion {
+    if(!request) {
+        return nil;
+    }
+    if(self = [super init]) {
+        self.request = request;
+        self.completionBlock = completion;
+    }
+    return self;
+}
 
 - (instancetype)initWithURL:(NSURL *)url {
     return [self initWithURL: url withCompletion: nil];
@@ -48,19 +60,22 @@
     return [self initWithURL: url withHeaders: nil withParams: params withMethod: method withCompletion: completion];
 }
 
-- (instancetype)initWithURL:(NSURL *)url withHeaders:(NSDictionary *)headers
-                 withParams:(NSDictionary *)params withMethod:(NNHTTPMethod)method
+- (instancetype)initWithURL:(NSURL *)url
+                withHeaders:(NSDictionary *)headers
+                 withParams:(NSDictionary *)params
+                 withMethod:(NNHTTPMethod)method
              withCompletion:(NNURLConnectionCompletion)completion {
     if(!url) {
         return nil;
     }
     
     if(self = [super init]) {
-        self.url = url;
+        _url = url;
         self.completionBlock = completion;
         self.httpMethod = method;
         self.params = params;
         self.headers = headers;
+        self.request = [[NNHTTPRequestSerializer serializer] requestWithURL: _url withMethod: _httpMethod withParams: _params withHeaders: _headers];
     }
     return self;
 }
@@ -68,29 +83,22 @@
 #pragma mark - Connection
 
 - (void)start {
-    NSURLRequest *request = [_requestSerializer requestWithURL: _url withMethod: _httpMethod withParameters: _params withHeaders: _headers];
-    if(!request) {
-        request = [[NNHTTPRequestSerializer serializer] requestWithURL: _url withMethod: _httpMethod withParameters: _params withHeaders: _headers];
+    if(!_request) {
+        return;
     }
+    
     __weak typeof(self) weakSelf = self;
     NSURLSession *session = [NSURLSession sharedSession];
-    _currentTask = [session dataTaskWithRequest: request completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
+    _currentTask = [session dataTaskWithRequest: _request completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
         weakSelf.data = data;
         
-        id responseObject = data;
         NSError *retError = error;
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
         if(!error && data) {
             weakSelf.response = httpResponse;
             NSInteger statusCode = httpResponse.statusCode;
-            if(statusCode >= 200 && statusCode < 300) {
-                //Process data if needed
-                if(_responseSerializer) {
-                    responseObject = [weakSelf.responseSerializer responseObjectForResponse: httpResponse withData: data error: &retError];
-                }
-                
-            } else {
+            if(statusCode < 200 || statusCode >= 300) {
                 //HTTP error, read error
                 NSDictionary *userInfo = @{NSLocalizedDescriptionKey : [NSHTTPURLResponse localizedStringForStatusCode: statusCode]};
                 retError = [NSError errorWithDomain: NNURLConnectionResponseErrorDomain
@@ -101,7 +109,7 @@
         
         if(weakSelf.completionBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.completionBlock(httpResponse, responseObject, retError);
+                weakSelf.completionBlock(httpResponse, data, retError);
             });
         }
     }];

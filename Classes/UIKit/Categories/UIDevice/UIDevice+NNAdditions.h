@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIDevice (NNAdditions)
-
 + (BOOL)isDeviceSimulator;
 + (BOOL)iPhone4Screen;
 + (BOOL)iPhone5Screen;
@@ -18,6 +17,7 @@
 + (BOOL)isBigDevice __attribute__((deprecated("With the new iPhones introduced, this is irrelevant")));
 + (CGFloat)deviceHeight;
 + (CGFloat)deviceWidth;
-+ (NSString *)UDID;
-
++ (NSString *)UDID DEPRECATED_MSG_ATTRIBUTE("Use 'vendorUdid' instead");
++ (NSString *)vendorUdid;
++ (NSString *)udidFromKeychain:(BOOL *)fromKeychain;
 @end

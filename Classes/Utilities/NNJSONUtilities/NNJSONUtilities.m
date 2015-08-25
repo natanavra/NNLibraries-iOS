@@ -10,6 +10,8 @@
 #import "NNConstants.h"
 #import "NSError+NNAdditions.h"
 #import "NNLogger.h"
+#import "NSDictionary+NNAdditions.h"
+#import "NSArray+NNAdditions.h"
 
 @implementation NNJSONUtilities
 
@@ -65,6 +67,60 @@
 }
 
 #pragma mark - JSON Parsing
+
++ (id)makeValidJSONObject:(id)object {
+    return [self makeValidJSONObject: object invalidValues: nil];
+}
+
++ (id)makeValidJSONObject:(id)object invalidValues:(NSDictionary **)invalid {
+    if([self isValidJSONObject: object]) {
+        return object;
+    }
+    
+    id validObject = nil;
+    if([self isJSONTypeObject: object]) {
+        if([object isKindOfClass: [NSDictionary class]]) {
+            NSMutableDictionary *valid = [NSMutableDictionary dictionary];
+            NSDictionary *dict = (NSDictionary *)object;
+            [dict enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+                if([key isKindOfClass: [NSString class]]) {
+                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: nil] forKey: key];
+                } else {
+                    NSString *validKey = [key description];
+                    //Transform invalid keys to strings (According to Apple Docs valid JSON all keys are strings)
+                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: nil] forKey: validKey];
+                }
+            }];
+            validObject = valid;
+        } else if([object isKindOfClass: [NSArray class]]) {
+            NSMutableArray *valid = [NSMutableArray array];
+            NSArray *arr = (NSArray *)object;
+            for(id obj in arr) {
+                [valid nnSafeAddObject: [self makeValidJSONObject: obj invalidValues: nil]];
+            }
+            validObject = valid;
+        } else {
+            validObject = object;
+        }
+    } else {
+        //Transforming invalid objects to strings
+        validObject = [object description];
+    }
+    return validObject;
+}
+
++ (BOOL)isJSONTypeObject:(id)object {
+    //According to Apple Docs these are the only valid classes for JSON objects
+    if([object isKindOfClass: [NSArray class]] ||
+       [object isKindOfClass: [NSDictionary class]] ||
+       [object isKindOfClass: [NSString class]] ||
+       [object isKindOfClass: [NSNumber class]] ||
+       [object isKindOfClass: [NSNull class]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 + (BOOL)isValidJSONObject:(id)object {
     return [NSJSONSerialization isValidJSONObject: object];

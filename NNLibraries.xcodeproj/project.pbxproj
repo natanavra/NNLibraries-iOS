@@ -24,7 +24,7 @@
 		5C216E161B67D68100CEBC79 /* NSDate+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5D941AB8E67E007E94BF /* NSDate+NNAdditions.h */; };
 		5C216E171B67D68100CEBC79 /* NNMotionManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5D7D1AB8E67E007E94BF /* NNMotionManager.h */; };
 		5C216E181B67D68100CEBC79 /* NNStoreKitHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5D8B1AB8E67E007E94BF /* NNStoreKitHelper.h */; };
-		5C37E9EF1B830E30001B80D6 /* NNRequestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9EE1B830E30001B80D6 /* NNRequestConstants.m */; };
+		5C37E9EF1B830E30001B80D6 /* NNURLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9EE1B830E30001B80D6 /* NNURLConstants.m */; };
 		5C37E9F21B830FE2001B80D6 /* NNURLRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9F11B830FE2001B80D6 /* NNURLRequestSerializer.m */; };
 		5C37E9F31B8311B7001B80D6 /* NNURLRequestSerializer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37E9F01B830FE2001B80D6 /* NNURLRequestSerializer.h */; };
 		5C37E9F61B8312F4001B80D6 /* NNURLResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9F51B8312F4001B80D6 /* NNURLResponseSerializer.m */; };
@@ -36,7 +36,8 @@
 		5CACCDB51B81E181009E343C /* NNURLConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C93DEE91B80780B0074D62A /* NNURLConnection.h */; };
 		5CACCDBF1B81E886009E343C /* NNURLConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */; };
 		5CACCDC01B81E972009E343C /* NNURLConnectionManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */; };
-		5CDAC51B1B831A84003A115B /* NNRequestConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37E9ED1B830E30001B80D6 /* NNRequestConstants.h */; };
+		5CB1100E1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1100D1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m */; };
+		5CDAC51B1B831A84003A115B /* NNURLConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37E9ED1B830E30001B80D6 /* NNURLConstants.h */; };
 		5CEB28971B67CDBC004A809C /* NNConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECB13D1AFC10810001785F /* NNConstants.m */; };
 		5CEB28981B67CDBC004A809C /* UIDevice+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34CC1B5B919700B79117 /* UIDevice+NNAdditions.m */; };
 		5CEB28991B67CDBC004A809C /* UIColor+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */; };
@@ -162,7 +163,7 @@
 				5CACCDC01B81E972009E343C /* NNURLConnectionManager.h in CopyFiles */,
 				5C37E9F71B83167F001B80D6 /* NNURLResponseSerializer.h in CopyFiles */,
 				5C37E9F31B8311B7001B80D6 /* NNURLRequestSerializer.h in CopyFiles */,
-				5CDAC51B1B831A84003A115B /* NNRequestConstants.h in CopyFiles */,
+				5CDAC51B1B831A84003A115B /* NNURLConstants.h in CopyFiles */,
 				5CEB29101B67D016004A809C /* NSURL+NNAddtions.h in CopyFiles */,
 				5CACCDB51B81E181009E343C /* NNURLConnection.h in CopyFiles */,
 				5C4CF42C1B6E4765004EC811 /* NNLibrariesFrameworks.h in CopyFiles */,
@@ -245,8 +246,8 @@
 		5C2232C71B03AE3200A6A4E6 /* NNFullscreenPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNFullscreenPopup.m; path = NNFullscreenPopup/NNFullscreenPopup.m; sourceTree = "<group>"; };
 		5C3537061AE2A0E40009773B /* NSURL+NNAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+NNAddtions.h"; path = "NSURL/NSURL+NNAddtions.h"; sourceTree = "<group>"; };
 		5C3537071AE2A0E40009773B /* NSURL+NNAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+NNAddtions.m"; path = "NSURL/NSURL+NNAddtions.m"; sourceTree = "<group>"; };
-		5C37E9ED1B830E30001B80D6 /* NNRequestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNRequestConstants.h; path = NNRequestConstants/NNRequestConstants.h; sourceTree = "<group>"; };
-		5C37E9EE1B830E30001B80D6 /* NNRequestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNRequestConstants.m; path = NNRequestConstants/NNRequestConstants.m; sourceTree = "<group>"; };
+		5C37E9ED1B830E30001B80D6 /* NNURLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLConstants.h; path = NNRequestConstants/NNURLConstants.h; sourceTree = "<group>"; };
+		5C37E9EE1B830E30001B80D6 /* NNURLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNURLConstants.m; path = NNRequestConstants/NNURLConstants.m; sourceTree = "<group>"; };
 		5C37E9F01B830FE2001B80D6 /* NNURLRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLRequestSerializer.h; path = NNURLRequestSerializer/NNURLRequestSerializer.h; sourceTree = "<group>"; };
 		5C37E9F11B830FE2001B80D6 /* NNURLRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNURLRequestSerializer.m; path = NNURLRequestSerializer/NNURLRequestSerializer.m; sourceTree = "<group>"; };
 		5C37E9F41B8312F4001B80D6 /* NNURLResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLResponseSerializer.h; path = NNURLResponseSerializer/NNURLResponseSerializer.h; sourceTree = "<group>"; };
@@ -279,6 +280,7 @@
 		5C99FB321ABC5C42008C0E01 /* NNJSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNJSONObject.h; path = NNJSONObject/NNJSONObject.h; sourceTree = "<group>"; };
 		5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLConnectionManager.h; path = NNURLConnection/NNURLConnectionManager.h; sourceTree = "<group>"; };
 		5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNURLConnectionManager.m; path = NNURLConnection/NNURLConnectionManager.m; sourceTree = "<group>"; };
+		5CB1100D1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNJSONUtilitiesTests.m; sourceTree = "<group>"; };
 		5CC544751AD118820023B6EF /* NSData+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NNAdditions.h"; path = "NSDate/NSData+NNAdditions.h"; sourceTree = "<group>"; };
 		5CC544761AD118820023B6EF /* NSData+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NNAdditions.m"; path = "NSDate/NSData+NNAdditions.m"; sourceTree = "<group>"; };
 		5CCD5D751AB8E67E007E94BF /* NNKeyValueDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNKeyValueDB.h; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				5C1A7BCE1B80996F00BAA12F /* NNURLConnectionTest.m */,
+				5CB1100D1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m */,
 				5C1A7BCC1B80996F00BAA12F /* Supporting Files */,
 			);
 			path = NNLibrariesTests;
@@ -447,8 +450,8 @@
 		5C37E9EC1B830DFD001B80D6 /* NNRequestConstants */ = {
 			isa = PBXGroup;
 			children = (
-				5C37E9ED1B830E30001B80D6 /* NNRequestConstants.h */,
-				5C37E9EE1B830E30001B80D6 /* NNRequestConstants.m */,
+				5C37E9ED1B830E30001B80D6 /* NNURLConstants.h */,
+				5C37E9EE1B830E30001B80D6 /* NNURLConstants.m */,
 			);
 			name = NNRequestConstants;
 			sourceTree = "<group>";
@@ -539,16 +542,30 @@
 		5C93DEEC1B80780F0074D62A /* NNURLConnection */ = {
 			isa = PBXGroup;
 			children = (
-				5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */,
-				5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */,
 				5C93DEE91B80780B0074D62A /* NNURLConnection.h */,
 				5C93DEEA1B80780B0074D62A /* NNURLConnection.m */,
+				5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */,
+				5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */,
+			);
+			name = NNURLConnection;
+			sourceTree = "<group>";
+		};
+		5CB10FEC1B89EBBC002B3E00 /* Request Serialization */ = {
+			isa = PBXGroup;
+			children = (
 				5C37E9F01B830FE2001B80D6 /* NNURLRequestSerializer.h */,
 				5C37E9F11B830FE2001B80D6 /* NNURLRequestSerializer.m */,
+			);
+			name = "Request Serialization";
+			sourceTree = "<group>";
+		};
+		5CB10FED1B89EBC8002B3E00 /* Response Serailization */ = {
+			isa = PBXGroup;
+			children = (
 				5C37E9F41B8312F4001B80D6 /* NNURLResponseSerializer.h */,
 				5C37E9F51B8312F4001B80D6 /* NNURLResponseSerializer.m */,
 			);
-			name = NNURLConnection;
+			name = "Response Serailization";
 			sourceTree = "<group>";
 		};
 		5CCD5D721AB8E67E007E94BF /* Classes */ = {
@@ -650,8 +667,10 @@
 			isa = PBXGroup;
 			children = (
 				5C37E9EC1B830DFD001B80D6 /* NNRequestConstants */,
-				5C93DEEC1B80780F0074D62A /* NNURLConnection */,
+				5CB10FED1B89EBC8002B3E00 /* Response Serailization */,
+				5CB10FEC1B89EBBC002B3E00 /* Request Serialization */,
 				5CCD5D8E1AB8E67E007E94BF /* NNAsyncRequest */,
+				5C93DEEC1B80780F0074D62A /* NNURLConnection */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1236,7 +1255,7 @@
 				5CEB28C71B67CDBC004A809C /* NNStoreKitHelper.m in Sources */,
 				5C93DEEB1B80780B0074D62A /* NNURLConnection.m in Sources */,
 				5CEB28C91B67CDBD004A809C /* NNAsyncRequest.m in Sources */,
-				5C37E9EF1B830E30001B80D6 /* NNRequestConstants.m in Sources */,
+				5C37E9EF1B830E30001B80D6 /* NNURLConstants.m in Sources */,
 				5CEB28CA1B67CDBD004A809C /* NNJSONUtilities.m in Sources */,
 				5CEB28CB1B67CDBD004A809C /* NNLogger.m in Sources */,
 				5CEB28CC1B67CDBD004A809C /* NNUtilities.m in Sources */,
@@ -1248,6 +1267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB1100E1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m in Sources */,
 				5C1A7BCF1B80996F00BAA12F /* NNURLConnectionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

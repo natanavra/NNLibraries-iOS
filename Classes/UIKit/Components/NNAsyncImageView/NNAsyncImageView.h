@@ -13,6 +13,7 @@
     Displays a UIActivityIndicator whilest loading. */
 @interface NNAsyncImageView : UIImageView {
     UIActivityIndicatorView *_indicator;
+    
 }
 - (void)setImageFromURL:(NSURL *)imgUrl;
 - (void)setImageWithURL:(NSURL *)imgUrl;

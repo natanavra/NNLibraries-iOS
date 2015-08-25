@@ -19,6 +19,8 @@
 + (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback;
 
 //JSON parse
++ (id)makeValidJSONObject:(id)object;
++ (id)makeValidJSONObject:(id)object invalidValues:(NSDictionary **)invalid;
 + (BOOL)isValidJSONObject:(id)object;
 + (id)parseJSONFromData:(NSData *)data error:(NSError **)error DEPRECATED_MSG_ATTRIBUTE("Use 'JSONObjectFromData:error:' instead");
 + (id)JSONObjectFromData:(NSData *)data error:(NSError **)error;

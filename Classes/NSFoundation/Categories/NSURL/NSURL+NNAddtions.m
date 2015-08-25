@@ -21,7 +21,31 @@
     }
 }
 
++ (NSString *)nnQueryWithParams:(NSDictionary *)params {
+    NSMutableString *query = [NSMutableString string];
+    [params enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+        NSString *stringKey = [key nnDescription];
+        NSString *stringObj = [obj nnDescription];
+        NSString *item = [NSString stringWithFormat: @"%@=%@", stringKey, stringObj];
+        if(query.length != 0) {
+            [query appendString: @"&"];
+        }
+        [query appendString: item];
+    }];
+    return query;
+}
 
++ (NSDictionary *)nnDictionaryFromQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSArray *components = [query componentsSeparatedByString: @"&"];
+    for(NSString *item in components) {
+        NSArray *queryItems = [item componentsSeparatedByString: @"="];
+        if(queryItems.count > 1) {
+            dict[queryItems[0]] = queryItems[1];
+        }
+    }
+    return dict;
+}
 
 - (NSURL *)nnURLByAddingGETQueryParams:(NSDictionary *)params {
     if(params.count == 0) {
@@ -29,28 +53,19 @@
     }
     
     NSURL *retval = nil;
-    NSMutableArray *queryItems = [NSMutableArray array];
-    if([self query]) {
-        NSArray *originalQueryItems = [[self query] componentsSeparatedByString: @"&"];
-        [queryItems addObjectsFromArray: originalQueryItems];
-    }
-    [params enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
-        NSString *stringKey = [key nnDescription];
-        NSString *stringObj = [obj nnDescription];
-        NSString *item = [NSString stringWithFormat: @"%@=%@", stringKey, stringObj];
-        if(![queryItems containsObject: item]) {
-            [queryItems addObject: item];
-        }
-    }];
-    NSString *query = [queryItems componentsJoinedByString: @"&"];
+    NSDictionary *existingParams = [[self class] nnDictionaryFromQueryString: [self query]];
+    NSMutableDictionary *allParams = [NSMutableDictionary dictionaryWithDictionary: existingParams];
+    [allParams addEntriesFromDictionary: params];
+    NSString *query = [[self class] nnQueryWithParams: allParams];
     
     NSString *urlString = [self absoluteString];
     NSRange markRange = [urlString rangeOfString: @"?"];
     if(markRange.location != NSNotFound) {
         urlString = [urlString substringToIndex: markRange.location];
     }
+    
     if(query.length > 0) {
-        NSString *fullURL = [urlString stringByAppendingFormat: @"?%@", query];
+        NSString *fullURL = [NSString stringWithFormat: @"%@?%@", urlString, query];
         retval = [NSURL URLWithString: fullURL];
     } else {
         retval = [NSURL URLWithString: urlString];

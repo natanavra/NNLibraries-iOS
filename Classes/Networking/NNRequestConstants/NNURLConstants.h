@@ -31,6 +31,6 @@ FOUNDATION_EXPORT NSString *const NNURLConnectionResponseErrorDomain;
 
 #pragma mark - Interface Declarations
 
-@interface NNRequestConstants : NSObject
+@interface NNURLConstants : NSObject
 
 @end

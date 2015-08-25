@@ -17,13 +17,23 @@
     return [[self alloc] init];
 }
 
-- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParameters:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+- (instancetype)init {
+    if(self = [super init]) {
+        
+    }
+    return self;
+}
+
+- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-    [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
     [request setHTTPMethod: [self methodFromHTTPMethod: method]];
     [headers enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
         [request setValue: [obj nnDescription] forHTTPHeaderField: [key nnDescription]];
     }];
+    
+    if(![request valueForHTTPHeaderField: @"Content-Type"]) {
+        [request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+    }
     
     switch(method) {
         case NNHTTPMethodGET: {
@@ -32,10 +42,10 @@
             break;
         }
         case NNHTTPMethodPOST: {
-            NSError *err = nil;
             NSData *postData = nil;
             if(params) {
-                postData = [NNJSONUtilities JSONDataFromObject: params error: &err];
+                NSString *query = [NSURL nnQueryWithParams: params];
+                postData = [query dataUsingEncoding: NSUTF8StringEncoding];
             }
             [request setHTTPBody: postData];
             break;
@@ -46,17 +56,43 @@
 }
 
 - (NSString *)methodFromHTTPMethod:(NNHTTPMethod)method {
-    NSString *retVal = @"GET";
+    NSString *retVal = nil;
     switch(method) {
         case NNHTTPMethodGET:
+            retVal = @"GET";
             break;
         case NNHTTPMethodPOST:
             retVal = @"POST";
             break;
         default:
+            retVal = @"GET";
             break;
     }
     return retVal;
+}
+
+@end
+
+@implementation NNJSONRequestSerializer
+
+- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    [request setHTTPMethod: @"POST"];
+    [headers enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+        [request setValue: [obj nnDescription] forHTTPHeaderField: [key nnDescription]];
+    }];
+    
+    if(![request valueForHTTPHeaderField: @"Content-Type"]) {
+        [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+    }
+    
+    if(params) {
+        NSError *error = nil;
+        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: params error: &error];
+        [request setHTTPBody: jsonData];
+    }
+    
+    return request;
 }
 
 @end

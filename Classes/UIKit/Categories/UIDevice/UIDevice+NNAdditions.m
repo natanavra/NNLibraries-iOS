@@ -7,6 +7,9 @@
 //
 
 #import "UIDevice+NNAdditions.h"
+#import "NNUICKeyChainStore.h"
+
+static NSString *const kKeychainKey_Udid = @"nnlib_device_udid";
 
 @implementation UIDevice (NNAdditions)
 
@@ -47,8 +50,26 @@
 }
 
 + (NSString *)UDID {
+    return [self vendorUdid];
+}
+
++ (NSString *)vendorUdid {
     NSUUID *udid = [[UIDevice currentDevice] identifierForVendor];
     return [udid UUIDString];
+}
+
++ (NSString *)udidFromKeychain:(BOOL *)fromKeychain {
+    NSString *udid = [NNUICKeyChainStore stringForKey: kKeychainKey_Udid];
+    if(!udid) {
+        udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [NNUICKeyChainStore setString: udid forKey: kKeychainKey_Udid];
+        if(fromKeychain) {
+            *fromKeychain = NO;
+        }
+    } else if(fromKeychain) {
+        *fromKeychain = YES;
+    }
+    return udid;
 }
 
 @end

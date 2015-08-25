@@ -8,13 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class NNURLConnection;
+#import "NNURLConstants.h"
+#import "NNURLRequestSerializer.h"
+#import "NNURLResponseSerializer.h"
+
 
 @interface NNURLConnectionManager : NSObject
 @property (nonatomic, readonly) NSMutableArray *connections;
 
+@property (nonatomic, strong) NSDictionary *httpHeaders;
+@property (nonatomic, strong) NNHTTPRequestSerializer *requestSerializer;
+@property (nonatomic, strong) NNHTTPResponseSerializer *responseSerializer;
+
 + (instancetype)sharedManager;
 
-- (void)startConnection:(NNURLConnection *)connection;
+- (void)GET:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
+- (void)POST:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
 
 @end

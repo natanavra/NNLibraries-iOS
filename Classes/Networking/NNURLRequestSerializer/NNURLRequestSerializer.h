@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NNRequestConstants.h"
+#import "NNURLConstants.h"
 
 @interface NNHTTPRequestSerializer : NSObject
 
 + (instancetype)serializer;
 
-- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParameters:(NSDictionary *)params withHeaders:(NSDictionary *)headers;
+- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers;
+
+@end
+
+@interface NNJSONRequestSerializer : NNHTTPRequestSerializer
 
 @end

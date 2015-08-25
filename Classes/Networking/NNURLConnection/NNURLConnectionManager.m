@@ -8,6 +8,10 @@
 
 #import "NNURLConnectionManager.h"
 #import "NNURLConnection.h"
+#import "NNAsyncRequest.h"
+
+#import "NNURLRequestSerializer.h"
+#import "NNURLResponseSerializer.h"
 
 @interface NNURLConnectionManager ()
 @property (nonatomic, readwrite) NSMutableArray *connections;
@@ -28,6 +32,8 @@
 
 - (instancetype)init {
     if(self = [super init]) {
+        _requestSerializer = [NNHTTPRequestSerializer serializer];
+        _responseSerializer = [NNHTTPResponseSerializer serializer];
         _connections = [NSMutableArray array];
     }
     return self;
@@ -50,6 +56,45 @@
         [_connections addObject: connection];
         [connection start];
     }
+}
+
+- (void)GET:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
+    NSURLRequest *request = [_requestSerializer requestWithURL: url withMethod: NNHTTPMethodGET
+                                                withParams: params withHeaders: _httpHeaders];
+    [self runRequest: request withCompletion: completion];
+}
+
+- (void)POST:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
+    NSURLRequest *request = [_requestSerializer requestWithURL: url withMethod: NNHTTPMethodPOST
+                                                withParams: params withHeaders: _httpHeaders];
+    [self runRequest: request withCompletion: completion];
+}
+
+- (void)runRequest:(NSURLRequest *)request withCompletion:(NNURLConnectionCompletion)originalCompletion {
+    __weak typeof(self) weakSelf = self;
+    id connection = nil;
+    if([NSURLSession class]) {
+        connection = [[NNURLConnection alloc] initWithRequest: request withCompletion: nil];
+    } else {
+        connection = [[NNAsyncRequest alloc] initWithRequest: request complete: nil];
+    }
+    [_connections addObject: connection];
+    
+    NNURLConnectionCompletion completion = ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        NSError *retError = error;
+        
+        //Parse with response serializer if available
+        if(weakSelf.responseSerializer) {
+            responseObject = [weakSelf.responseSerializer responseObjectForResponse: response withData: responseObject error: &retError];
+        }
+        
+        [weakSelf.connections removeObject: connection];
+        if(originalCompletion) {
+            originalCompletion(response, responseObject, retError);
+        }
+    };
+    [connection setCompletionBlock: completion];
+    [connection start];
 }
 
 @end

@@ -7,46 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NNRequestConstants.h"
-
-/* The completion block is called on the main thread. */
-typedef void(^NNAsyncCompleteBlock)(NSURLResponse *response, NSData *responseData, NSError *error);
-typedef void(^NNAsyncOldCompleteBlock)(NSData *responseData, NSError *error);
-
-static NSString *const httpMethodPOST   = @"POST";
-static NSString *const httpMethodGET    = @"GET";
+#import "NNURLConstants.h"
 
 /** Simple asynchronous request */
 @interface NNAsyncRequest : NSObject <NSURLConnectionDataDelegate> {
-    NSMutableURLRequest *_request;
-    NSHTTPURLResponse *_response;
-    NSURLConnection *_connection;
-    NSMutableData *_responseData;
     
-    NNAsyncCompleteBlock _callback;
 }
+@property (nonatomic, readonly) NSURL *url;
+@property (nonatomic, strong) NSDictionary *params;
+@property (nonatomic, strong) NSDictionary *headers;
+@property (nonatomic) NNHTTPMethod httpMethod;
+@property (nonatomic, copy) NNURLConnectionCompletion completionBlock;
+
 @property (nonatomic, readonly) NSInteger statusCode;
+@property (nonatomic, readonly) NSHTTPURLResponse *response;
+@property (nonatomic, readonly) NSData *data;
+
 
 - (instancetype)initWithRequest:(NSURLRequest *)request;
-- (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNAsyncCompleteBlock)block;
-- (instancetype)initWithURL:(NSURL *)url complete:(NNAsyncCompleteBlock)block;
-- (instancetype)initWithURL:(NSString *)url
+- (instancetype)initWithRequest:(NSURLRequest *)request complete:(NNURLConnectionCompletion)block;
+- (instancetype)initWithURL:(NSURL *)url complete:(NNURLConnectionCompletion)block;
+- (instancetype)initWithURL:(NSURL *)url
                  withParams:(NSDictionary *)params
                 withHeaders:(NSDictionary *)headers
              withHTTPMethod:(NNHTTPMethod)method
-            completionBlock:(NNAsyncCompleteBlock)block;
+            completionBlock:(NNURLConnectionCompletion)block;
 
-/** Key/Value http headers. Read as is. */
-- (void)setHTTPHeaders:(NSDictionary *)headers;
-/** Accepts only GET and POST for now. */
-- (void)setHTTPMethod:(NSString *)method;
-/** This string needs to be formatted like so: 'param1=value1&param2=value2' other formats will return an error. */
-- (void)setHTTPBody:(NSString *)postString;
-/** Any data you see fit as the HTTP Post data. */
-- (void)setHTTPBodyData:(NSData *)postData;
 
-- (void)startAsyncConnection;
+- (void)start;
+- (void)cancel;
 
-- (NSString *)responseString;
-- (NSString *)responseStringWithEncoding:(NSStringEncoding)encoding;
 @end

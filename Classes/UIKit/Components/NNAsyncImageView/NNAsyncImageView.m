@@ -10,6 +10,10 @@
 #import "NNAsyncRequest.h"
 #import "NNLogger.h"
 
+@interface NNAsyncImageView ()
+@property (nonatomic, strong) NNAsyncRequest *request;
+@end
+
 @implementation NNAsyncImageView
 
 - (void)setImageFromURL:(NSURL *)imgUrl {
@@ -17,7 +21,7 @@
     [self addSubview: _indicator];
     [_indicator startAnimating];
     
-    NNAsyncRequest *request = [[NNAsyncRequest alloc] initWithURL: imgUrl complete: ^(NSURLResponse *response, NSData *responseData, NSError *error) {
+    _request = [[NNAsyncRequest alloc] initWithURL: imgUrl complete: ^(NSURLResponse *response, NSData *responseData, NSError *error) {
         if(!error && responseData) {
             UIImage *img = [UIImage imageWithData: responseData];
             if(img) {
@@ -30,7 +34,7 @@
         [_indicator removeFromSuperview];
         _indicator = nil;
     }];
-    [request startAsyncConnection];
+    [_request start];
 }
 
 - (void)layoutSubviews {

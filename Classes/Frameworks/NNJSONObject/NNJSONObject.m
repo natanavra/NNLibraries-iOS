@@ -20,6 +20,10 @@
 }
 
 - (NSDictionary *)jsonRepresentation {
+    return [self dictionaryRepresentation];
+}
+
+- (NSDictionary *)dictionaryRepresentation {
     return nil;
 }
 

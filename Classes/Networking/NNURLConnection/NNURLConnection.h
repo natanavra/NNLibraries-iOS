@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NNRequestConstants.h"
+#import "NNURLConstants.h"
 
 #pragma mark - Header Definitions
 
@@ -15,10 +15,7 @@
 @class NNHTTPResponseSerializer;
 
 @interface NNURLConnection : NSObject
-@property (nonatomic, strong) NNHTTPRequestSerializer *requestSerializer;
-@property (nonatomic, strong) NNHTTPResponseSerializer *responseSerializer;
-
-@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, readonly) NSURL *url;
 @property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, strong) NSDictionary *params;
 @property (nonatomic) NNHTTPMethod httpMethod;
@@ -28,6 +25,8 @@
 @property (nonatomic, strong, readonly) NSHTTPURLResponse *response;
 @property (nonatomic, strong, readonly) NSData *data;
 
+
+- (instancetype)initWithRequest:(NSURLRequest *)request withCompletion:(NNURLConnectionCompletion)completion;
 
 - (instancetype)initWithURL:(NSURL *)url;
 - (instancetype)initWithURL:(NSURL *)url withCompletion:(NNURLConnectionCompletion)completion;
