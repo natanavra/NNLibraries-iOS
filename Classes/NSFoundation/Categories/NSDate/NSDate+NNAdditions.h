@@ -66,5 +66,6 @@ extern NSString *const NSDatePOSIXFormat;
 + (NSInteger)numberOfDaysInYear:(NSInteger)year;
 + (NSInteger)numberOfDaysInYearWithDate:(NSDate *)date;
 + (NSInteger)daysInYear:(NSDate *)date;
++ (NSInteger)hoursFromSeconds:(NSInteger)seconds;
 
 @end

@@ -59,6 +59,7 @@ static NSMutableArray *_logs = nil;
             log = [log substringToIndex: kMaxLogLength];
             log = [log stringByAppendingString: @"\n... (Use 'forceLogAll' to see all content)"];
         }
+//        NSString *symbol = @"🔵⚠️"
         NSLog(@"🔴 %@", log);
         
         if(!_logs) {

@@ -32,12 +32,12 @@
     NSDictionary *testObject = @{@"key" : @"value",
                                  @123 : @"NOT GOOD VALUE",
                                     @"NOT GOOD KEY" : badVal};
-    NSDictionary *outcome = [NNJSONUtilities extractValidJSONObject: testObject];
+    NSDictionary *outcome = [NNJSONUtilities makeValidJSONObject: testObject];
     NSDictionary *expected = @{@"key" : @"value"};
     XCTAssertEqualObjects(outcome, expected, @"outcome contains bad values");
     
     NSString *stringVal = @"123";
-    id extractedString = [NNJSONUtilities extractValidJSONObject: stringVal];
+    id extractedString = [NNJSONUtilities makeValidJSONObject: stringVal];
     XCTAssertEqualObjects(extractedString, stringVal, @"Should return the string");
 }
 

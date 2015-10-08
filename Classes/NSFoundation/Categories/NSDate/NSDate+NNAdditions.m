@@ -209,6 +209,12 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
     return range;
 }
 
+#pragma mark - Transformers
+
++ (NSInteger)hoursFromSeconds:(NSInteger)seconds {
+    return seconds / 60 / 60;
+}
+
 #pragma mark - Cached Instances
 
 + (NSDateFormatter *)dateFormatter {

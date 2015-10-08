@@ -11,7 +11,7 @@
 #import "NSURL+NNAddtions.h"
 #import "NSDate+NNAdditions.h"
 #import "NSData+NNAdditions.h"
-#import "NSData+Security.h"
+#import "NSData+NNSecurity.h"
 
 #import "NSDictionary+NNAdditions.h"
 #import "NSArray+NNAdditions.h"

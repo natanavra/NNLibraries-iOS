@@ -18,7 +18,7 @@
 + (BOOL)validBooleanFromObject:(id)object;
 + (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback;
 
-//JSON parse
+//JSON parse (NSObjects from NSData)
 + (id)makeValidJSONObject:(id)object;
 + (id)makeValidJSONObject:(id)object invalidValues:(NSDictionary **)invalid;
 + (BOOL)isValidJSONObject:(id)object;
@@ -26,7 +26,11 @@
 + (id)JSONObjectFromData:(NSData *)data error:(NSError **)error;
 + (id)JSONObjectFromData:(NSData *)data withOptions:(NSJSONReadingOptions)options error:(NSError **)error;
 
+//JSON Data from NSObjects
 + (NSData *)JSONDataFromObject:(id)object error:(NSError **)error;
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error;
+
+//Traversal and lookup
++ (id)valueForKeyPath:(NSString *)keyPath inObject:(id)object;
 
 @end

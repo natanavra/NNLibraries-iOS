@@ -8,6 +8,8 @@
 
 #import "NNJSONObject.h"
 
+static NSString *const kJsonDictKey = @"jsonDict";
+
 @implementation NNJSONObject
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
@@ -19,8 +21,23 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    if(self = [super init]) {
+        NSDictionary *json = [decoder decodeObjectForKey: kJsonDictKey];
+        if(json) {
+            self = [self initWithDictionary: json];
+        }
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    NSDictionary *json = [self jsonRepresentation];
+    [encoder encodeObject: json forKey: kJsonDictKey];
+}
+
 - (NSDictionary *)jsonRepresentation {
-    return [self dictionaryRepresentation];
+    return nil;
 }
 
 - (NSDictionary *)dictionaryRepresentation {

@@ -36,14 +36,14 @@
 
 #import "CALayer+NNRuntimeAttributes.h"
 #import "UIView+NNAdditions.h"
-#import "UIView+CGGeometry.h"
+#import "UIView+NNGeometry.h"
 #import "UIAlertView+NNAdditions.h"
 #import "UIButton+NNAdditions.h"
 #import "UINavigationBar+NNAdditions.h"
 
 #import "UIImage+NNAdditions.h"
-#import "UIImage+Stamps.h"
-#import "UIImage+AssetLaunchImage.h"
+#import "UIImage+NNStamps.h"
+#import "UIImage+NNAssetLaunchImage.h"
 
 #import "UIViewController+NNAdditions.h"
 #import "UINavigationController+NNAdditions.h"

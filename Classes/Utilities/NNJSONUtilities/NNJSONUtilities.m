@@ -153,6 +153,8 @@
     return [self JSONDataFromObject: object prettyPrint: NO error: error];
 }
 
+#pragma mark - JSON Data from NSObjects
+
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error {
     NSData *retData = nil;
     if(!object) {
@@ -167,5 +169,71 @@
     }
     return retData;
 }
+
+#pragma mark - Traversal and lookup
+
+#warning TODO: this should be in an NSDictionary category
++ (id)valueForKeyPath:(NSString *)keyPath inObject:(id)object {
+    if(keyPath.length == 0) {
+        return nil;
+    }
+    
+    NSArray *dotComps = [keyPath componentsSeparatedByString: @"."];
+    id jumper = object;
+    for(NSString *key in dotComps) {
+        //Allow a user to pass a key corresponding to array without an index, only if the array has one item inside.
+        if([jumper isKindOfClass: [NSArray class]]) {
+            NSArray *array = (NSArray *)jumper;
+            if(array.count == 1) {
+                jumper = array[0];
+            }
+        }
+        
+        //If we're not in a dictionary and we're still drilling down - exit the loop, the key is irrelevant.
+        if(![jumper isKindOfClass: [NSDictionary class]]) {
+            jumper = nil;
+            break;
+        }
+    
+        //Search for bracket in the key (to support arrays)
+        NSRange openBracketRange = [key rangeOfString: @"["];
+        if(openBracketRange.location != NSNotFound) {
+            NSString *clearKey = [key substringToIndex: openBracketRange.location];
+            jumper = [jumper objectForKey: clearKey];
+            //Will be set to 'YES' only if we found a closing bracket and there was a valid numeric value inside.
+            BOOL valid = NO;
+            
+            if([jumper isKindOfClass: [NSArray class]]) {
+                NSRange closeBracketRange = [key rangeOfString: @"]"];
+                if(closeBracketRange.location != NSNotFound) {
+                    NSRange inBracketRange = NSMakeRange(openBracketRange.location, closeBracketRange.location - openBracketRange.location);
+                    NSString *inBracketString = [key substringWithRange: inBracketRange];
+                    NSCharacterSet *numbersSet = [NSCharacterSet decimalDigitCharacterSet];
+                    NSString *clearValue = [inBracketString stringByTrimmingCharactersInSet: [numbersSet invertedSet]];
+                    if(clearValue.length > 0) {
+                        NSInteger bracketValue = [clearValue integerValue];
+                        NSArray *array = (NSArray *)jumper;
+                        if(bracketValue >= 0 && bracketValue < array.count) {
+                            valid = YES;
+                            jumper = array[bracketValue];
+                        }
+                    }
+                }
+            }
+            
+            if(!valid) {
+                jumper = nil;
+            }
+        } else {
+            jumper = [jumper objectForKey: key];
+        }
+        
+        if(jumper == nil) {
+            break;
+        }
+    }
+    return jumper;
+}
+
 
 @end

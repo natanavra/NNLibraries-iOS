@@ -14,6 +14,8 @@
 
 @implementation NSObject (NNAdditions)
 
+#warning TODO: get back to swizzling implementations, possibly not correct
+
 + (void)nnSwizzleInstanceMethod:(SEL)selector toSelector:(SEL)newSelector {
     [self nnSwizzleInstanceMethod: selector toInstancesOfClass: self withSelector: newSelector];
 }
@@ -21,8 +23,7 @@
 + (void)nnSwizzleInstanceMethod:(SEL)selector toInstancesOfClass:(Class)cls withSelector:(SEL)newSelector {
     Method original = class_getInstanceMethod(self, selector);
     Method swizzled = class_getInstanceMethod(cls, newSelector);
-    
-#warning TODO: get back to this implementation, possibly not correct
+
     BOOL added = class_addMethod(cls, newSelector, method_getImplementation(swizzled), method_getTypeEncoding(swizzled));
     if(added) {
         class_replaceMethod(cls, selector, method_getImplementation(swizzled), method_getTypeEncoding(swizzled));
@@ -42,7 +43,6 @@
     IMP swizzledImp = method_getImplementation(swizzled);
     const char *swizzledTypeEnc = method_getTypeEncoding(swizzled);
     
-#warning TODO: get back to this implementation, possibly not correct
     Class c = object_getClass(cls);
     if(c) {
         BOOL added = class_addMethod(c, newSelector, swizzledImp, swizzledTypeEnc);

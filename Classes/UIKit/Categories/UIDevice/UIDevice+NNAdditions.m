@@ -61,7 +61,7 @@ static NSString *const kKeychainKey_Udid = @"nnlib_device_udid";
 + (NSString *)udidFromKeychain:(BOOL *)fromKeychain {
     NSString *udid = [NNUICKeyChainStore stringForKey: kKeychainKey_Udid];
     if(!udid) {
-        udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        udid = [self vendorUdid];
         [NNUICKeyChainStore setString: udid forKey: kKeychainKey_Udid];
         if(fromKeychain) {
             *fromKeychain = NO;

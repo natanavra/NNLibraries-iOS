@@ -16,5 +16,5 @@
 - (NSDictionary *)jsonRepresentation; //Deprecated
 @end
 
-@interface NNJSONObject : NSObject <NNJSONObject>
+@interface NNJSONObject : NSObject <NNJSONObject, NSCoding>
 @end
