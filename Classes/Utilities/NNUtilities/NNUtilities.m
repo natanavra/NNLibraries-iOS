@@ -330,6 +330,33 @@
     return validEmail;
 }
 
++ (NSComparisonResult)compareVersionString:(NSString *)version1 toVersionString:(NSString *)version2 {
+    NSComparisonResult retval = NSOrderedSame;
+    NSArray *comps1 = [version1 componentsSeparatedByString: @"."];
+    NSArray *comps2 = [version2 componentsSeparatedByString: @"."];
+    NSInteger minLength = MIN(comps1.count, comps2.count);
+    
+    if(comps1.count == 0 && comps2.count != 0) {
+        retval = NSOrderedAscending;
+    } else if(comps1.count != 0 && comps2.count == 0) {
+        retval = NSOrderedDescending;
+    }
+    
+    for(NSInteger i = 0 ; i < minLength ; i ++) {
+        NSInteger first = [comps1[i] integerValue];
+        NSInteger second = [comps2[i] integerValue];
+        
+        if(first > second) {
+            retval = NSOrderedDescending;
+            break;
+        } else if(first < second) {
+            retval = NSOrderedAscending;
+            break;
+        }
+    }
+    return retval;
+}
+
 + (BOOL)isDebugMode {
 #ifdef DEBUG
     return YES;

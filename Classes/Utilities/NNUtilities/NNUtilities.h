@@ -72,6 +72,8 @@
 
 + (BOOL)isValidEmail:(NSString *)email;
 
++ (NSComparisonResult)compareVersionString:(NSString *)version1 toVersionString:(NSString *)version2;
+
 + (NSArray *)uniqueCopyArray:(NSArray *)array DEPRECATED_MSG_ATTRIBUTE("Use 'NSArray+NNAdditions' instead");
 
 //URLs

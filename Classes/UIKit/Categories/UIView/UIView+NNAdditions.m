@@ -23,8 +23,10 @@ NSInteger const kNonRemovableSubviewTag = 403;
         if(components.count > 0) {
             return components[0];
         }
+    } else {
+        self = [self init];
     }
-    return nil;
+    return self;
 }
 
 - (void)removeAllSubviews {

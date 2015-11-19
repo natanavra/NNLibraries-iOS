@@ -35,7 +35,7 @@ NSString *const kEncryptionKey = @"natan";
     if(success) {
         return mutableData;
     } else {
-#warning TODO: generate error.
+//TODO: generate error.
         return nil;
     }
 }
@@ -52,7 +52,7 @@ NSString *const kEncryptionKey = @"natan";
     if(success) {
         return data;
     } else {
-#warning TODO: generate error.
+//TODO: generate error.
         return nil;
     }
 }

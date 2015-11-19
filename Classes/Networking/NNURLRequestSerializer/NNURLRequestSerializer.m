@@ -76,6 +76,10 @@
 @implementation NNJSONRequestSerializer
 
 - (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+    if(method != NNHTTPMethodPOST) {
+        return [super requestWithURL: url withMethod: method withParams: params withHeaders: headers];
+    }
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     [request setHTTPMethod: @"POST"];
     [headers enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {

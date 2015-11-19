@@ -14,7 +14,7 @@
 
 @implementation NSObject (NNAdditions)
 
-#warning TODO: get back to swizzling implementations, possibly not correct
+//TODO: get back to swizzling implementations, possibly not correct
 
 + (void)nnSwizzleInstanceMethod:(SEL)selector toSelector:(SEL)newSelector {
     [self nnSwizzleInstanceMethod: selector toInstancesOfClass: self withSelector: newSelector];
@@ -84,7 +84,7 @@
 //        }
     }
     
-    if(!description || description.length == 0) {
+    if((!description || description.length == 0) && ![self isKindOfClass: [NSData class]]) {
         description = [self description];
     }
     return description;

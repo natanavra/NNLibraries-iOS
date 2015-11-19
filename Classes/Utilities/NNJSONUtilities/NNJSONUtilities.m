@@ -72,23 +72,26 @@
     return [self makeValidJSONObject: object invalidValues: nil];
 }
 
-+ (id)makeValidJSONObject:(id)object invalidValues:(NSDictionary **)invalid {
++ (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid {
     if([self isValidJSONObject: object]) {
         return object;
     }
+    if(!invalid) {
+        invalid = [NSMutableDictionary dictionary];
+    }
     
     id validObject = nil;
-    if([self isJSONTypeObject: object]) {
+    if([self isValidJSONObject: object]) {
         if([object isKindOfClass: [NSDictionary class]]) {
             NSMutableDictionary *valid = [NSMutableDictionary dictionary];
             NSDictionary *dict = (NSDictionary *)object;
             [dict enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
                 if([key isKindOfClass: [NSString class]]) {
-                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: nil] forKey: key];
+                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: invalid] forKey: key];
                 } else {
                     NSString *validKey = [key description];
                     //Transform invalid keys to strings (According to Apple Docs valid JSON all keys are strings)
-                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: nil] forKey: validKey];
+                    [valid nnSafeSetObject: [self makeValidJSONObject: obj invalidValues: invalid] forKey: validKey];
                 }
             }];
             validObject = valid;
@@ -96,7 +99,7 @@
             NSMutableArray *valid = [NSMutableArray array];
             NSArray *arr = (NSArray *)object;
             for(id obj in arr) {
-                [valid nnSafeAddObject: [self makeValidJSONObject: obj invalidValues: nil]];
+                [valid nnSafeAddObject: [self makeValidJSONObject: obj invalidValues: invalid]];
             }
             validObject = valid;
         } else {
@@ -172,7 +175,7 @@
 
 #pragma mark - Traversal and lookup
 
-#warning TODO: this should be in an NSDictionary category
+//TODO: this should be in an NSDictionary category
 + (id)valueForKeyPath:(NSString *)keyPath inObject:(id)object {
     if(keyPath.length == 0) {
         return nil;

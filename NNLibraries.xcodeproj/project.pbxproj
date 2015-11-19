@@ -37,6 +37,8 @@
 		5CACCDBF1B81E886009E343C /* NNURLConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */; };
 		5CACCDC01B81E972009E343C /* NNURLConnectionManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */; };
 		5CB1100E1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1100D1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m */; };
+		5CB39E341BE7748C002DE8C0 /* NNTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB39E331BE7748C002DE8C0 /* NNTimer.m */; settings = {ASSET_TAGS = (); }; };
+		5CB39E351BE77496002DE8C0 /* NNTimer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB39E321BE7748C002DE8C0 /* NNTimer.h */; };
 		5CDAC51B1B831A84003A115B /* NNURLConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C37E9ED1B830E30001B80D6 /* NNURLConstants.h */; };
 		5CEB28971B67CDBC004A809C /* NNConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECB13D1AFC10810001785F /* NNConstants.m */; };
 		5CEB28981B67CDBC004A809C /* UIDevice+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34CC1B5B919700B79117 /* UIDevice+NNAdditions.m */; };
@@ -160,6 +162,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				5CB39E351BE77496002DE8C0 /* NNTimer.h in CopyFiles */,
 				5CACCDC01B81E972009E343C /* NNURLConnectionManager.h in CopyFiles */,
 				5C37E9F71B83167F001B80D6 /* NNURLResponseSerializer.h in CopyFiles */,
 				5C37E9F31B8311B7001B80D6 /* NNURLRequestSerializer.h in CopyFiles */,
@@ -281,6 +284,8 @@
 		5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLConnectionManager.h; path = NNURLConnection/NNURLConnectionManager.h; sourceTree = "<group>"; };
 		5CACCDBE1B81E886009E343C /* NNURLConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNURLConnectionManager.m; path = NNURLConnection/NNURLConnectionManager.m; sourceTree = "<group>"; };
 		5CB1100D1B8C8EBC002B3E00 /* NNJSONUtilitiesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNJSONUtilitiesTests.m; sourceTree = "<group>"; };
+		5CB39E321BE7748C002DE8C0 /* NNTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNTimer.h; path = NNTimer/NNTimer.h; sourceTree = "<group>"; };
+		5CB39E331BE7748C002DE8C0 /* NNTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNTimer.m; path = NNTimer/NNTimer.m; sourceTree = "<group>"; };
 		5CC544751AD118820023B6EF /* NSData+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NNAdditions.h"; path = "NSDate/NSData+NNAdditions.h"; sourceTree = "<group>"; };
 		5CC544761AD118820023B6EF /* NSData+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NNAdditions.m"; path = "NSDate/NSData+NNAdditions.m"; sourceTree = "<group>"; };
 		5CCD5D751AB8E67E007E94BF /* NNKeyValueDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNKeyValueDB.h; sourceTree = "<group>"; };
@@ -568,6 +573,15 @@
 			name = "Response Serailization";
 			sourceTree = "<group>";
 		};
+		5CB39E311BE7746B002DE8C0 /* NNTimer */ = {
+			isa = PBXGroup;
+			children = (
+				5CB39E321BE7748C002DE8C0 /* NNTimer.h */,
+				5CB39E331BE7748C002DE8C0 /* NNTimer.m */,
+			);
+			name = NNTimer;
+			sourceTree = "<group>";
+		};
 		5CCD5D721AB8E67E007E94BF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +598,7 @@
 		5CCD5D731AB8E67E007E94BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CB39E311BE7746B002DE8C0 /* NNTimer */,
 				5CFCB19A1B89C9BC0061E2EF /* NNJSONObject */,
 				5CCD5D741AB8E67E007E94BF /* NNKeyValueDB */,
 				5CCD5D791AB8E67E007E94BF /* NNLocationManager */,
@@ -1222,6 +1237,7 @@
 				5CEB28A91B67CDBC004A809C /* NNFromXIBView.m in Sources */,
 				5CEB28AA1B67CDBC004A809C /* NNDisplayImageViewController.m in Sources */,
 				5CEB28AB1B67CDBC004A809C /* NNAsyncImageView.m in Sources */,
+				5CB39E341BE7748C002DE8C0 /* NNTimer.m in Sources */,
 				5CEB28AC1B67CDBC004A809C /* NNAutocompleteViewController.m in Sources */,
 				5CFCB19C1B89C9F40061E2EF /* NNJSONObject.m in Sources */,
 				5CEB28AD1B67CDBC004A809C /* NNAutolayoutLabel.m in Sources */,
@@ -1287,16 +1303,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
@@ -1305,11 +1323,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Release;

@@ -19,6 +19,8 @@ extern BOOL const kGlobalForceLogAll;
 + (NSString *)logEntriesFormatted;
 + (NSArray *)clearLogs;
 
++ (void)setLogging:(BOOL)log;
+
 /**
  *  Logs a message from a sender object when in DEBUG.
  *  @param sender     The object that requests to log the message.

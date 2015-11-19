@@ -92,6 +92,7 @@
     });
     _data = [_accumlatedData copy];
     _accumlatedData = nil;
+    [NNLogger logFromInstance: self message: @"finished loading" data: _data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

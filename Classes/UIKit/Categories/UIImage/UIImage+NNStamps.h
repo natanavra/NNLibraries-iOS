@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#warning This whole class needs to be refactored. Written hackishly and not too efficiently to finish stuff as quick as possible.
+//TODO: This whole class needs to be refactored. Written hackishly and not too efficiently to finish stuff as quick as possible.
 
 typedef NS_ENUM(NSInteger, CGRectCorner) {
     CGRectCornerTopLeft = 0,
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, CGRectCorner) {
 @end
 
 
-#warning WORK IN PROGRESS
+//TODO: WORK IN PROGRESS
 
 @interface NNStringStampProperties : NSObject
 @property (nonatomic, strong) UIColor *color;

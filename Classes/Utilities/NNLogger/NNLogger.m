@@ -35,6 +35,12 @@ static NSMutableArray *_logs = nil;
     return logs;
 }
 
+static BOOL shouldLog = YES;
+
++ (void)setLogging:(BOOL)log {
+    shouldLog = log;
+}
+
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage {
     [self logFromInstance: sender message: logMessage data: nil];
 }
@@ -53,7 +59,7 @@ static NSMutableArray *_logs = nil;
 }
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force {
-    if([NNUtilities isDebugMode] && !NNProductionBuild) {
+    if(shouldLog && [NNUtilities isDebugMode] && !NNProductionBuild) {
         NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
         if(log.length > kMaxLogLength && !force && !kGlobalForceLogAll) {
             log = [log substringToIndex: kMaxLogLength];
@@ -77,11 +83,8 @@ static NSMutableArray *_logs = nil;
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage data:(id)object {
     NSMutableString *output = [NSMutableString string];
     NSString *dataString = nil;
-    if([object respondsToSelector: @selector(nnDescription)]) {
-        dataString = [object nnDescription];
-    } else {
-        dataString = [object description];
-    }
+    dataString = [object nnDescription];
+    
     if(sender) {
         [output appendFormat: @"%@", NSStringFromClass([sender class])];
     }
@@ -93,9 +96,9 @@ static NSMutableArray *_logs = nil;
     }
     if(dataString.length > 0) {
         if(output.length > 0) {
-            [output appendString: @" 📊 "];
+            [output appendString: @"\n📊 "];
         }
-        [output appendFormat: @"\n%@", dataString];
+        [output appendFormat: @"%@", dataString];
     }
     if(output.length == 0) {
         [output appendString: @"BAD LOG"];

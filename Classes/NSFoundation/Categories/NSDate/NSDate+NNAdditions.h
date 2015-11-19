@@ -22,7 +22,7 @@ extern NSString *const NSDatePOSIXFormat;
 
 /**
  *  Returns a string representation of the date with the given format.
- *  @param format Date format (RFC-something standard, Apple way...) must be valid <b><i>non-nil</b></i>
+ *  @param format Date format (RFC-something standard, Apple way...) must be valid <b><i>non-nil</i></b>
  */
 - (NSString *)dateStringWithFormat:(NSString *)format;
 

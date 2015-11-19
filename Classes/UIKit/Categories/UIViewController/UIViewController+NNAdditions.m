@@ -75,7 +75,7 @@
 #pragma mark - Camera Access Permissions
 
 - (void)requestPermissionForCamera {
-#warning Check this one
+#warning TODO: Check this one
     NSString *mediaType = AVMediaTypeVideo;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType: mediaType];
     if(authStatus == AVAuthorizationStatusAuthorized) {

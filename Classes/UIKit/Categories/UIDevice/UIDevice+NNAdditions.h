@@ -20,4 +20,5 @@
 + (NSString *)UDID DEPRECATED_MSG_ATTRIBUTE("Use 'vendorUdid' instead");
 + (NSString *)vendorUdid;
 + (NSString *)udidFromKeychain:(BOOL *)fromKeychain;
++ (NSString *)machineModel;
 @end
