@@ -10,11 +10,11 @@
 
 @implementation CALayer (NNRuntimeAttributes)
 
-- (void)setIBBorderColor:(UIColor *)newColor {
+- (void)setNNBorderColor:(UIColor *)newColor {
     self.borderColor = newColor.CGColor;
 }
 
-- (UIColor *)IBBorderColor {
+- (UIColor *)NNBorderColor {
     return [UIColor colorWithCGColor: self.borderColor];
 }
 

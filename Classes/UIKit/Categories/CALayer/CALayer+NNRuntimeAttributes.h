@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CALayer (NNRuntimeAttributes)
-@property (nonatomic, weak) UIColor *IBBorderColor;
+@property (nonatomic, weak) UIColor *NNBorderColor;
 @end

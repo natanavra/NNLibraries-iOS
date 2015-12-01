@@ -44,10 +44,13 @@
     NSMutableArray *badKeys = [NSMutableArray array];
     for(id keyObject in self) {
         BOOL bad = NO;
+        id value = self[keyObject];
         if(![keyObject isKindOfClass: cls]) {
             bad = YES;
-        } else if(![self[keyObject] isKindOfClass: cls]) {
+        } else if(![value isKindOfClass: cls]) {
             bad = YES;
+        } else if([value isKindOfClass: [NSDictionary class]]) {
+            [value nnRemoveObjectsAndKeysNotOfClass: cls];
         }
         
         if(bad) {

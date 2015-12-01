@@ -22,6 +22,7 @@
 + (id)makeValidJSONObject:(id)object;
 + (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid;
 + (BOOL)isValidJSONObject:(id)object;
++ (BOOL)isJSONTypeObject:(id)object;
 + (id)parseJSONFromData:(NSData *)data error:(NSError **)error DEPRECATED_MSG_ATTRIBUTE("Use 'JSONObjectFromData:error:' instead");
 + (id)JSONObjectFromData:(NSData *)data error:(NSError **)error;
 + (id)JSONObjectFromData:(NSData *)data withOptions:(NSJSONReadingOptions)options error:(NSError **)error;
