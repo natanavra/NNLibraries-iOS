@@ -8,7 +8,11 @@
 
 #import "NNConstants.h"
 
+NSString *const kNNStoreKitProductPurchasedNotification = @"NNStoreKit_ProductPurchased";
+NSString *const kNNLocationAuthChanged = @"LocationAuthChanged";
+
 const NSUInteger kNNLibrariesMajorVersion = 2;
+const NSInteger kEmptyStatusCode = 0;
 
 const NSTimeInterval NNDefaultAnimationDuration = 0.3f;
 const BOOL NNProductionBuild = NO;

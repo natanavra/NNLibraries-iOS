@@ -56,7 +56,7 @@
 #define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
 #endif
 
-extern NSString *const kReachabilityChangedNotification;
+extern NSString *const kNNReachabilityChangedNotification;
 
 typedef NS_ENUM(NSInteger, NNNetworkStatus) {
     // Apple NetworkStatus Compatible Names.

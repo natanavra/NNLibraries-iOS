@@ -9,8 +9,8 @@
 #import "NNCustomDatePicker.h"
 #import "NSDate+NNAdditions.h"
 
-#define kMinYear 0
-#define kMaxYear 10000
+const NSInteger kMinYear = 0;
+const NSInteger kMaxYear = 10000;
 
 @interface NNCustomDatePicker () <UIPickerViewDelegate, UIPickerViewDataSource> {
     BOOL _initialized;

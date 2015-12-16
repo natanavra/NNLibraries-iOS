@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kReachabilityChangedNotification;
+extern NSString *const kNNReachabilityChangedNotification;
 
 typedef void (^NNReachabilityChangedBlock)(BOOL reachable);
 

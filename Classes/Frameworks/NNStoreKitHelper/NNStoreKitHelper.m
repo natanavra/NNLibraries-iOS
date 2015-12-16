@@ -123,7 +123,7 @@
 - (void)transactionComplete:(SKPaymentTransaction *)transaction {
     [NNLogger logFromInstance: self message: [NSString stringWithFormat: @"Transaction Complete: %@", transaction.payment.productIdentifier]];
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[NSNotificationCenter defaultCenter] postNotificationName: kStoreKitProductPurchasedNotification object: transaction.payment.productIdentifier];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kNNStoreKitProductPurchasedNotification object: transaction.payment.productIdentifier];
 }
 
 - (void)transactionFailed:(SKPaymentTransaction *)transaction {

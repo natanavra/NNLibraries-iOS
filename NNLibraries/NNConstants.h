@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 natanavra. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #define NNLocalizedString(key) NSLocalizedString(key, nil)
 
-#define kStoreKitProductPurchasedNotification   @"NNStoreKit_ProductPurchased"
-#define kLocationAuthChanged                    @"LocationAuthChanged"
+FOUNDATION_EXPORT NSString *const kNNStoreKitProductPurchasedNotification;
+FOUNDATION_EXPORT NSString *const kNNLocationAuthChanged;
 
-#define kEmptyStatusCode 0
-
-#import <Foundation/Foundation.h>
+FOUNDATION_EXPORT const NSInteger kEmptyStatusCode;
 
 FOUNDATION_EXPORT const NSUInteger kNNLibrariesMajorVersion;
 

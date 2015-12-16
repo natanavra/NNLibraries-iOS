@@ -11,7 +11,7 @@
 #import "NNUtilities.h"
 #import "NNLogger.h"
 
-#define kDefaultDBFileName @"NNKeyValueDatabases.dat"
+NSString *const NNDefaultDBFileName = @"NNKeyValueDatabases.dat";
 
 @implementation NNKeyValueDBManager
 
@@ -127,7 +127,7 @@
 }
 
 - (NSString *)filePath {
-    return [NNUtilities pathToFileInDocumentsDirectory: kDefaultDBFileName];
+    return [NNUtilities pathToFileInDocumentsDirectory: NNDefaultDBFileName];
 }
 
 - (void)clearAllDatabases {

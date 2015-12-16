@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kDefaultMaxNumberOfRecords 50
+FOUNDATION_EXPORT const NSInteger NNDefaultMaxNumberOfRecords; //50
 
 typedef enum {
     NNKeyValueDBOperationFailed,

@@ -11,13 +11,15 @@
 #import "NNLogger.h"
 #import "NNJSONUtilities.h"
 
+const NSInteger NNDefaultMaxNumberOfRecords = 50;
+
 @implementation NNKeyValueDB
 
 - (instancetype)init {
     if(self = [super init]) {
         _dictionary = [NSMutableDictionary dictionary];
         _keys = [NSMutableArray array];
-        _maxNumberOfRecords = kDefaultMaxNumberOfRecords;
+        _maxNumberOfRecords = NNDefaultMaxNumberOfRecords;
         _databaseID = NSStringFromClass(self.class);
         _persistent = YES;
     }

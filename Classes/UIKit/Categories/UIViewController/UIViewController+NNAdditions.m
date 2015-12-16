@@ -12,8 +12,8 @@
 #import "NNLogger.h"
 #import "UIAlertView+NNAdditions.h"
 
-@import AVFoundation;
-@import MobileCoreServices;
+#import <AVFoundation/AVFoundation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation UIViewController (NNAdditions)
 

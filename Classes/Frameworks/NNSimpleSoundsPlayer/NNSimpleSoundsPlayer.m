@@ -12,7 +12,7 @@
 #import "NNUtilities.h"
 #import "NNJSONUtilities.h"
 
-@import AudioToolbox;
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation NNSimpleSoundsPlayer
 

@@ -11,9 +11,9 @@
 #import "NNConstants.h"
 #import "UIAlertView+NNAdditions.h"
 
-#define DEBUG_LOCATION 0
+const BOOL DEBUG_LOCATION = false;
 
-@import CoreLocation;
+#import <CoreLocation/CoreLocation.h>
 
 @interface NNLocationManager () <CLLocationManagerDelegate> {
     BOOL failed;
@@ -120,7 +120,7 @@ static NSString *const kRequestUseAlwaysKey = @"NSLocationAlwaysUsageDescription
     } else {
         [self.locMgr stopUpdatingLocation];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName: kLocationAuthChanged object: nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kNNLocationAuthChanged object: nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {

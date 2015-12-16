@@ -11,7 +11,7 @@
 
 #define DEBUG_MOTION 0
 
-@import CoreMotion;
+#import <CoreMotion/CoreMotion.h>
 
 @interface NNMotionManager ()
 @property (nonatomic, strong) CMMotionManager *mgr;
