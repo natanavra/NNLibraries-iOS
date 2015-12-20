@@ -146,7 +146,6 @@
 		5CEB28F11B67D016004A809C /* NNLibrariesNSFoundation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DE41AB8E67E007E94BF /* NNLibrariesNSFoundation.h */; };
 		5CEB28F21B67D016004A809C /* NNLibrariesUIKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DE51AB8E67E007E94BF /* NNLibrariesUIKit.h */; };
 		5CEB28F31B67D016004A809C /* UIDevice+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCE34CB1B5B919700B79117 /* UIDevice+NNAdditions.h */; };
-		5CEB28F41B67D016004A809C /* UIColor+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */; };
 		5CEB28F51B67D016004A809C /* UIFont+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C56390C1AED4DF900E53DE5 /* UIFont+NNAdditions.h */; };
 		5CEB28F61B67D016004A809C /* CALayer+NNRuntimeAttributes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5D9E1AB8E67E007E94BF /* CALayer+NNRuntimeAttributes.h */; };
 		5CEB28F71B67D016004A809C /* UIAlertView+NNAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DA11AB8E67E007E94BF /* UIAlertView+NNAdditions.h */; };
@@ -275,7 +274,6 @@
 				5CEB28F11B67D016004A809C /* NNLibrariesNSFoundation.h in CopyFiles */,
 				5CEB28F21B67D016004A809C /* NNLibrariesUIKit.h in CopyFiles */,
 				5CEB28F31B67D016004A809C /* UIDevice+NNAdditions.h in CopyFiles */,
-				5CEB28F41B67D016004A809C /* UIColor+NNAdditions.h in CopyFiles */,
 				5CEB28F51B67D016004A809C /* UIFont+NNAdditions.h in CopyFiles */,
 				5CEB28F61B67D016004A809C /* CALayer+NNRuntimeAttributes.h in CopyFiles */,
 				5CEB28F71B67D016004A809C /* UIAlertView+NNAdditions.h in CopyFiles */,
@@ -346,7 +344,6 @@
 		5C4CF42B1B6E4726004EC811 /* NNLibrariesFrameworks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNLibrariesFrameworks.h; sourceTree = "<group>"; };
 		5C56390C1AED4DF900E53DE5 /* UIFont+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+NNAdditions.h"; sourceTree = "<group>"; };
 		5C56390D1AED4DF900E53DE5 /* UIFont+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+NNAdditions.m"; sourceTree = "<group>"; };
-		5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NNAdditions.h"; sourceTree = "<group>"; };
 		5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NNAdditions.m"; sourceTree = "<group>"; };
 		5C659B781AC919A5007AAC76 /* NNDisplayImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNDisplayImageViewController.h; path = NNDisplayImageViewController/NNDisplayImageViewController.h; sourceTree = "<group>"; };
 		5C659B791AC919A5007AAC76 /* NNDisplayImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNDisplayImageViewController.m; path = NNDisplayImageViewController/NNDisplayImageViewController.m; sourceTree = "<group>"; };
@@ -565,7 +562,6 @@
 		5C5639101AED5A5600E53DE5 /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
-				5C5639111AED5A6500E53DE5 /* UIColor+NNAdditions.h */,
 				5C5639121AED5A6500E53DE5 /* UIColor+NNAdditions.m */,
 			);
 			path = UIColor;
