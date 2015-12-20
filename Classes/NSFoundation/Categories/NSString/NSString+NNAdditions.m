@@ -18,6 +18,11 @@
     return [self stringByReplacingOccurrencesOfString: @" " withString: @""];
 }
 
+- (BOOL)isEmptyString {
+    NSString *str = [self stringByTrimmingWhiteSpace];
+    return str.length == 0;
+}
+
 #pragma mark - NNSelectable
 
 - (NSString *)title {

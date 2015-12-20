@@ -16,6 +16,8 @@
  */
 - (NSString *)stringByTrimmingWhiteSpace;
 
+- (BOOL)isEmptyString;
+
 /**
  @return new NSString without any white spaces in it
  */
