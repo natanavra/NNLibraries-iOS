@@ -93,8 +93,15 @@
             originalCompletion(response, responseObject, retError);
         }
     };
-    [connection setCompletionBlock: completion];
-    [connection start];
+    if([NSURLSession class]) {
+        NNURLConnection *casted = (NNURLConnection *)connection;
+        [casted setCompletionBlock: completion];
+        [casted start];
+    } else {
+        NNAsyncRequest *casted = (NNAsyncRequest *)connection;
+        [casted setCompletionBlock: completion];
+        [casted start];
+    }
 }
 
 @end
