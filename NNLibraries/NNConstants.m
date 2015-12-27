@@ -8,6 +8,8 @@
 
 #import "NNConstants.h"
 
+NSString *const NNLibrariesVersion = @"1.0.0";
+
 NSString *const kNNStoreKitProductPurchasedNotification = @"NNStoreKit_ProductPurchased";
 NSString *const kNNLocationAuthChanged = @"LocationAuthChanged";
 
