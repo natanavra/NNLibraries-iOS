@@ -22,6 +22,9 @@
     char keyPtr[kCCKeySizeAES256 + 1]; // room for terminator (unused)
     bzero(keyPtr, sizeof(keyPtr));     // fill with zeroes (for padding)
     
+    if(key.length > kCCKeySizeAES256) {
+        key = [key substringToIndex: kCCKeySizeAES256];
+    }
     // Fetch key data
     if (![key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding]) {
         return FALSE;

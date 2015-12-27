@@ -10,12 +10,12 @@
 
 #define NNLocalizedString(key) NSLocalizedString(key, nil)
 
+FOUNDATION_EXPORT NSString *const NNLibrariesVersion;
+
 FOUNDATION_EXPORT NSString *const kNNStoreKitProductPurchasedNotification;
 FOUNDATION_EXPORT NSString *const kNNLocationAuthChanged;
 
 FOUNDATION_EXPORT const NSInteger kEmptyStatusCode;
-
-FOUNDATION_EXPORT const NSUInteger kNNLibrariesMajorVersion;
 
 FOUNDATION_EXPORT const NSTimeInterval NNDefaultAnimationDuration;
 FOUNDATION_EXPORT const BOOL NNProductionBuild;
