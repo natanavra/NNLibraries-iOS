@@ -17,8 +17,6 @@ FOUNDATION_EXPORT NSString *const kNNLocationAuthChanged;
 
 FOUNDATION_EXPORT const NSInteger kEmptyStatusCode;
 
-FOUNDATION_EXPORT const NSUInteger kNNLibrariesMajorVersion;
-
 FOUNDATION_EXPORT const NSTimeInterval NNDefaultAnimationDuration;
 FOUNDATION_EXPORT const BOOL NNProductionBuild;
 
