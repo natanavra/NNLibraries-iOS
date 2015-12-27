@@ -51,7 +51,6 @@
 		5C78902B1C15961C00E1979A /* NNJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE34AB1B57C2AF00B79117 /* NNJSONUtilities.m */; };
 		5C78902C1C15961C00E1979A /* NNLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DDC1AB8E67E007E94BF /* NNLogger.m */; };
 		5C78902D1C15961C00E1979A /* NNUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DDF1AB8E67E007E94BF /* NNUtilities.m */; };
-		5C7890311C15961C00E1979A /* NNLibraries-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD5DE71AB8E67E007E94BF /* NNLibraries-info.plist */; };
 		5C7890361C15961C00E1979A /* NNURLConnectionManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5CACCDBD1B81E886009E343C /* NNURLConnectionManager.h */; };
 		5C7890371C15961C00E1979A /* NNURLResponseSerializer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C37E9F41B8312F4001B80D6 /* NNURLResponseSerializer.h */; };
 		5C7890381C15961C00E1979A /* NNURLRequestSerializer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 5C37E9F01B830FE2001B80D6 /* NNURLRequestSerializer.h */; };
@@ -140,7 +139,6 @@
 		5CEB28CC1B67CDBD004A809C /* NNUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DDF1AB8E67E007E94BF /* NNUtilities.m */; };
 		5CEB28CD1B67CDBD004A809C /* NNMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5E0F1AB8E685007E94BF /* NNMBProgressHUD.m */; };
 		5CEB28EB1B67CFE0004A809C /* NNAutocompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD5DE91AB8E67E007E94BF /* NNAutocompleteViewController.xib */; };
-		5CEB28EC1B67CFE7004A809C /* NNLibraries-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD5DE71AB8E67E007E94BF /* NNLibraries-info.plist */; };
 		5CEB28EF1B67D016004A809C /* NNLibraries.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DE21AB8E67E007E94BF /* NNLibraries.h */; };
 		5CEB28F01B67D016004A809C /* NNLibrariesEssentials.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DE31AB8E67E007E94BF /* NNLibrariesEssentials.h */; };
 		5CEB28F11B67D016004A809C /* NNLibrariesNSFoundation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CCD5DE41AB8E67E007E94BF /* NNLibrariesNSFoundation.h */; };
@@ -443,7 +441,6 @@
 		5CCD5DE31AB8E67E007E94BF /* NNLibrariesEssentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNLibrariesEssentials.h; sourceTree = "<group>"; };
 		5CCD5DE41AB8E67E007E94BF /* NNLibrariesNSFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNLibrariesNSFoundation.h; sourceTree = "<group>"; };
 		5CCD5DE51AB8E67E007E94BF /* NNLibrariesUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNLibrariesUIKit.h; sourceTree = "<group>"; };
-		5CCD5DE71AB8E67E007E94BF /* NNLibraries-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NNLibraries-info.plist"; sourceTree = "<group>"; };
 		5CCD5DE91AB8E67E007E94BF /* NNAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NNAutocompleteViewController.xib; sourceTree = "<group>"; };
 		5CCD5E0E1AB8E685007E94BF /* NNMBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNMBProgressHUD.h; sourceTree = "<group>"; };
 		5CCD5E0F1AB8E685007E94BF /* NNMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNMBProgressHUD.m; sourceTree = "<group>"; };
@@ -1099,7 +1096,6 @@
 		5CCD5DE61AB8E67E007E94BF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5CCD5DE71AB8E67E007E94BF /* NNLibraries-info.plist */,
 				5CCD5DE81AB8E67E007E94BF /* XIBs */,
 			);
 			path = Resources;
@@ -1313,7 +1309,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C7890311C15961C00E1979A /* NNLibraries-info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,7 +1316,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CEB28EC1B67CFE7004A809C /* NNLibraries-info.plist in Resources */,
 				5CEB28EB1B67CFE0004A809C /* NNAutocompleteViewController.xib in Resources */,
 				5C216E091B67D12900CEBC79 /* NNDisplayImageViewController.xib in Resources */,
 			);
