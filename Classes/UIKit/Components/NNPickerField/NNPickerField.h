@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 natanavra. All rights reserved.
 //
 
+#ifndef NNPICKERFIELD_HEADER
+#define NNPICKERFIELD_HEADER
+
 #import <UIKit/UIKit.h>
 
 @class NNPickerField;
@@ -54,3 +57,5 @@
 /** @warning Private method! Calling this method will result in unexpected behavior! */
 - (void)unlinkPicker;
 @end
+
+#endif
