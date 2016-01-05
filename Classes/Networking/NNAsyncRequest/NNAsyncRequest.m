@@ -107,28 +107,9 @@
 
 - (NSError *)requestError {
     if([self badRequest]) {
-        NSString *errorDomain = nil;
-        
-        switch(_statusCode) {
-            case NNHTTPErrorNotFound:
-                errorDomain = @"com.NNAsyncRequest.notFound";
-                break;
-            case NNHTTPErrorForbidden:
-                errorDomain = @"com.NNAsyncRequest.forbidden";
-                break;
-            case NNHTTPErrorBadRequest:
-                errorDomain = @"com.NNAsyncRequest.badRequest";
-                break;
-            case NNHTTPErrorNotAuthorized:
-                errorDomain = @"com.NNAsyncRequest.notAuthorized";
-                break;
-            default:
-                errorDomain = @"com.NNAsyncRequest.undefined";
-                break;
-        }
-        if(errorDomain.length > 0) {
-            return [NSError errorWithDomain: errorDomain code: _statusCode userInfo: nil];
-        }
+        NSString *errorDomain = @"com.NNAsyncRequest.error";
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : [NSHTTPURLResponse localizedStringForStatusCode: _statusCode]};
+        return [NSError errorWithDomain: errorDomain code: _statusCode userInfo: userInfo];
     }
     return nil;
 }

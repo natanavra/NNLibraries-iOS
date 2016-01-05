@@ -93,6 +93,7 @@
             originalCompletion(response, responseObject, retError);
         }
     };
+    
     if([NSURLSession class]) {
         NNURLConnection *casted = (NNURLConnection *)connection;
         [casted setCompletionBlock: completion];

@@ -56,16 +56,13 @@
 }
 
 - (NSString *)methodFromHTTPMethod:(NNHTTPMethod)method {
-    NSString *retVal = nil;
+    NSString *retVal = @"GET";
     switch(method) {
-        case NNHTTPMethodGET:
-            retVal = @"GET";
-            break;
         case NNHTTPMethodPOST:
             retVal = @"POST";
             break;
+        case NNHTTPMethodGET:
         default:
-            retVal = @"GET";
             break;
     }
     return retVal;
