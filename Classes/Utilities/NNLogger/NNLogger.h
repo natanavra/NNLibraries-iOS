@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 natanavra. All rights reserved.
 //
 
+#ifndef NNLOGGER_HEADER
+#define NNLOGGER_HEADER
+
 #import <Foundation/Foundation.h>
 
 #define NNLogDebug(m, d) [NNLogger logFromInstance: self fromSelector: _cmd withLine: __LINE__ message: m data: d]
@@ -67,3 +70,5 @@ extern BOOL const kGlobalForceLogAll;
  */
 + (NSString *)logStringFromInstance:(id)sender message:(NSString *)logMessage data:(id)object;
 @end
+
+#endif

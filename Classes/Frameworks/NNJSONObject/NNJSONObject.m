@@ -49,4 +49,47 @@ static NSString *const kJsonDictKey = @"jsonDict";
     return [NSString stringWithFormat: @"%@: %@", description, [self jsonRepresentation]];
 }
 
+#pragma mark - Validators
+
+- (id)validObjectFromObject:(id)object {
+    if(object == [NSNull null] || object == nil) {
+        return nil;
+    }
+    return object;
+}
+
+- (NSInteger)validIntegerFromObject:(id)object {
+    if([self validObjectFromObject: object]) {
+        return [object integerValue];
+    }
+    return 0;
+}
+
+- (float)validFloatFromObject:(id)object {
+    if([self validObjectFromObject: object]) {
+        return [object floatValue];
+    }
+    return 0.0f;
+}
+
+- (double)validDoubleFromObject:(id)object {
+    if([self validObjectFromObject: object]) {
+        return [object doubleValue];
+    }
+    return 0.0;
+}
+
+- (BOOL)validBooleanFromObject:(id)object {
+    return [self validBooleanFromObject: object fallbackValue: NO];
+}
+
+- (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback {
+    if([self validObjectFromObject: object]) {
+        return [object boolValue];
+    }
+    return fallback;
+}
+
+
+
 @end
