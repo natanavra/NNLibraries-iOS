@@ -12,4 +12,5 @@
 + (UIImage *)imageNamedWithOriginalRendering:(NSString *)imageName;
 - (UIImage *)imageResizedToSize:(CGSize)size;
 - (UIImage *)resizeImageTo640;
+- (NSData *)compressedImageDataToMaxBytes:(NSInteger)bytes;
 @end

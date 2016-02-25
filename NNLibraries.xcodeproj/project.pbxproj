@@ -94,7 +94,7 @@
 		5CEB289D1B67CDBC004A809C /* UIButton+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DA51AB8E67E007E94BF /* UIButton+NNAdditions.m */; };
 		5CEB289E1B67CDBC004A809C /* UIImage+NNAssetLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E51B052A6500327D1C /* UIImage+NNAssetLaunchImage.m */; };
 		5CEB289F1B67CDBC004A809C /* UIImage+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DA81AB8E67E007E94BF /* UIImage+NNAdditions.m */; };
-		5CEB28A01B67CDBC004A809C /* UIImage+Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */; };
+		5CEB28A01B67CDBC004A809C /* UIImage+NNStamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42B9E21B052A5800327D1C /* UIImage+NNStamps.m */; };
 		5CEB28A11B67CDBC004A809C /* UINavigationBar+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DAB1AB8E67E007E94BF /* UINavigationBar+NNAdditions.m */; };
 		5CEB28A21B67CDBC004A809C /* UINavigationController+NNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DAE1AB8E67E007E94BF /* UINavigationController+NNAdditions.m */; };
 		5CEB28A31B67CDBC004A809C /* UIView+NNGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD5DB11AB8E67E007E94BF /* UIView+NNGeometry.m */; };
@@ -338,7 +338,7 @@
 		5C37E9F41B8312F4001B80D6 /* NNURLResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNURLResponseSerializer.h; path = NNURLResponseSerializer/NNURLResponseSerializer.h; sourceTree = "<group>"; };
 		5C37E9F51B8312F4001B80D6 /* NNURLResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNURLResponseSerializer.m; path = NNURLResponseSerializer/NNURLResponseSerializer.m; sourceTree = "<group>"; };
 		5C42B9E11B052A5800327D1C /* UIImage+NNStamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NNStamps.h"; sourceTree = "<group>"; };
-		5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Stamps.m"; sourceTree = "<group>"; };
+		5C42B9E21B052A5800327D1C /* UIImage+NNStamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NNStamps.m"; sourceTree = "<group>"; };
 		5C42B9E41B052A6500327D1C /* UIImage+NNAssetLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NNAssetLaunchImage.h"; sourceTree = "<group>"; };
 		5C42B9E51B052A6500327D1C /* UIImage+NNAssetLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NNAssetLaunchImage.m"; sourceTree = "<group>"; };
 		5C4CF42B1B6E4726004EC811 /* NNLibrariesFrameworks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNLibrariesFrameworks.h; sourceTree = "<group>"; };
@@ -890,7 +890,7 @@
 				5CCD5DA71AB8E67E007E94BF /* UIImage+NNAdditions.h */,
 				5CCD5DA81AB8E67E007E94BF /* UIImage+NNAdditions.m */,
 				5C42B9E11B052A5800327D1C /* UIImage+NNStamps.h */,
-				5C42B9E21B052A5800327D1C /* UIImage+Stamps.m */,
+				5C42B9E21B052A5800327D1C /* UIImage+NNStamps.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1338,7 +1338,7 @@
 				5CEB289D1B67CDBC004A809C /* UIButton+NNAdditions.m in Sources */,
 				5CEB289E1B67CDBC004A809C /* UIImage+NNAssetLaunchImage.m in Sources */,
 				5CEB289F1B67CDBC004A809C /* UIImage+NNAdditions.m in Sources */,
-				5CEB28A01B67CDBC004A809C /* UIImage+Stamps.m in Sources */,
+				5CEB28A01B67CDBC004A809C /* UIImage+NNStamps.m in Sources */,
 				5CEB28A11B67CDBC004A809C /* UINavigationBar+NNAdditions.m in Sources */,
 				5CEB28A21B67CDBC004A809C /* UINavigationController+NNAdditions.m in Sources */,
 				5CEB28A31B67CDBC004A809C /* UIView+NNGeometry.m in Sources */,

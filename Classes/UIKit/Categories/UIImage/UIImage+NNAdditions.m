@@ -40,5 +40,19 @@
     return retImage;
 }
 
+- (NSData *)compressedImageDataToMaxBytes:(NSInteger)bytes {
+    CGFloat compression = 0.9;
+    CGFloat maxCompression = 0.1;
+    NSInteger maxFileSize = bytes * 1024;
+    
+    NSData *imageData = nil;
+    do {
+        imageData = UIImageJPEGRepresentation(self, compression);
+        compression -= 0.1;
+    } while(imageData.length > maxFileSize && compression > maxCompression);
+    
+    return imageData;
+}
+
 @end
 
