@@ -69,7 +69,35 @@
 #pragma mark - JSON Parsing
 
 + (id)makeValidJSONObject:(id)object {
-    return [self makeValidJSONObject: object invalidValues: nil];
+    //return [self makeValidJSONObject: object invalidValues: nil];
+    id retval = nil;
+    if([self isValidJSONObject: object] || [self isJSONSimpleType: object]) {
+        retval = object;
+    } else if([object isKindOfClass: [NSDictionary class]]) {
+        NSMutableDictionary *validDict = [NSMutableDictionary dictionary];
+        NSDictionary *dict = (NSDictionary *)object;
+        [dict enumerateKeysAndObjectsUsingBlock: ^(id key, id value, BOOL *stop) {
+            if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
+                validDict[key] = value;
+            } else {
+                [validDict nnSafeSetObject: [self makeValidJSONObject: value] forKey: key];
+            }
+        }];
+        retval = validDict;
+    } else if([object isKindOfClass: [NSArray class]]) {
+        NSMutableArray *validArr = [NSMutableArray array];
+        NSArray *arr = (NSArray *)object;
+        [arr enumerateObjectsUsingBlock: ^(id value, NSUInteger idx, BOOL *stop) {
+            if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
+                [validArr addObject: value];
+            } else {
+                [validArr nnSafeAddObject: [self makeValidJSONObject: value]];
+            }
+        }];
+        retval = validArr;
+    }
+    
+    return retval;
 }
 
 + (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid {
@@ -116,7 +144,15 @@
     //According to Apple Docs these are the only valid classes for JSON objects
     if([object isKindOfClass: [NSArray class]] ||
        [object isKindOfClass: [NSDictionary class]] ||
-       [object isKindOfClass: [NSString class]] ||
+       [self isJSONSimpleType: object]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isJSONSimpleType:(id)object {
+    if([object isKindOfClass: [NSString class]] ||
        [object isKindOfClass: [NSNumber class]] ||
        [object isKindOfClass: [NSNull class]]) {
         return YES;
