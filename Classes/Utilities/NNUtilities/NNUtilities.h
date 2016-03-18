@@ -57,6 +57,7 @@
 + (UIColor *)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height DEPRECATED_MSG_ATTRIBUTE("Use 'UIColor+NNAdditions' instead");
 
 //Other
++ (NSString *)stringFromFloat:(float)number maxFractionDigits:(NSUInteger)digits;
 + (NSString *)uniqueIdentifier;
 + (NSString *)appShortVersionNumber;
 + (NSString *)appLongVersionNumber;

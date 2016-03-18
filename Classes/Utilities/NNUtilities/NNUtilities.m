@@ -252,6 +252,16 @@
 
 #pragma mark - Other
 
++ (NSString *)stringFromFloat:(float)number maxFractionDigits:(NSUInteger)digits {
+    static NSNumberFormatter *formatter = nil;
+    if(!formatter) {
+        formatter = [[NSNumberFormatter alloc] init];
+        [formatter setRoundingMode: NSNumberFormatterRoundUp];
+    }
+    [formatter setMaximumFractionDigits: digits];
+    return [formatter stringFromNumber: [NSNumber numberWithFloat: number]];
+}
+
 + (NSString *)uniqueIdentifier {
     NSUUID *uuid = [NSUUID UUID];
     NSString *uuidStr = [uuid UUIDString];
