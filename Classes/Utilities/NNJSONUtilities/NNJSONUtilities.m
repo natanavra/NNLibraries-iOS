@@ -12,6 +12,7 @@
 #import "NNLogger.h"
 #import "NSDictionary+NNAdditions.h"
 #import "NSArray+NNAdditions.h"
+#import "NNJSONObject.h"
 
 @implementation NNJSONUtilities
 
@@ -69,6 +70,10 @@
 #pragma mark - JSON Parsing
 
 + (id)makeValidJSONObject:(id)object {
+    return [self makeValidJSONObject: object shouldReplaceIncompatibleWithStrings: NO];
+}
+
++ (id)makeValidJSONObject:(id)object shouldReplaceIncompatibleWithStrings:(BOOL)replace {
     //return [self makeValidJSONObject: object invalidValues: nil];
     id retval = nil;
     if([self isValidJSONObject: object] || [self isJSONSimpleType: object]) {
@@ -80,7 +85,7 @@
             if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
                 validDict[key] = value;
             } else {
-                [validDict nnSafeSetObject: [self makeValidJSONObject: value] forKey: key];
+                [validDict nnSafeSetObject: [self makeValidJSONObject: value shouldReplaceIncompatibleWithStrings: replace] forKey: key];
             }
         }];
         retval = validDict;
@@ -91,10 +96,14 @@
             if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
                 [validArr addObject: value];
             } else {
-                [validArr nnSafeAddObject: [self makeValidJSONObject: value]];
+                [validArr nnSafeAddObject: [self makeValidJSONObject: value shouldReplaceIncompatibleWithStrings: replace]];
             }
         }];
         retval = validArr;
+    } else if([object isKindOfClass: [NNJSONObject class]]) {
+        retval = [((NNJSONObject *)object) dictionaryRepresentation];
+    } else if(replace && [object respondsToSelector: @selector(description)]) {
+        retval = [object description];
     }
     
     return retval;

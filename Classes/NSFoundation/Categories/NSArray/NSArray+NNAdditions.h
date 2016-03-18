@@ -16,6 +16,6 @@
 
 @interface NSMutableArray (NNAdditions)
 - (void)removeObjectsNotOfClass:(Class)cls;
-- (void)nnSafeAddObject:(id)object;
+- (BOOL)nnSafeAddObject:(id)object;
 @end
 

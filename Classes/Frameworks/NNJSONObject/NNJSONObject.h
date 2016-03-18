@@ -16,7 +16,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;
 @optional
-- (NSDictionary *)jsonRepresentation; //Deprecated
+- (NSDictionary *)jsonRepresentation DEPRECATED_MSG_ATTRIBUTE("Implement `dictionaryRepresentation` instead"); //Deprecated
 @end
 
 @interface NNJSONObject : NSObject <NNJSONObject, NSCoding>

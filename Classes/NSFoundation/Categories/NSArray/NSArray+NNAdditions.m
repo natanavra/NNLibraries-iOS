@@ -36,10 +36,12 @@
     [cleanObjects removeObjectsInArray: cleanObjects];
 }
 
-- (void)nnSafeAddObject:(id)object {
+- (BOOL)nnSafeAddObject:(id)object {
     if(object) {
         [self addObject: object];
+        return YES;
     }
+    return NO;
 }
 
 @end

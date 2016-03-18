@@ -74,7 +74,7 @@
         NSData *data = (NSData *)self;
         description = [data nnStringWithEncoding: NSUTF8StringEncoding];
     } else if([self isKindOfClass: [NSDictionary class]] || [self isKindOfClass: [NSArray class]]) {
-        description = [self debugDescription];
+        description = [self description];
 //        NSError *err = nil;
 //        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: self prettyPrint: YES error: &err];
 //        if(jsonData) {

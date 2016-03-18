@@ -32,12 +32,12 @@ static NSString *const kJsonDictKey = @"jsonDict";
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    NSDictionary *json = [self jsonRepresentation];
+    NSDictionary *json = [self dictionaryRepresentation];
     [encoder encodeObject: json forKey: kJsonDictKey];
 }
 
 - (NSDictionary *)jsonRepresentation {
-    return nil;
+    return [self dictionaryRepresentation];
 }
 
 - (NSDictionary *)dictionaryRepresentation {
@@ -46,7 +46,7 @@ static NSString *const kJsonDictKey = @"jsonDict";
 
 - (NSString *)description {
     NSString *description = [super description];
-    return [NSString stringWithFormat: @"%@: %@", description, [self jsonRepresentation]];
+    return [NSString stringWithFormat: @"%@: %@", description, [self dictionaryRepresentation]];
 }
 
 #pragma mark - Validators
