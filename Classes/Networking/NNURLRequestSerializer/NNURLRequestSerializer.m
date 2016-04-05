@@ -89,7 +89,7 @@
     
     if(params) {
         NSError *error = nil;
-        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: params error: &error];
+        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: params prettyPrint: NO error: &error forceValid: YES];
         [request setHTTPBody: jsonData];
     }
     

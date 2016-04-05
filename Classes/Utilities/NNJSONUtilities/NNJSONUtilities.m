@@ -67,7 +67,7 @@
     return fallback;
 }
 
-#pragma mark - JSON Parsing
+#pragma mark - JSON object validation
 
 + (id)makeValidJSONObject:(id)object {
     return [self makeValidJSONObject: object shouldReplaceIncompatibleWithStrings: NO];
@@ -170,6 +170,8 @@
     }
 }
 
+#pragma mark - JSON parsing
+
 + (BOOL)isValidJSONObject:(id)object {
     return [NSJSONSerialization isValidJSONObject: object];
 }
@@ -197,23 +199,33 @@
     return object;
 }
 
+#pragma mark - JSON Data from NSObjects
+
 + (NSData *)JSONDataFromObject:(id)object error:(NSError **)error {
     return [self JSONDataFromObject: object prettyPrint: NO error: error];
 }
 
-#pragma mark - JSON Data from NSObjects
-
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error {
+    return [self JSONDataFromObject: object prettyPrint: pretty error: error forceValid: NO];
+}
+
++ (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error forceValid:(BOOL)force {
     NSData *retData = nil;
+    NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilObjectError;
     if(!object) {
         if(error) {
             *error = [NSError nnErrorWithCode: kNilObjectError];
         }
     } else if([NSJSONSerialization isValidJSONObject: object]) {
-        NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilObjectError;
         retData = [NSJSONSerialization dataWithJSONObject: object options: options error: error];
-    } else if(error) {
-        *error = [NSError nnErrorWithCode: kInvalidJSONObjectError];
+    } else if(force) {
+        id validObj = [self makeValidJSONObject: object shouldReplaceIncompatibleWithStrings: NO];
+        retData = [NSJSONSerialization dataWithJSONObject: validObj options: options error: error];
+    }
+    if(!retData && error) {
+        if(!*error) {
+            *error = [NSError nnErrorWithCode: kInvalidJSONObjectError];
+        }
     }
     return retData;
 }

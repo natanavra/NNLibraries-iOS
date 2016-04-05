@@ -33,6 +33,7 @@
 //JSON Data from NSObjects
 + (NSData *)JSONDataFromObject:(id)object error:(NSError **)error;
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error;
++ (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error forceValid:(BOOL)force;
 
 //Traversal and lookup
 + (id)valueForKeyPath:(NSString *)keyPath inObject:(id)object;
