@@ -19,14 +19,13 @@
 - (NSDictionary *)jsonRepresentation DEPRECATED_MSG_ATTRIBUTE("Implement `dictionaryRepresentation` instead"); //Deprecated
 @end
 
-@interface NNJSONObject : NSObject <NNJSONObject, NSCoding>
+@interface NNJSONObject : NSObject <NNJSONObject, NSCoding, NSCopying>
 - (id)validObjectFromObject:(id)object;
 - (NSInteger)validIntegerFromObject:(id)object;
 - (float)validFloatFromObject:(id)object;
 - (double)validDoubleFromObject:(id)object;
 - (BOOL)validBooleanFromObject:(id)object;
 - (BOOL)validBooleanFromObject:(id)object fallbackValue:(BOOL)fallback;
-
 @end
 
 #endif
