@@ -10,8 +10,14 @@
 
 #import <CoreLocation/CLLocation.h>
 
+FOUNDATION_EXPORT NSString *const kNNLocationAuthChanged;
+
+typedef void(^NNLocationChangedBlock)(CLLocation *);
+
 /** CLLocationManager wrapper */
 @interface NNLocationManager : NSObject
+
+@property (nonatomic, copy) NNLocationChangedBlock updateBlock;
 
 + (instancetype)sharedLocation;
 + (NNLocationManager *)defaultManager __attribute__((deprecated));

@@ -13,7 +13,6 @@
 FOUNDATION_EXPORT NSString *const NNLibrariesVersion;
 
 FOUNDATION_EXPORT NSString *const kNNStoreKitProductPurchasedNotification;
-FOUNDATION_EXPORT NSString *const kNNLocationAuthChanged;
 
 FOUNDATION_EXPORT const NSInteger kEmptyStatusCode;
 

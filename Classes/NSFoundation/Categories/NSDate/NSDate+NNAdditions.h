@@ -59,7 +59,7 @@ extern NSString *const NSDatePOSIXFormat;
 + (NSString *)AMSymbol;
 + (NSString *)PMSymbol;
 
-- (NSInteger)daysDifferenceFromDate:(NSDate *)date;
+- (NSUInteger)daysDifferenceFromDate:(NSDate *)date;
 
 + (NSInteger)numberOfDaysInMonth:(NSDate *)date;
 + (NSInteger)numberOfDaysInMonth:(NSInteger)month inYear:(NSInteger)year;

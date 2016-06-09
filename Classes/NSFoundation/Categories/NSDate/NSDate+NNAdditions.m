@@ -131,11 +131,10 @@ NSString *const NSDatePOSIXFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
     return NSOrderedDescending;
 }
 
-- (NSInteger)daysDifferenceFromDate:(NSDate *)date {
+- (NSUInteger)daysDifferenceFromDate:(NSDate *)date {
     NSTimeInterval difference = [self timeIntervalSinceDate: date];
-    NSDate *differenceAsDate = [NSDate dateWithTimeIntervalSince1970: difference];
-    NSDateComponents *components = [NSDate dateComponents: NSCalendarUnitDay fromDate: differenceAsDate];
-    return components.day;
+    NSUInteger days = fabsf(roundf(difference / 86400.0f));
+    return days;
 }
 
 #pragma mark - Calendar Methods

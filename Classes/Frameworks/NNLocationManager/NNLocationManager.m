@@ -25,6 +25,7 @@ const BOOL DEBUG_LOCATION = false;
 
 @implementation NNLocationManager
 
+NSString *const kNNLocationAuthChanged = @"LocationAuthChanged";
 static NSString *const kRequestWhenInUseAuthKey = @"NSLocationWhenInUseUsageDescription";
 static NSString *const kRequestUseAlwaysKey = @"NSLocationAlwaysUsageDescription";
 
@@ -138,9 +139,23 @@ static NSString *const kRequestUseAlwaysKey = @"NSLocationAlwaysUsageDescription
     CLLocation *location = [locations lastObject]; //Get last known position;
     failed = NO;
     self.currentLoc = location;
+    
     if(DEBUG_LOCATION) {
         [NNLogger logFromInstance: self message: @"Location changed" data: location];
     }
+    
+    if(_updateBlock && (!_lastLocation || [self locationChanged])) {
+        _updateBlock(location);
+        [self updateLocationDelta];
+    }
+    
+    if(!_lastLocation) {
+        _lastLocation = location;
+    }
+}
+
+- (void)updateLocationDelta {
+    _lastLocation = _currentLoc;
 }
 
 #pragma mark - Getters
