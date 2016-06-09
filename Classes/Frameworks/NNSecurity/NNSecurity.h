@@ -20,8 +20,6 @@ extern NSString *const kEncryptionKey;
 + (NSData *)decrypt:(NSData *)ciphered error:(NSError **)err;
 + (NSData *)decrypt:(NSData *)ciphered withKey:(NSString *)key error:(NSError **)err;
 
-#pragma mark - KeyChain
-
-
++ (NSData *)hmacSha256HashString:(NSString *)data withKey:(NSString *)key;
 
 @end
