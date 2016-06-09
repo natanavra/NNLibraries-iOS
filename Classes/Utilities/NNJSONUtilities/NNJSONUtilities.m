@@ -211,7 +211,7 @@
 
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error forceValid:(BOOL)force {
     NSData *retData = nil;
-    NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilObjectError;
+    NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilOptions;
     if(!object) {
         if(error) {
             *error = [NSError nnErrorWithCode: kNilObjectError];

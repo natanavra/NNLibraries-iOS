@@ -10,6 +10,8 @@
 
 #pragma mark - Constants
 
+/** For post creation process, e.g. signing the request. return true to continue with the request, false to stop. */
+typedef BOOL(^NNURLRequestProcess)(NSMutableURLRequest *request);
 typedef void(^NNURLConnectionCompletion)(NSHTTPURLResponse *response, id responseObject, NSError *error);
 
 typedef NS_ENUM(NSUInteger, NNHTTPMethod) {
