@@ -81,7 +81,7 @@
 
 - (NSMutableURLRequest *)mutableRequestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
     if(method != NNHTTPMethodPOST) {
-        return [super requestWithURL: url withMethod: method withParams: params withHeaders: headers];
+        return [super mutableRequestWithURL: url withMethod: method withParams: params withHeaders: headers];
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
