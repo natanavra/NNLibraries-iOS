@@ -75,7 +75,6 @@
     BOOL valid = YES;
     if(process) {
          valid = process(request);
-        
     }
     if(valid) {
         [self runRequest: request withCompletion: completion];
