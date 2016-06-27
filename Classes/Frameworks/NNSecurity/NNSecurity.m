@@ -59,11 +59,17 @@ NSString *const kEncryptionKey = @"natan";
 }
 
 + (NSData *)hmacSha256HashString:(NSString *)data withKey:(NSString *)key {
-    const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *cData = [data cStringUsingEncoding:NSASCIIStringEncoding];
-    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
-    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
-    return [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    NSData *retval = nil;
+    data = [[data dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO] base64EncodedStringWithOptions: 0];
+    const char *cKey  = [key cStringUsingEncoding: NSUTF8StringEncoding];
+    const char *cData = [data cStringUsingEncoding: NSUTF8StringEncoding];
+    if(cData && cKey) {
+        unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+        CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+        retval = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+        NSString *signature = [retval base64EncodedStringWithOptions: 0];
+    }
+    return retval;
 }
 
 
