@@ -72,6 +72,7 @@
 
 - (void)POST:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params processBlock:(NNURLRequestProcess)process completion:(NNURLConnectionCompletion)completion {
     NSMutableURLRequest *request = [_requestSerializer mutableRequestWithURL: url withMethod: NNHTTPMethodPOST withParams: params withHeaders: headers];
+    
     BOOL valid = YES;
     if(process) {
          valid = process(request);
