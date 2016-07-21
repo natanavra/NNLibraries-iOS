@@ -59,7 +59,7 @@ static BOOL shouldLog = YES;
 }
 
 + (void)logFromInstance:(id)sender message:(NSString *)logMessage data:(id)object forceLogAll:(BOOL)force {
-    if(shouldLog && [NNUtilities isDebugMode] && !NNProductionBuild) {
+    if(shouldLog && [NNUtilities isDebugMode]) {
         NSString *log = [self logStringFromInstance: sender message: logMessage data: object];
         if(log.length > kMaxLogLength && !force && !kGlobalForceLogAll) {
             log = [log substringToIndex: kMaxLogLength];
