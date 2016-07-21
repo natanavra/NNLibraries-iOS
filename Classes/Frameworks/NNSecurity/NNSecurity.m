@@ -11,6 +11,7 @@
 #import "NSData+NNSecurity.h"
 #import <CommonCrypto/CommonCrypto.h>
 
+
 @implementation NNSecurity
 
 NSString *const kEncryptionKey = @"natan";
@@ -55,6 +56,20 @@ NSString *const kEncryptionKey = @"natan";
 //TODO: generate error.
         return nil;
     }
+}
+
++ (NSData *)hmacSha256HashString:(NSString *)data withKey:(NSString *)key {
+    NSData *retval = nil;
+    data = [[data dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO] base64EncodedStringWithOptions: 0];
+    const char *cKey  = [key cStringUsingEncoding: NSUTF8StringEncoding];
+    const char *cData = [data cStringUsingEncoding: NSUTF8StringEncoding];
+    if(cData && cKey) {
+        unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+        CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+        retval = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+//        NSString *signature = [retval base64EncodedStringWithOptions: 0];
+    }
+    return retval;
 }
 
 

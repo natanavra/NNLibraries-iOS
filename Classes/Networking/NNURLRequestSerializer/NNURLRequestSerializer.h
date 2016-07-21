@@ -10,11 +10,14 @@
 
 #import "NNURLConstants.h"
 
+@class NNRequestSerializerOptions;
+
 @interface NNHTTPRequestSerializer : NSObject
 
 + (instancetype)serializer;
 
 - (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers;
+- (NSMutableURLRequest *)mutableRequestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers;
 
 @end
 

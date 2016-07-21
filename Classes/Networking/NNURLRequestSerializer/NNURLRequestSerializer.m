@@ -10,12 +10,15 @@
 #import "NSObject+NNAdditions.h"
 #import "NSURL+NNAddtions.h"
 #import "NNJSONUtilities.h"
+#import "NNSecurity.h"
+
 
 @implementation NNHTTPRequestSerializer
 
 + (instancetype)serializer {
     return [[self alloc] init];
 }
+
 
 - (instancetype)init {
     if(self = [super init]) {
@@ -25,6 +28,10 @@
 }
 
 - (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+    return [[self mutableRequestWithURL: url withMethod: method withParams: params withHeaders: headers] copy];
+}
+
+- (NSMutableURLRequest *)mutableRequestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     [request setHTTPMethod: [self methodFromHTTPMethod: method]];
     [headers enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
@@ -75,9 +82,9 @@
 
 @implementation NNJSONRequestSerializer
 
-- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+- (NSMutableURLRequest *)mutableRequestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
     if(method != NNHTTPMethodPOST) {
-        return [super requestWithURL: url withMethod: method withParams: params withHeaders: headers];
+        return [super mutableRequestWithURL: url withMethod: method withParams: params withHeaders: headers];
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
@@ -92,11 +99,16 @@
     
     if(params) {
         NSError *error = nil;
-        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: params error: &error];
+        NSData *jsonData = [NNJSONUtilities JSONDataFromObject: params prettyPrint: NO error: &error forceValid: YES];
         [request setHTTPBody: jsonData];
     }
     
     return request;
 }
 
+- (NSURLRequest *)requestWithURL:(NSURL *)url withMethod:(NNHTTPMethod)method withParams:(NSDictionary *)params withHeaders:(NSDictionary *)headers {
+    return [[self mutableRequestWithURL: url withMethod: method withParams: params withHeaders: headers] copy];
+}
+
 @end
+

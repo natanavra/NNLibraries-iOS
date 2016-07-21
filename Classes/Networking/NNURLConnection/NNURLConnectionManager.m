@@ -58,16 +58,28 @@
     }
 }
 
-- (void)GET:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
+- (void)GET:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
     NSURLRequest *request = [_requestSerializer requestWithURL: url withMethod: NNHTTPMethodGET
-                                                withParams: params withHeaders: _httpHeaders];
+                                                withParams: params withHeaders: headers];
     [self runRequest: request withCompletion: completion];
 }
 
-- (void)POST:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
+- (void)POST:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion {
     NSURLRequest *request = [_requestSerializer requestWithURL: url withMethod: NNHTTPMethodPOST
-                                                withParams: params withHeaders: _httpHeaders];
+                                                withParams: params withHeaders: headers];
     [self runRequest: request withCompletion: completion];
+}
+
+- (void)POST:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params processBlock:(NNURLRequestProcess)process completion:(NNURLConnectionCompletion)completion {
+    NSMutableURLRequest *request = [_requestSerializer mutableRequestWithURL: url withMethod: NNHTTPMethodPOST withParams: params withHeaders: headers];
+    
+    BOOL valid = YES;
+    if(process) {
+         valid = process(request);
+    }
+    if(valid) {
+        [self runRequest: request withCompletion: completion];
+    }
 }
 
 - (void)runRequest:(NSURLRequest *)request withCompletion:(NNURLConnectionCompletion)originalCompletion {

@@ -20,9 +20,12 @@
 
 //JSON parse (NSObjects from NSData)
 + (id)makeValidJSONObject:(id)object;
-+ (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid;
++ (id)makeValidJSONObject:(id)object shouldReplaceIncompatibleWithStrings:(BOOL)replace;
++ (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid DEPRECATED_MSG_ATTRIBUTE("Not working, use makeValidJSONObject: instead");
 + (BOOL)isValidJSONObject:(id)object;
 + (BOOL)isJSONTypeObject:(id)object;
++ (BOOL)isJSONSimpleType:(id)object;
+
 + (id)parseJSONFromData:(NSData *)data error:(NSError **)error DEPRECATED_MSG_ATTRIBUTE("Use 'JSONObjectFromData:error:' instead");
 + (id)JSONObjectFromData:(NSData *)data error:(NSError **)error;
 + (id)JSONObjectFromData:(NSData *)data withOptions:(NSJSONReadingOptions)options error:(NSError **)error;
@@ -30,6 +33,7 @@
 //JSON Data from NSObjects
 + (NSData *)JSONDataFromObject:(id)object error:(NSError **)error;
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error;
++ (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error forceValid:(BOOL)force;
 
 //Traversal and lookup
 + (id)valueForKeyPath:(NSString *)keyPath inObject:(id)object;

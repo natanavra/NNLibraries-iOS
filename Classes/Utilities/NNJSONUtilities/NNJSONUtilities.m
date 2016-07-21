@@ -12,6 +12,7 @@
 #import "NNLogger.h"
 #import "NSDictionary+NNAdditions.h"
 #import "NSArray+NNAdditions.h"
+#import "NNJSONObject.h"
 
 @implementation NNJSONUtilities
 
@@ -66,10 +67,46 @@
     return fallback;
 }
 
-#pragma mark - JSON Parsing
+#pragma mark - JSON object validation
 
 + (id)makeValidJSONObject:(id)object {
-    return [self makeValidJSONObject: object invalidValues: nil];
+    return [self makeValidJSONObject: object shouldReplaceIncompatibleWithStrings: NO];
+}
+
++ (id)makeValidJSONObject:(id)object shouldReplaceIncompatibleWithStrings:(BOOL)replace {
+    //return [self makeValidJSONObject: object invalidValues: nil];
+    id retval = nil;
+    if([self isValidJSONObject: object] || [self isJSONSimpleType: object]) {
+        retval = object;
+    } else if([object isKindOfClass: [NSDictionary class]]) {
+        NSMutableDictionary *validDict = [NSMutableDictionary dictionary];
+        NSDictionary *dict = (NSDictionary *)object;
+        [dict enumerateKeysAndObjectsUsingBlock: ^(id key, id value, BOOL *stop) {
+            if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
+                validDict[key] = value;
+            } else {
+                [validDict nnSafeSetObject: [self makeValidJSONObject: value shouldReplaceIncompatibleWithStrings: replace] forKey: key];
+            }
+        }];
+        retval = validDict;
+    } else if([object isKindOfClass: [NSArray class]]) {
+        NSMutableArray *validArr = [NSMutableArray array];
+        NSArray *arr = (NSArray *)object;
+        [arr enumerateObjectsUsingBlock: ^(id value, NSUInteger idx, BOOL *stop) {
+            if([self isValidJSONObject: value] || [self isJSONSimpleType: value]) {
+                [validArr addObject: value];
+            } else {
+                [validArr nnSafeAddObject: [self makeValidJSONObject: value shouldReplaceIncompatibleWithStrings: replace]];
+            }
+        }];
+        retval = validArr;
+    } else if([object isKindOfClass: [NNJSONObject class]]) {
+        retval = [((NNJSONObject *)object) dictionaryRepresentation];
+    } else if(replace && [object respondsToSelector: @selector(description)]) {
+        retval = [object description];
+    }
+    
+    return retval;
 }
 
 + (id)makeValidJSONObject:(id)object invalidValues:(NSMutableDictionary *)invalid {
@@ -116,7 +153,15 @@
     //According to Apple Docs these are the only valid classes for JSON objects
     if([object isKindOfClass: [NSArray class]] ||
        [object isKindOfClass: [NSDictionary class]] ||
-       [object isKindOfClass: [NSString class]] ||
+       [self isJSONSimpleType: object]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isJSONSimpleType:(id)object {
+    if([object isKindOfClass: [NSString class]] ||
        [object isKindOfClass: [NSNumber class]] ||
        [object isKindOfClass: [NSNull class]]) {
         return YES;
@@ -124,6 +169,8 @@
         return NO;
     }
 }
+
+#pragma mark - JSON parsing
 
 + (BOOL)isValidJSONObject:(id)object {
     return [NSJSONSerialization isValidJSONObject: object];
@@ -152,23 +199,33 @@
     return object;
 }
 
+#pragma mark - JSON Data from NSObjects
+
 + (NSData *)JSONDataFromObject:(id)object error:(NSError **)error {
     return [self JSONDataFromObject: object prettyPrint: NO error: error];
 }
 
-#pragma mark - JSON Data from NSObjects
-
 + (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error {
+    return [self JSONDataFromObject: object prettyPrint: pretty error: error forceValid: NO];
+}
+
++ (NSData *)JSONDataFromObject:(id)object prettyPrint:(BOOL)pretty error:(NSError **)error forceValid:(BOOL)force {
     NSData *retData = nil;
+    NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilOptions;
     if(!object) {
         if(error) {
             *error = [NSError nnErrorWithCode: kNilObjectError];
         }
     } else if([NSJSONSerialization isValidJSONObject: object]) {
-        NSJSONWritingOptions options = pretty ? NSJSONWritingPrettyPrinted : kNilObjectError;
         retData = [NSJSONSerialization dataWithJSONObject: object options: options error: error];
-    } else if(error) {
-        *error = [NSError nnErrorWithCode: kInvalidJSONObjectError];
+    } else if(force) {
+        id validObj = [self makeValidJSONObject: object shouldReplaceIncompatibleWithStrings: NO];
+        retData = [NSJSONSerialization dataWithJSONObject: validObj options: options error: error];
+    }
+    if(!retData && error) {
+        if(!*error) {
+            *error = [NSError nnErrorWithCode: kInvalidJSONObjectError];
+        }
     }
     return retData;
 }

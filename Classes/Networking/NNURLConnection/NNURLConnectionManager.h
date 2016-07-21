@@ -16,13 +16,13 @@
 @interface NNURLConnectionManager : NSObject
 @property (nonatomic, readonly) NSMutableArray *connections;
 
-@property (nonatomic, strong) NSDictionary *httpHeaders;
 @property (nonatomic, strong) NNHTTPRequestSerializer *requestSerializer;
 @property (nonatomic, strong) NNHTTPResponseSerializer *responseSerializer;
 
 + (instancetype)sharedManager;
 
-- (void)GET:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
-- (void)POST:(NSURL *)url parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
+- (void)GET:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
+- (void)POST:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params completion:(NNURLConnectionCompletion)completion;
+- (void)POST:(NSURL *)url headers:(NSDictionary *)headers parameters:(NSDictionary *)params processBlock:(NNURLRequestProcess)process completion:(NNURLConnectionCompletion)completion;
 
 @end
