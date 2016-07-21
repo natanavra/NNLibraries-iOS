@@ -67,7 +67,7 @@ NSString *const kEncryptionKey = @"natan";
         unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
         CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
         retval = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
-        NSString *signature = [retval base64EncodedStringWithOptions: 0];
+//        NSString *signature = [retval base64EncodedStringWithOptions: 0];
     }
     return retval;
 }
