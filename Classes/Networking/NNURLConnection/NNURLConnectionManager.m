@@ -96,7 +96,7 @@
         NSError *retError = error;
         
         //Parse with response serializer if available
-        if(response && responseObject && !error && weakSelf.responseSerializer) {
+        if(response && responseObject && weakSelf.responseSerializer) {
             responseObject = [weakSelf.responseSerializer responseObjectForResponse: response withData: responseObject error: &retError];
         }
         
