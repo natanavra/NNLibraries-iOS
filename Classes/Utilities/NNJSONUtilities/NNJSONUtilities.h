@@ -10,6 +10,7 @@
 
 @interface NNJSONUtilities : NSObject
 //object validation methods
++ (NSDictionary *)validDictionaryFromObject:(id)object;
 + (id)validObjectFromObject:(id)object;
 + (NSString *)validStringFromObject:(id)object DEPRECATED_MSG_ATTRIBUTE("Behaviour is not defined well, because an empty string is not better than nil. Use 'validObjectFromObject:' instead");
 + (NSInteger)validIntegerFromObject:(id)object;

@@ -61,8 +61,8 @@ NSString *const kEncryptionKey = @"natan";
 + (NSData *)hmacSha256HashString:(NSString *)data withKey:(NSString *)key {
     NSData *retval = nil;
     data = [[data dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO] base64EncodedStringWithOptions: 0];
-    const char *cKey  = [key cStringUsingEncoding: NSUTF8StringEncoding];
-    const char *cData = [data cStringUsingEncoding: NSUTF8StringEncoding];
+    const char *cKey  = [key cStringUsingEncoding: NSASCIIStringEncoding];
+    const char *cData = [data cStringUsingEncoding: NSASCIIStringEncoding];
     if(cData && cKey) {
         unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
         CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);

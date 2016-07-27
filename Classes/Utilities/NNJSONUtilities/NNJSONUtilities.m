@@ -18,6 +18,13 @@
 
 #pragma mark - Validations
 
++ (NSDictionary *)validDictionaryFromObject:(id)object {
+    if([self validObjectFromObject: object] && [object isKindOfClass: [NSDictionary class]]) {
+        return object;
+    }
+    return nil;
+}
+
 + (id)validObjectFromObject:(id)object {
     if(object == [NSNull null] || object == nil) {
         return nil;
