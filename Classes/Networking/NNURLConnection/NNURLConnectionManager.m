@@ -15,6 +15,7 @@
 
 @interface NNURLConnectionManager ()
 @property (nonatomic, readwrite) NSMutableArray *connections;
+@property (nonatomic, strong) NSMutableDictionary *sessions;
 @end
 
 @implementation NNURLConnectionManager
@@ -35,6 +36,7 @@
         _requestSerializer = [NNHTTPRequestSerializer serializer];
         _responseSerializer = [NNHTTPResponseSerializer serializer];
         _connections = [NSMutableArray array];
+        _sessions = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -87,29 +89,36 @@
     id connection = nil;
     if([NSURLSession class]) {
         connection = [[NNURLConnection alloc] initWithRequest: request withCompletion: nil];
+        if(_configuration) {
+            NSURLSession *session = [NSURLSession sessionWithConfiguration: _configuration];
+            [_sessions setObject: session forKey: [NSValue valueWithNonretainedObject: connection]];
+        }
     } else {
         connection = [[NNAsyncRequest alloc] initWithRequest: request complete: nil];
     }
     [_connections addObject: connection];
     
+    NNHTTPResponseSerializer *responseSerializer = self.responseSerializer;
     NNURLConnectionCompletion completion = ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSError *retError = error;
         
         //Parse with response serializer if available
-        if(response && responseObject && weakSelf.responseSerializer) {
-            responseObject = [weakSelf.responseSerializer responseObjectForResponse: response withData: responseObject error: &retError];
+        if(response && responseObject && responseSerializer) {
+            responseObject = [responseSerializer responseObjectForResponse: response withData: responseObject error: &retError];
         }
         
         [weakSelf.connections removeObject: connection];
         if(originalCompletion) {
             originalCompletion(response, responseObject, retError);
         }
+        
+        [_sessions removeObjectForKey: [NSValue valueWithNonretainedObject: connection]];
     };
     
     if([NSURLSession class]) {
         NNURLConnection *casted = (NNURLConnection *)connection;
         [casted setCompletionBlock: completion];
-        [casted start];
+        [casted startWithAsyncCompletion];
     } else {
         NNAsyncRequest *casted = (NNAsyncRequest *)connection;
         [casted setCompletionBlock: completion];

@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NNHTTPRequestSerializer *requestSerializer;
 @property (nonatomic, strong) NNHTTPResponseSerializer *responseSerializer;
+@property (nonatomic, strong) NSURLSessionConfiguration *configuration;
 
 + (instancetype)sharedManager;
 
