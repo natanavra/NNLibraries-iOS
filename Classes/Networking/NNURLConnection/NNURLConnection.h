@@ -20,10 +20,12 @@
 @property (nonatomic, strong) NSDictionary *params;
 @property (nonatomic) NNHTTPMethod httpMethod;
 
+@property (nonatomic, strong) NSURLSession *urlSession;
 @property (nonatomic, copy) NNURLConnectionCompletion completionBlock;
 
 @property (nonatomic, strong, readonly) NSHTTPURLResponse *response;
 @property (nonatomic, strong, readonly) NSData *data;
+
 
 
 - (instancetype)initWithRequest:(NSURLRequest *)request withCompletion:(NNURLConnectionCompletion)completion;
@@ -44,6 +46,7 @@
 
 
 - (void)start;
+- (void)startWithAsyncCompletion;
 - (void)suspend;
 - (void)resume;
 - (void)cancel;

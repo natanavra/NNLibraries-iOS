@@ -83,13 +83,24 @@
 #pragma mark - Connection
 
 - (void)start {
+    [self startWithAsyncCompletion: NO];
+}
+
+- (void)startWithAsyncCompletion {
+    [self startWithAsyncCompletion: YES];
+}
+
+- (void)startWithAsyncCompletion:(BOOL)async {
     if(!_request) {
         return;
     }
     
-    __weak typeof(self) weakSelf = self;
-    NSURLSession *session = [NSURLSession sharedSession];
-    _currentTask = [session dataTaskWithRequest: _request completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
+    if(!_urlSession) {
+        _urlSession = [NSURLSession sharedSession];
+    }
+    
+    __weak typeof(self) weakSelf = self;    
+    _currentTask = [_urlSession dataTaskWithRequest: _request completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
         weakSelf.data = data;
         
         NSError *retError = error;
@@ -108,9 +119,13 @@
         }
         
         if(weakSelf.completionBlock) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            if(async) {
                 weakSelf.completionBlock(httpResponse, data, retError);
-            });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.completionBlock(httpResponse, data, retError);
+                });
+            }
         }
     }];
     [self resume];
